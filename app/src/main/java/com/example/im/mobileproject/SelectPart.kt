@@ -14,6 +14,7 @@ class SelectPart:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select)
+        setTitle("부품 선택")
 
         val spin1:Spinner = findViewById(R.id.spinner1)
         val spin2:Spinner = findViewById(R.id.spinner2)

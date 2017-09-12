@@ -7,6 +7,11 @@
     android:orientation="vertical"
     tools:context="com.example.im.mobileproject.MainActivity">
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="75dp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -38,5 +43,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="조립 Tip" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="뷰포리아" />
 
 </LinearLayout>

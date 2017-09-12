@@ -13,6 +13,7 @@ class RegistrationPart: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+        setTitle("부품 등록")
 
         val spin1: Spinner = findViewById(R.id.spinner1)
         val text1: TextView = findViewById(R.id.textView1)
@@ -20,16 +21,5 @@ class RegistrationPart: AppCompatActivity() {
         val value = arrayListOf("아아~","아~아아ㅏ","마이크 테스트")
 
         spin1.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,value)
-
-        spin1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                text1.text = "선택하시오."
-            }
-
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                text1.text = value.get(p2)
-            }
-
-        }
     }
 }
