@@ -23,12 +23,12 @@ class SelectPart:AppCompatActivity() {
         val spin5:Spinner = findViewById(R.id.spinner5)
         val spin6:Spinner = findViewById(R.id.spinner6)
 
-        val mainBoard = arrayListOf("메","인","보","드")
-        val cpu = arrayListOf("C","P","U")
-        val ram = arrayListOf("R","A","M")
-        val vga = arrayListOf("V","G","A")
-        val hdd = arrayListOf("HDD","or","SDD")
-        val etc = arrayListOf("ㄱ","ㅣ","ㅌ","ㅏ")
+        val mainBoard = arrayListOf("메인보드")
+        val cpu = arrayListOf("CPU")
+        val ram = arrayListOf("RAM")
+        val vga = arrayListOf("VGA")
+        val hdd = arrayListOf("HDD","SDD")
+        val etc = arrayListOf("기타")
 
         spin1.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mainBoard)
         spin2.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,cpu)
