@@ -4,7 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/master.iml" filepath="$PROJECT_DIR$/master.iml" />
+<<<<<<< Updated upstream
       <module fileurl="file://D:\mobile_project\master\mobileProject.iml" filepath="D:\mobile_project\master\mobileProject.iml" />
+=======
+>>>>>>> Stashed changes
     </modules>
   </component>
 </project>
+<!-- 0915 test -->
