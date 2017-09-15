@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         val btn1:Button = findViewById(R.id.button_1);
         val btn2:Button = findViewById(R.id.button_2);
         val btn3:Button = findViewById(R.id.button_3);
+        val btn4:Button = findViewById(R.id.button_4);
 
         btn1.setOnClickListener{
             val intent1:Intent = Intent(this@MainActivity,SelectPart::class.java)
@@ -23,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         btn2.setOnClickListener{
             val intent2:Intent = Intent(this@MainActivity,RegistrationPart::class.java)
             startActivity(intent2)
+        }
+        btn4.setOnClickListener{
+            val intent3:Intent = Intent(this@MainActivity,Vufo::class.java)
+            startActivity(intent3)
         }
     }
 }

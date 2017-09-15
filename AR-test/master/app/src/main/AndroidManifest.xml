@@ -30,6 +30,15 @@
         <activity android:name=".SelectPart"/>
         <activity android:name=".RegistrationPart"/>
         <activity android:name=".Vufo"/>
+
+        <activity
+            android:name=".app.ImageTargets.ImageTargets"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:theme="@style/SampleAppsTheme"
+            android:launchMode="singleTask"
+            >
+        </activity>
+
     </application>
 
 </manifest>
