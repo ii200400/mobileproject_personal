@@ -1,0 +1,4 @@
+#Tue Sep 12 08:27:02 KST 2017
+base.0=D\:\\Android\\vuforia-sdk-android-6-2-10\\samples\\0911_test\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+renamed.0=classes.dex
+file.0=D\:\\Android\\vuforia-sdk-android-6-2-10\\samples\\0911_test\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
