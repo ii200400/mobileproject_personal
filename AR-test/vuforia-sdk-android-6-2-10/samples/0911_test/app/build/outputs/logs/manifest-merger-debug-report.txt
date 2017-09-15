@@ -1,0 +1,281 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:2:1-192:12
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:2:1-192:12
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:2:1-192:12
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:2:1-192:12
+MERGED from [com.android.support:appcompat-v7:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\307ddacd732052908e4f0912796d4f96\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\7722b94d736819cf401f8dee31263a83\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:animated-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.0.2.aar\53c0302de3137c97790d835b05292590\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.0.2.aar\ff716aafe5b24255a0636d89d03f5811\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-v4-26.0.2.aar\5e8453f0e010bc7a3d8b78bb95c7319d\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.0.2.aar\4a2bcf93b3d6fa7aa34bbab4d699147e\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-fragment:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-fragment-26.0.2.aar\2eb129bdbd59ba9825cf8733f8dd6c1e\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-utils:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.2.aar\7ce4bd84cc3637c0d745f84883ae0ccf\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-ui:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.0.2.aar\eb6c34cd575f4c83ae69992a7110484a\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.2.aar\0082c1fd5e40ebccbdff9585033019ff\AndroidManifest.xml:17:1-31:12
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:2:1-192:12
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:2:1-192:12
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:2:1-192:12
+	package
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:3:5-49
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:5:5-30
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:4:5-30
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+uses-sdk
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:14:5-74
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:14:5-74
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:14:5-74
+MERGED from [com.android.support:appcompat-v7:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\307ddacd732052908e4f0912796d4f96\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\307ddacd732052908e4f0912796d4f96\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\7722b94d736819cf401f8dee31263a83\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\7722b94d736819cf401f8dee31263a83\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:animated-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.0.2.aar\53c0302de3137c97790d835b05292590\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.0.2.aar\53c0302de3137c97790d835b05292590\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.0.2.aar\ff716aafe5b24255a0636d89d03f5811\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.0.2.aar\ff716aafe5b24255a0636d89d03f5811\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-v4-26.0.2.aar\5e8453f0e010bc7a3d8b78bb95c7319d\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-v4-26.0.2.aar\5e8453f0e010bc7a3d8b78bb95c7319d\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.0.2.aar\4a2bcf93b3d6fa7aa34bbab4d699147e\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.0.2.aar\4a2bcf93b3d6fa7aa34bbab4d699147e\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-fragment-26.0.2.aar\2eb129bdbd59ba9825cf8733f8dd6c1e\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-fragment-26.0.2.aar\2eb129bdbd59ba9825cf8733f8dd6c1e\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-utils:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.2.aar\7ce4bd84cc3637c0d745f84883ae0ccf\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.2.aar\7ce4bd84cc3637c0d745f84883ae0ccf\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.0.2.aar\eb6c34cd575f4c83ae69992a7110484a\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.0.2.aar\eb6c34cd575f4c83ae69992a7110484a\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.2.aar\0082c1fd5e40ebccbdff9585033019ff\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.2.aar\0082c1fd5e40ebccbdff9585033019ff\AndroidManifest.xml:21:5-23:58
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:14:5-74
+INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:14:5-74
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\307ddacd732052908e4f0912796d4f96\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:14:42-71
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:14:15-41
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml
+uses-feature#0x00020000
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:16:5-54
+	android:glEsVersion
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:16:19-51
+uses-feature#android.hardware.camera
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:32:5-60
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:32:19-57
+uses-permission#android.permission.CAMERA
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:37:5-65
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:37:22-62
+uses-permission#android.permission.INTERNET
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:42:5-66
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:42:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:48:5-79
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:48:22-76
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:50:5-79
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:50:22-77
+application
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:62:5-190:19
+MERGED from [com.android.support:appcompat-v7:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\307ddacd732052908e4f0912796d4f96\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\307ddacd732052908e4f0912796d4f96\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\7722b94d736819cf401f8dee31263a83\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\7722b94d736819cf401f8dee31263a83\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.0.2.aar\53c0302de3137c97790d835b05292590\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:animated-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.0.2.aar\53c0302de3137c97790d835b05292590\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.0.2.aar\ff716aafe5b24255a0636d89d03f5811\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.0.2.aar\ff716aafe5b24255a0636d89d03f5811\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-v4-26.0.2.aar\5e8453f0e010bc7a3d8b78bb95c7319d\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v4:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-v4-26.0.2.aar\5e8453f0e010bc7a3d8b78bb95c7319d\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.0.2.aar\4a2bcf93b3d6fa7aa34bbab4d699147e\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.0.2.aar\4a2bcf93b3d6fa7aa34bbab4d699147e\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-fragment-26.0.2.aar\2eb129bdbd59ba9825cf8733f8dd6c1e\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-fragment-26.0.2.aar\2eb129bdbd59ba9825cf8733f8dd6c1e\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.2.aar\7ce4bd84cc3637c0d745f84883ae0ccf\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.2.aar\7ce4bd84cc3637c0d745f84883ae0ccf\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.0.2.aar\eb6c34cd575f4c83ae69992a7110484a\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.0.2.aar\eb6c34cd575f4c83ae69992a7110484a\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.2.aar\0082c1fd5e40ebccbdff9585033019ff\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.2.aar\0082c1fd5e40ebccbdff9585033019ff\AndroidManifest.xml:25:5-29:19
+	android:label
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:64:9-41
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:66:9-40
+	android:icon
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:63:9-38
+	android:allowBackup
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:67:9-35
+	android:description
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:65:9-54
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:68:9-47
+activity#com.vuforia.samples.VuforiaSamples.MainActivity
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:87:9-93:20
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:87:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:88:13-92:29
+action#android.intent.action.MAIN
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:89:17-69
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:89:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:91:17-77
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:91:27-74
+activity#com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivitySplashScreen
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:95:10-101:21
+	android:screenOrientation
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:98:13-49
+	android:noHistory
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:99:13-37
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:97:13-93
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:96:13-65
+activity#com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityLauncher
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:103:9-108:20
+	android:screenOrientation
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:106:13-49
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:105:13-93
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:104:13-61
+activity#com.vuforia.samples.VuforiaSamples.ui.ActivityList.AboutScreen
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:110:10-116:20
+	android:screenOrientation
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:113:13-49
+	android:noHistory
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:114:13-37
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:112:13-93
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:111:13-56
+activity#com.vuforia.samples.VuforiaSamples.app.ImageTargets.ImageTargets
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:118:9-124:20
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:122:13-44
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:120:13-93
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:121:13-51
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:119:13-58
+activity#com.vuforia.samples.VuforiaSamples.app.VuMark.VuMark
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:126:9-132:20
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:130:13-44
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:128:13-93
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:129:13-51
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:127:13-46
+activity#com.vuforia.samples.VuforiaSamples.app.TextRecognition.TextReco
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:134:9-140:20
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:138:13-44
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:136:13-93
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:137:13-51
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:135:13-57
+activity#com.vuforia.samples.VuforiaSamples.app.CylinderTargets.CylinderTargets
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:142:9-148:20
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:146:13-44
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:144:13-93
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:145:13-51
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:143:13-64
+activity#com.vuforia.samples.VuforiaSamples.app.VirtualButtons.VirtualButtons
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:150:9-156:20
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:154:13-44
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:152:13-93
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:153:13-51
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:151:13-62
+activity#com.vuforia.samples.VuforiaSamples.app.UserDefinedTargets.UserDefinedTargets
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:158:9-164:20
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:162:13-44
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:160:13-93
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:161:13-51
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:159:13-70
+activity#com.vuforia.samples.VuforiaSamples.app.MultiTargets.MultiTargets
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:166:9-172:20
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:170:13-44
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:168:13-93
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:169:13-51
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:167:13-58
+activity#com.vuforia.samples.VuforiaSamples.app.CloudRecognition.CloudReco
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:174:9-180:20
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:178:13-44
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:176:13-93
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:177:13-51
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:175:13-59
+activity#com.vuforia.samples.VuforiaSamples.app.ObjectRecognition.ObjectTargets
+ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:182:9-188:20
+	android:launchMode
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:186:13-44
+	android:configChanges
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:184:13-93
+	android:theme
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:185:13-51
+	android:name
+		ADDED from D:\Android\vuforia-sdk-android-6-2-10\samples\0911_test\app\src\main\AndroidManifest.xml:183:13-64
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\307ddacd732052908e4f0912796d4f96\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.0.2.aar\53c0302de3137c97790d835b05292590\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:animated-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.0.2.aar\53c0302de3137c97790d835b05292590\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.0.2.aar\ff716aafe5b24255a0636d89d03f5811\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.0.2.aar\ff716aafe5b24255a0636d89d03f5811\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-v4:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-v4-26.0.2.aar\5e8453f0e010bc7a3d8b78bb95c7319d\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-v4:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-v4-26.0.2.aar\5e8453f0e010bc7a3d8b78bb95c7319d\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.0.2.aar\4a2bcf93b3d6fa7aa34bbab4d699147e\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.0.2.aar\4a2bcf93b3d6fa7aa34bbab4d699147e\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-fragment-26.0.2.aar\2eb129bdbd59ba9825cf8733f8dd6c1e\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-fragment-26.0.2.aar\2eb129bdbd59ba9825cf8733f8dd6c1e\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.2.aar\7ce4bd84cc3637c0d745f84883ae0ccf\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.2.aar\7ce4bd84cc3637c0d745f84883ae0ccf\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.0.2.aar\eb6c34cd575f4c83ae69992a7110484a\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.0.2.aar\eb6c34cd575f4c83ae69992a7110484a\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.2.aar\0082c1fd5e40ebccbdff9585033019ff\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.2.aar\0082c1fd5e40ebccbdff9585033019ff\AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:appcompat-v7:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\307ddacd732052908e4f0912796d4f96\AndroidManifest.xml:28:13-35
+	android:name
+		ADDED from [com.android.support:appcompat-v7:26.0.2] C:\Users\J\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\307ddacd732052908e4f0912796d4f96\AndroidManifest.xml:27:13-51
