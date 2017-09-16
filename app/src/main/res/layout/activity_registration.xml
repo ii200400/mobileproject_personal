@@ -36,11 +36,11 @@
         android:layout_width="match_parent"
         android:layout_height="30dp" />
 
-    <ImageButton
-        android:id="@+id/imageButton1"
+    <ImageView
+        android:id="@+id/imageview"
         android:layout_width="match_parent"
         android:layout_height="241dp"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        android:background="?attr/colorControlHighlight" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,7 +65,7 @@
             android:layout_height="match_parent" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
