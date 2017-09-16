@@ -21,23 +21,23 @@ class RegistrationPart: AppCompatActivity() {
         setTitle("부품 등록")
 
         val spin1: Spinner = findViewById(R.id.spinner1)
-        val text1: TextView = findViewById(R.id.textView1)
 
         val value = arrayListOf("카테고리","메인보드","CPU","RAM","메모리")
 
         spin1.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,value)
 
-        val btnPicture : Button=findViewById(R.id.button1)
-        val btnUpload : Button=findViewById(R.id.button2)
+        val btnPicture:Button=findViewById(R.id.button1)
+        val btnUpload:Button=findViewById(R.id.button2)
 
+        //사진 찍기
         btnPicture.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if (intent.resolveActivity(packageManager) != null) {
+                //다른 앱을 불러와 구동
                 startActivityForResult(intent, CAMERA_REQUEST_MODE)
             }
         }
 
-        //btnUpload.setOnClickListener { 파이어 베이스 업로드용 버튼 구현
 
     }
 
