@@ -25,6 +25,10 @@ class MainActivity : AppCompatActivity() {
             val intent2:Intent = Intent(this@MainActivity,RegistrationPart::class.java)
             startActivity(intent2)
         }
+        btn3.setOnClickListener{
+            val intent2:Intent = Intent(this@MainActivity,RegistrationPart::class.java)
+            startActivity(intent2)
+        }
         btn4.setOnClickListener{
             val intent3:Intent = Intent(this@MainActivity,Vufo::class.java)
             startActivity(intent3)

@@ -16,7 +16,7 @@ class RegistrationPart: AppCompatActivity() {
         setTitle("부품 등록")
 
         val spin1: Spinner = findViewById(R.id.spinner1)
-        val text1: TextView = findViewById(R.id.textView1)
+        //val text1: TextView = findViewById(R.id.textView1)
 
         val value = arrayListOf("아아~","아~아아ㅏ","마이크 테스트")
 

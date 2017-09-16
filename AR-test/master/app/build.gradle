@@ -62,5 +62,7 @@ dependencies {
     })
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    compile files("$VUFORIA_SDK_DIR/$JAR_DIR/Vuforia.jar")
+    //compile files("$VUFORIA_SDK_DIR/$JAR_DIR/Vuforia.jar")
+    compile files("libs/Vuforia.jar")
+    compile files("libs/lib.jar")
 }
