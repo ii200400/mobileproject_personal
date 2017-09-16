@@ -1,5 +1,6 @@
 package com.example.im.mobileproject
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -10,8 +11,16 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_registration.*
+import android.widget.Toast
+import android.support.v4.app.ActivityCompat
+import android.content.pm.PackageManager
+import android.support.v4.content.ContextCompat
+import android.os.Build
+
+
 
 class RegistrationPart: AppCompatActivity() {
+    private val PERMISSIONS_REQUEST_CODE = 100
     val CAMERA_REQUEST_MODE = 0
     var filePath: Uri? = null
 
@@ -38,7 +47,32 @@ class RegistrationPart: AppCompatActivity() {
             }
         }
 
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //API 23 이상이면
+                // 런타임 퍼미션 처리 필요
+
+                val hasCameraPermission = ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.CAMERA)
+                val hasWriteExternalStoragePermission = ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+                if (hasCameraPermission == PackageManager.PERMISSION_GRANTED && hasWriteExternalStoragePermission == PackageManager.PERMISSION_GRANTED) {
+                }//이미 퍼미션을 가지고 있음
+                else {
+                    //퍼미션 요청
+                    ActivityCompat.requestPermissions(this,
+                            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            PERMISSIONS_REQUEST_CODE)
+                }
+            } else {
+            }
+
+
+        } else {
+            Toast.makeText(this, "Camera not supported",
+                    Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
