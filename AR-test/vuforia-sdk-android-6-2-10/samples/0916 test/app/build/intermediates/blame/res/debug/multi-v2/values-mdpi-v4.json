@@ -21,6 +21,28 @@
                     }
                 }
             ]
+        },
+        {
+            "outputFile": "D:\\Git-project\\master\\AR-test\\vuforia-sdk-android-6-2-10\\samples\\0916 test\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-mdpi-v4\\values-mdpi-v4.xml",
+            "map": [
+                {
+                    "source": "D:\\Git-project\\master\\AR-test\\vuforia-sdk-android-6-2-10\\samples\\0916 test\\app\\src\\main\\res\\values-mdpi\\dimens.xml",
+                    "from": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "56,105",
+                        "endColumns": "48,49",
+                        "endOffsets": "100,150"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,104",
+                        "endColumns": "48,49",
+                        "endOffsets": "99,149"
+                    }
+                }
+            ]
         }
     ]
 }

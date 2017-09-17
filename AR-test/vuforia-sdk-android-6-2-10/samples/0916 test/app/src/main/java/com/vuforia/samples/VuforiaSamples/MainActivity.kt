@@ -14,32 +14,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*
-        val btn1 : Button = findViewById(R.id.button_1);
-        val btn2 : Button = findViewById(R.id.button_2);
-        val btn3 : Button = findViewById(R.id.button_3);
-        */
+        val btn1 : Button = findViewById(R.id.button_1) as Button
+        val btn2 : Button = findViewById(R.id.button_2) as Button
+        val btn3 : Button = findViewById(R.id.button_3) as Button
         val btn4 : Button = findViewById(R.id.button_4) as Button
 
-        /*
         btn1.setOnClickListener{
-            val intent1:Intent = Intent(this@MainActivity,ActivityLauncher::class.java)
+            val intent1:Intent = Intent(this@MainActivity,SelectPart::class.java)
             startActivity(intent1)
         }
         btn2.setOnClickListener{
-            val intent2:Intent = Intent(this@MainActivity,ui.ActivityList.ActivityLauncher::class.java)
+            val intent2:Intent = Intent(this@MainActivity,RegistrationPart::class.java)
             startActivity(intent2)
         }
         btn3.setOnClickListener{
-            val intent3:Intent = Intent(this@MainActivity,ActivityLauncher::class.java)
-            startActivity(intent2)
+            val intent3:Intent = Intent(this@MainActivity,Assembly::class.java)
+            startActivity(intent3)
         }
-        */
-
         btn4.setOnClickListener{
             val intent4:Intent = Intent(this@MainActivity,ActivityLauncher::class.java)
             startActivity(intent4)
         }
-        //*/
     }
 }

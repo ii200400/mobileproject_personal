@@ -160,6 +160,18 @@
             android:name="com.vuforia.samples.VuforiaSamples.MainActivity"
             android:theme="@style/NoTitle" >
         </activity>
+        <activity
+            android:name="com.vuforia.samples.VuforiaSamples.SelectPart"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name="com.vuforia.samples.VuforiaSamples.RegistrationPart"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name="com.vuforia.samples.VuforiaSamples.Assembly"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name="com.vuforia.samples.VuforiaSamples.Picture"
+            android:theme="@style/NoTitle" />
     </application>
 
 </manifest>
