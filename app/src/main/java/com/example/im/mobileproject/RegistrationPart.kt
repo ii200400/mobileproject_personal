@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_registration.*
 import android.widget.Toast
@@ -16,6 +15,8 @@ import android.support.v4.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 import android.os.Build
+import android.hardware.camera2.*
+
 
 
 
@@ -50,7 +51,7 @@ class RegistrationPart: AppCompatActivity() {
         if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //API 23 이상이면
-                // 런타임 퍼미션 처리 필요
+                // 런타임 권한 처리 필요
 
                 val hasCameraPermission = ContextCompat.checkSelfPermission(this,
                         Manifest.permission.CAMERA)
@@ -58,9 +59,9 @@ class RegistrationPart: AppCompatActivity() {
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
                 if (hasCameraPermission == PackageManager.PERMISSION_GRANTED && hasWriteExternalStoragePermission == PackageManager.PERMISSION_GRANTED) {
-                }//이미 퍼미션을 가지고 있음
+                }//이미 권한을 가지고 있음
                 else {
-                    //퍼미션 요청
+                    //권한 요청
                     ActivityCompat.requestPermissions(this,
                             arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
                             PERMISSIONS_REQUEST_CODE)
@@ -70,8 +71,7 @@ class RegistrationPart: AppCompatActivity() {
 
 
         } else {
-            Toast.makeText(this, "Camera not supported",
-                    Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Camera not supported", Toast.LENGTH_LONG).show()
         }
     }
 
