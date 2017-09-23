@@ -1,11 +1,12 @@
 package com.vuforia.samples.VuforiaSamples
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.*
+
+import com.vuforia.samples.VuforiaSamples.app.ImageTargets.ImageTargets
 
 class SelectPart:AppCompatActivity() {
 
@@ -30,12 +31,18 @@ class SelectPart:AppCompatActivity() {
         val hdd = arrayListOf("HDD","SDD")
         val etc = arrayListOf("기타")
 
-        spin1.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mainBoard)
-        spin2.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,cpu)
-        spin3.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ram)
-        spin4.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,vga)
-        spin5.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,hdd)
-        spin6.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,etc)
-    }
+        spin1.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mainBoard) as SpinnerAdapter?
+        spin2.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,cpu) as SpinnerAdapter?
+        spin3.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ram) as SpinnerAdapter?
+        spin4.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,vga) as SpinnerAdapter?
+        spin5.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,hdd) as SpinnerAdapter?
+        spin6.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,etc) as SpinnerAdapter?
 
+        val startbtn : Button = findViewById(R.id.button_startAR) as Button
+
+        startbtn.setOnClickListener{
+            val intent : Intent = Intent(this, ImageTargets::class.java)
+            startActivity(intent)
+        }
+    }
 }

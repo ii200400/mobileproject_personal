@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.Spinner
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 
 class Assembly : AppCompatActivity() {
 
@@ -24,6 +25,7 @@ class Assembly : AppCompatActivity() {
         val category= arrayOf("카테고리","메인보드","CPU","RAM","메모리")
 
         spin2.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,category)
+        // 아래 코드 빨간줄 뜨긴한데 빌드와 실행 모두 되네요
         fragmentManager.beginTransaction().replace(R.id.container,fragment1).commit()
 
     }

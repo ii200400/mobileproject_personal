@@ -1,1 +1,0 @@
-D:\Git-project\master\pcAssemblyHelper\app\src\main\java\com\vuforia\samples\VuforiaSamples\RegistrationPart.kt
