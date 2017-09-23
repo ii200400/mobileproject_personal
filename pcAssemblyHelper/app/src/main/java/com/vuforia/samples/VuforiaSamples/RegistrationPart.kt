@@ -47,6 +47,7 @@ class RegistrationPart: AppCompatActivity() {
 
         if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
 
+            /*
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //API 23 이상이면
                 // 런타임 퍼미션 처리 필요
 
@@ -65,7 +66,7 @@ class RegistrationPart: AppCompatActivity() {
                 }
             } else {
             }
-
+            */
 
         } else {
             Toast.makeText(this, "Camera not supported",

@@ -1,7 +1,1 @@
-D:\Git-project\master\pcAssemblyHelper\app\src\main\java\com\vuforia\samples\VuforiaSamples\MainActivity.kt
-D:\Git-project\master\pcAssemblyHelper\app\src\main\java\com\vuforia\samples\VuforiaSamples\SelectPart.kt
-D:\Git-project\master\pcAssemblyHelper\app\src\main\java\com\vuforia\samples\VuforiaSamples\Assembly.kt
 D:\Git-project\master\pcAssemblyHelper\app\src\main\java\com\vuforia\samples\VuforiaSamples\RegistrationPart.kt
-D:\Git-project\master\pcAssemblyHelper\app\src\main\java\com\vuforia\samples\VuforiaSamples\Fragment2.kt
-D:\Git-project\master\pcAssemblyHelper\app\src\main\java\com\vuforia\samples\VuforiaSamples\Picture.kt
-D:\Git-project\master\pcAssemblyHelper\app\src\main\java\com\vuforia\samples\VuforiaSamples\Fragment1.kt
