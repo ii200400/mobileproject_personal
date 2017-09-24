@@ -4,7 +4,7 @@
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="26" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -29,8 +29,9 @@
         </activity>
         <activity android:name=".SelectPart" />
         <activity android:name=".RegistrationPart" />
+        <activity android:name=".RegistrationPart_SP" />
         <activity android:name=".Assembly" />
-        <activity android:name=".Picture"></activity>
+        <activity android:name=".Picture" />
     </application>
 
 </manifest>

@@ -15,8 +15,6 @@ import android.support.v4.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 import android.os.Build
-import android.hardware.camera2.*
-
 
 
 
@@ -41,11 +39,15 @@ class RegistrationPart: AppCompatActivity() {
 
         //사진 찍기
         btnPicture.setOnClickListener {
+            /*
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if (intent.resolveActivity(packageManager) != null) {
                 //다른 앱을 불러와 구동
                 startActivityForResult(intent, CAMERA_REQUEST_MODE)
             }
+            */
+            val intent_picture : Intent = Intent(this@RegistrationPart,RegistrationPart_SP::class.java)
+            startActivity(intent_picture)
         }
 
         if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
@@ -71,7 +73,8 @@ class RegistrationPart: AppCompatActivity() {
 
 
         } else {
-            Toast.makeText(this, "Camera not supported", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Camera not supported",
+                    Toast.LENGTH_LONG).show()
         }
     }
 
