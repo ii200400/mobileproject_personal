@@ -4,7 +4,7 @@
             "outputFile": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v17\\values-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\0d5c68f3327e61479d6009c3fb383575\\res\\values-v17\\values-v17.xml",
+                    "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\values-v17\\values-v17.xml",
                     "from": {
                         "startLines": "4,7,11,15,18,21,24,28,32,35,38,41,45,48",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
