@@ -11,6 +11,15 @@ class MainSplash : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mainsplash)
 
+        // 1초 동안 정지하고 스플래시 이미지 띄우기
+        try {
+            Thread.sleep(1000);
+        }
+        catch (e : Exception)
+        {
+            print("스플래시 에러")
+        }
+
         val intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
     }
