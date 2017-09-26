@@ -3,16 +3,11 @@ package com.example.im.mobileproject
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.graphics.ImageFormat
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.TextureView
 import android.widget.Button
-import android.view.Surface.ROTATION_270
-import android.view.Surface.ROTATION_180
-import android.view.Surface.ROTATION_90
-import android.view.Surface.ROTATION_0
 import android.util.SparseIntArray
 import android.view.Surface
 import android.os.HandlerThread
@@ -31,7 +26,6 @@ import android.widget.Toast
 import java.io.*
 import java.nio.ByteBuffer
 import java.util.*
-import java.util.jar.Manifest
 
 
 /**
@@ -50,6 +44,7 @@ class RegistrationPart_SP : AppCompatActivity() {
     protected var captureRequestBuilder: CaptureRequest.Builder? = null
     private var imageDimension: Size? = null
     private var imageReader: ImageReader? = null
+    private var map : StreamConfigurationMap? = null
     private var file: File? = null
     private val REQUEST_CAMERA_PERMISSION = 200
     //private val mFlashSupported: Boolean = false ..?왜 있을까;
@@ -57,7 +52,7 @@ class RegistrationPart_SP : AppCompatActivity() {
     private var mBackgroundThread: HandlerThread? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {//모두 구현
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.camera_api)
 
@@ -72,14 +67,10 @@ class RegistrationPart_SP : AppCompatActivity() {
         textureView!!.setSurfaceTextureListener(textureListener);
 
         takePictureButton!!.setOnClickListener{
-            v->{
-                takePicture()
-            }
+            takePicture()
         }
-
-
     }
-
+    //textureView에 카메라 화면 stream
     val textureListener : TextureView.SurfaceTextureListener =  object : TextureView.SurfaceTextureListener{
         override fun onSurfaceTextureAvailable (surface:SurfaceTexture, width:Int, height:Int){
             openCamera()
@@ -94,32 +85,32 @@ class RegistrationPart_SP : AppCompatActivity() {
 
         }
     }
-    //위와 마찬가지로 val로 취급한다
+
     val stateCallback : CameraDevice.StateCallback = object : CameraDevice.StateCallback(){
-        override fun onOpened(camera : CameraDevice){//카메라 화면이 실행됨에 따라 불러짐
+        //카메라 화면 stream
+        override fun onOpened(camera : CameraDevice){
             Log.e(TAG, "onOpened")
             cameraDevice = camera
             createCameraPreview()
         }
+        //에러가 나거나 카메라에서 나가면 카메라 장치 종료
         override fun onDisconnected(p0: CameraDevice?) {
             cameraDevice!!.close()
         }
-
         override fun onError(p0: CameraDevice?, p1: Int) {
             cameraDevice!!.close()
             cameraDevice = null
         }
     }
-
+    //TODO 언제 호출되는 것인지?
     val captureCallbackListener : CameraCaptureSession.CaptureCallback = object : CameraCaptureSession.CaptureCallback(){
         override fun onCaptureCompleted(session: CameraCaptureSession?, request: CaptureRequest?, result: TotalCaptureResult?) {
             super.onCaptureCompleted(session, request, result)
-            //왠지 모르겠지만 RegistrationPart_SP.this가 context에 들어가면 오류가 난다.
-            Toast.makeText(applicationContext, "Saved:" + file, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RegistrationPart_SP, "Saved:" + file, Toast.LENGTH_SHORT).show()
             createCameraPreview()
         }
     }
-    //완전 일반 함수들인데 중복으로 쓰이지 않으면 빼겠다.
+    //thread관련 함수
     protected fun startBackgroundThread(){
         mBackgroundThread = HandlerThread("Camera Background");
         mBackgroundThread!!.start()
@@ -134,16 +125,21 @@ class RegistrationPart_SP : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
+    //사진찍기의 중심함수
     protected fun takePicture(){
         if (null == cameraDevice){
+            //카메라 장치가 꺼져있는 경우
             Log.e(TAG,"cameraDevice is null")
             return;
         }
         val manager : CameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
         try{
+            //TODO 카메라 이미지 크기 조작?
             val characteristics : CameraCharacteristics = manager.getCameraCharacteristics(cameraDevice!!.getId())
             var jpegSizes : Array<Size>? = null
+            if (map != null) {
+                jpegSizes = map!!.getOutputSizes(ImageFormat.JPEG)
+            }
             if (characteristics != null){
                 jpegSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP).getOutputSizes(ImageFormat.JPEG)
             }
@@ -154,17 +150,34 @@ class RegistrationPart_SP : AppCompatActivity() {
                 height = jpegSizes[0].height
             }
             val reader : ImageReader = ImageReader.newInstance(width,height,ImageFormat.JPEG,1)
-            val outputSurfaces : List<Surface> = ArrayList<Surface>(2)
-            outputSurfaces.plus(reader.surface)
-            outputSurfaces.plus(textureView!!.surfaceTexture)
+            val outputSurfaces : ArrayList<Surface> = ArrayList<Surface>(2)
+            outputSurfaces.add(reader.surface)
+            outputSurfaces.add(Surface(textureView!!.surfaceTexture))
 
             val captureBuilder : CaptureRequest.Builder = cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
             captureBuilder.addTarget(reader.surface)
             captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO)
 
+            //TODO 카메라 회전을 고려하여 이미지 저장
             val rotation = windowManager.defaultDisplay.rotation
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation))
-            val file : File = File(Environment.getExternalStorageDirectory().toString() + "pic.jpg")
+
+            //외부 저장소에 읽고 쓰는 것이 가능한지 확인
+            val state : String = Environment.getExternalStorageState()
+            if(!Environment.MEDIA_MOUNTED.equals(state)) {
+                Log.e(TAG, "Storage Permission need");
+                return
+            }
+
+            val fileName: String = String.format("%d.jpg", System.currentTimeMillis())
+            val file = File(Environment.getExternalStorageDirectory().absolutePath + "/DCIM/Assembly_helper", fileName)
+            //파일 생성 실패
+            if (!file.mkdirs()){
+                Log.e(TAG, "Directory not created");
+                return
+            }
+            Log.e("_---------------------","4")
+            //http://myandroidarchive.tistory.com/6
             val readerListener : ImageReader.OnImageAvailableListener  = object : ImageReader.OnImageAvailableListener {
                 override fun onImageAvailable(reader : ImageReader) {
                     var image : Image? = null
@@ -190,7 +203,7 @@ class RegistrationPart_SP : AppCompatActivity() {
                     var output : OutputStream? = null
                     try{
                         output = FileOutputStream(file)
-                        output.write(bytes)
+                        output!!.write(bytes)
                     }finally {
                         if (output != null){
                             output.close()
@@ -198,8 +211,8 @@ class RegistrationPart_SP : AppCompatActivity() {
                     }
                 }
             }
-
             reader.setOnImageAvailableListener(readerListener, mBackgroundHandler)
+
             val captureListener : CameraCaptureSession.CaptureCallback = object : CameraCaptureSession.CaptureCallback(){
                 override fun onCaptureCompleted(session : CameraCaptureSession, request: CaptureRequest, result : TotalCaptureResult){
                     super.onCaptureCompleted(session, request, result)
@@ -259,8 +272,8 @@ class RegistrationPart_SP : AppCompatActivity() {
         try{
             cameraId = manager.cameraIdList[0]
             val characteristics : CameraCharacteristics = manager.getCameraCharacteristics(cameraId)
-            val map : StreamConfigurationMap = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
-            imageDimension = map.getOutputSizes(SurfaceTexture::class.java)[0]
+            map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+            imageDimension = map!!.getOutputSizes(SurfaceTexture::class.java)[0]
             //카메라 권한 확인
             val hasCameraPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
             val hasWriteExternalStoragePermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -291,7 +304,7 @@ class RegistrationPart_SP : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
+    //카메라 종료 구현만하고 쓰지는 않는다.
     private fun closeCamera(){
         if (cameraDevice != null){
             cameraDevice!!.close()
