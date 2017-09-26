@@ -1,6 +1,7 @@
 //https://inducesmile.com/android/android-camera2-api-example-tutorial/
 package com.example.im.mobileproject
 
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.ImageFormat
@@ -24,6 +25,7 @@ import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.Toast
 import java.io.*
+import java.nio.Buffer
 import java.nio.ByteBuffer
 import java.util.*
 
@@ -149,6 +151,7 @@ class RegistrationPart_SP : AppCompatActivity() {
                 width = jpegSizes[0].width
                 height = jpegSizes[0].height
             }
+            //이미지의 크기와 형식을 묘사(?)한다. Create a new reader for images of the desired size and format.
             val reader : ImageReader = ImageReader.newInstance(width,height,ImageFormat.JPEG,1)
             val outputSurfaces : ArrayList<Surface> = ArrayList<Surface>(2)
             outputSurfaces.add(reader.surface)
@@ -159,7 +162,7 @@ class RegistrationPart_SP : AppCompatActivity() {
             captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO)
 
             //TODO 카메라 회전을 고려하여 이미지 저장
-            val rotation = windowManager.defaultDisplay.rotation
+            val rotation = (this@RegistrationPart_SP as Activity).windowManager.defaultDisplay.rotation
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation))
 
             //외부 저장소에 읽고 쓰는 것이 가능한지 확인
@@ -170,21 +173,22 @@ class RegistrationPart_SP : AppCompatActivity() {
             }
 
             val fileName: String = String.format("%d.jpg", System.currentTimeMillis())
-            val file = File(Environment.getExternalStorageDirectory().absolutePath + "/DCIM/Assembly_helper", fileName)
+            val file = File(Environment.getExternalStorageDirectory().toString() + "/DCIM/helper", fileName)
+            Log.e("--------------------",file.toString())
             //파일 생성 실패
             if (!file.mkdirs()){
                 Log.e(TAG, "Directory not created");
                 return
             }
-            Log.e("_---------------------","4")
+
             //http://myandroidarchive.tistory.com/6
             val readerListener : ImageReader.OnImageAvailableListener  = object : ImageReader.OnImageAvailableListener {
                 override fun onImageAvailable(reader : ImageReader) {
-                    var image : Image? = null
+                    val image : Image = reader.acquireLatestImage()
                     try{
-                        image = reader.acquireLatestImage()
                         val buffer : ByteBuffer = image.planes[0].buffer
-                        var bytes : ByteArray = ByteArray(buffer.capacity())
+                        //buffer.rewind()
+                        val bytes = ByteArray(buffer.remaining())
                         buffer.get(bytes)
                         save(bytes)
                     }catch (e : FileNotFoundException){
@@ -197,6 +201,7 @@ class RegistrationPart_SP : AppCompatActivity() {
                         }
                     }
                 }
+
                 //https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-throws/index.html
                 @Throws(IOException::class)
                 private fun save (bytes : ByteArray) {
@@ -212,7 +217,7 @@ class RegistrationPart_SP : AppCompatActivity() {
                 }
             }
             reader.setOnImageAvailableListener(readerListener, mBackgroundHandler)
-
+            //사진을 찍으면 불리는 함수
             val captureListener : CameraCaptureSession.CaptureCallback = object : CameraCaptureSession.CaptureCallback(){
                 override fun onCaptureCompleted(session : CameraCaptureSession, request: CaptureRequest, result : TotalCaptureResult){
                     super.onCaptureCompleted(session, request, result)
