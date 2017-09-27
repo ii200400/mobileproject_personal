@@ -25,6 +25,16 @@ class Assembly : AppCompatActivity() {
 
         spin2.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,category)
         fragmentManager.beginTransaction().replace(R.id.container,fragment1).commit()
+    }
 
+    fun onFragmentChange(index: Int){
+        var index=index
+
+        if(index==0){
+            fragmentManager.beginTransaction().replace(R.id.container,fragment1).commit()
+        }
+        else if(index==1){
+            fragmentManager.beginTransaction().replace(R.id.container,fragment2).commit()
+        }
     }
 }
