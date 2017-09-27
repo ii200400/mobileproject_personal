@@ -16,16 +16,16 @@
         "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable-hdpi\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable_icon_camera_normal.png.flat",
-        "source": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\src\\main\\res\\drawable\\icon_camera_normal.png"
+        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
+        "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable-xhdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\color_switch_thumb_material_light.xml.flat",
         "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\color\\switch_thumb_material_light.xml"
     },
     {
-        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
-        "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable-xhdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
+        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable_icon_camera_normal.png.flat",
+        "source": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\src\\main\\res\\drawable\\icon_camera_normal.png"
     },
     {
         "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\layout_sample_app_menu_layer.xml.flat",
@@ -92,12 +92,12 @@
         "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable-xxhdpi\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
-        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_mode_close_item_material.xml.flat",
-        "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
         "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_abc_btn_radio_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable-xxxhdpi\\abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_mode_close_item_material.xml.flat",
+        "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
         "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_abc_list_focused_holo.9.png.flat",
@@ -120,16 +120,16 @@
         "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable-hdpi\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_textfield_activated_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable-xxhdpi\\abc_textfield_activated_mtrl_alpha.9.png"
+        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_default_mtrl_shape.xml.flat",
+        "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
     },
     {
         "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_abc_switch_track_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable-xhdpi\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_default_mtrl_shape.xml.flat",
-        "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
+        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_textfield_activated_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\drawable-xxhdpi\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_abc_ic_menu_selectall_mtrl_alpha.png.flat",
@@ -1062,6 +1062,10 @@
     {
         "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable_icon.png.flat",
         "source": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\src\\main\\res\\drawable\\icon.png"
+    },
+    {
+        "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_armain.xml.flat",
+        "source": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\src\\main\\res\\layout\\activity_armain.xml"
     },
     {
         "merged": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_abc_ic_voice_search_api_mtrl_alpha.png.flat",

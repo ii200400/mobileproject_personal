@@ -32,10 +32,10 @@
     -->
     <uses-feature android:name="android.hardware.camera" />
 
-    <!--         Add this permission to get access to the camera. -->
+    <!-- Add this permission to get access to the camera. -->
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <!--         Add this permission to allow opening network sockets. -->
+    <!-- Add this permission to allow opening network sockets. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!--
@@ -46,6 +46,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <!--
       NOTE: The setting 'android:launchMode="singleTask"' makes sure
       that the activity can begin only one task and the device can hold only
@@ -63,15 +64,14 @@
         android:label="@string/app_name"
         android:launchMode="singleTask"
         android:theme="@style/SampleAppsTheme">
-
-        <activity android:name=".MainSplash"
-            android:theme="@style/SampleAppsTheme"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".MainSplash"
+            android:screenOrientation="portrait"
+            android:theme="@style/SampleAppsTheme">
 
             <!-- 여기에 밑에 있는 intent-filter 지우고 붙여넣기 -->
 
         </activity>
-
         <activity
             android:name=".ui.ActivityList.ActivitySplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
@@ -86,60 +86,60 @@
         <activity
             android:name=".ui.ActivityList.ActivityLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ActivityList.AboutScreen"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:noHistory="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".app.ImageTargets.ImageTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme"></activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name=".app.VuMark.VuMark"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme"></activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name=".app.TextRecognition.TextReco"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme"></activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name=".app.CylinderTargets.CylinderTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme"></activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name=".app.VirtualButtons.VirtualButtons"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme"></activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name=".app.UserDefinedTargets.UserDefinedTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme"></activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name=".app.MultiTargets.MultiTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme"></activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name=".app.CloudRecognition.CloudReco"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme"></activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name=".app.ObjectRecognition.ObjectTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme"></activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/NoTitle"></activity>
+            android:theme="@style/NoTitle" />
         <activity
             android:name=".SelectPart"
             android:theme="@style/NoTitle" />
@@ -152,7 +152,7 @@
         <activity
             android:name=".Picture"
             android:theme="@style/NoTitle" />
-
+        <activity android:name=".ARmain"></activity>
     </application>
 
 </manifest>

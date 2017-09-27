@@ -65,22 +65,14 @@
         android:label="@string/app_name"
         android:launchMode="singleTask"
         android:theme="@style/SampleAppsTheme" >
+        <activity
+            android:name="com.vuforia.samples.VuforiaSamples.MainSplash"
+            android:screenOrientation="portrait"
+            android:theme="@style/SampleAppsTheme" >
 
-        <!--
-          NOTE: The values in 'android:configChanges' ensure that Android will 
-          not destroy and re-create the activity when the user flips the 
-          keyboard, changes the orientation of the device, or the actual or 
-          physical screen resolution changes, but calls the Activity's 
-          onConfigurationChanged() function instead.
+            <!-- 여기에 밑에 있는 intent-filter 지우고 붙여넣기 -->
 
-          NOTE 2: In order to prevent automatic reactions to orientation
-          changes in addition to setting proper values for
-          'android:configChanges', you also must explicitly specify the screen
-          orientation used by the application, either by setting the attribute
-          'android:screenOrientation' or in code by calling
-          Activity.setRequestedOrientation().
-        -->
-        <!-- Splash Screen Activity -->
+        </activity>
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivitySplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
@@ -161,7 +153,7 @@
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.Picture"
             android:theme="@style/NoTitle" />
-        <activity android:name="com.vuforia.samples.VuforiaSamples.MainSplash" />
+        <activity android:name="com.vuforia.samples.VuforiaSamples.ARmain" />
     </application>
 
 </manifest>
