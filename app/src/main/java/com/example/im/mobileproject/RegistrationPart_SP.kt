@@ -198,15 +198,13 @@ class RegistrationPart_SP : AppCompatActivity() {
                             //val bytes = ByteArray(buffer.capacity())
                             //buffer.get(bytes)
                             //save(bytes)
-                            Log.e("-------------","111")
+
                             bitmap = Bitmap.createBitmap(reader.width + rowPadding / pixelStride, reader.height, Bitmap.Config.ARGB_8888)
                             bitmap.copyPixelsFromBuffer(buffer)
-                            Log.e("-------------","333")
+
                             val fileName: String = String.format("%d.png", System.currentTimeMillis())
                             output = FileOutputStream(file.toString() + "/" + fileName)
-                            Log.e("-------------",output.toString())
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output)
-                            Log.e("-------------","222")
                         }
                     }catch (e : FileNotFoundException){
                         e.printStackTrace()
