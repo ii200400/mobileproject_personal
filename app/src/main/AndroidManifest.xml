@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -26,7 +27,8 @@
         <activity android:name=".SelectPart" />
         <activity android:name=".RegistrationPart" />
         <activity android:name=".Assembly" />
-        <activity android:name=".Picture"></activity>
+        <activity android:name=".Picture" />
+        <activity android:name=".Assembly_Register"></activity>
     </application>
 
 </manifest>
