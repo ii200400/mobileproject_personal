@@ -2,6 +2,7 @@
 package com.example.im.mobileproject
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -22,6 +23,7 @@ import android.hardware.camera2.*
 import android.hardware.camera2.params.StreamConfigurationMap
 import android.media.Image
 import android.os.Environment
+import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
@@ -173,7 +175,8 @@ class RegistrationPart_SP : AppCompatActivity() {
                 return
             }
             //TODO
-            var file = File(Environment.getExternalStorageDirectory().toString() + "/DCIM/helper/")
+            var file = File(Environment.getExternalStorageDirectory().toString() + "/DCIM/helper")
+
             //파일 생성 실패
             if(!file.exists()) {
                 if (!file.mkdirs()) {
@@ -194,17 +197,26 @@ class RegistrationPart_SP : AppCompatActivity() {
                             val buffer: ByteBuffer = image.planes[0].buffer
                             val pixelStride = image.planes[0].pixelStride
                             val rowStride = image.planes[0].rowStride
-                            val rowPadding = rowStride - pixelStride * reader.width;
-                            //val bytes = ByteArray(buffer.capacity())
-                            //buffer.get(bytes)
-                            //save(bytes)
+                            val rowPadding = rowStride - pixelStride * reader.width
 
                             bitmap = Bitmap.createBitmap(reader.width + rowPadding / pixelStride, reader.height, Bitmap.Config.ARGB_8888)
                             bitmap.copyPixelsFromBuffer(buffer)
 
                             val fileName: String = String.format("%d.png", System.currentTimeMillis())
                             output = FileOutputStream(file.toString() + "/" + fileName)
+                            Log.e("--------------",output.toString())
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output)
+                            output.flush()
+                            output.close()
+                            /*
+                            //TODO 갤러리에서 이미지 볼 수 있도록 하기
+                            val values : ContentValues = ContentValues()
+                            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
+                            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+                            values.put(MediaStore.MediaColumns.DATA, fileName);
+                            //TODO 자신의 context를 불러오는 방법을 알아보기
+                            this@RegistrationPart_SP.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                            */
                         }
                     }catch (e : FileNotFoundException){
                         e.printStackTrace()
@@ -218,21 +230,6 @@ class RegistrationPart_SP : AppCompatActivity() {
 
                         if (image != null){
                             image.close()
-                        }
-                    }
-                }
-
-                //https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-throws/index.html
-                @Throws(IOException::class)
-                //https://stackoverflow.com/questions/42951837/using-camera2-api-to-get-single-image-and-display-it-with-imageview
-                private fun save (bytes : ByteArray) {
-                    var output : OutputStream? = null
-                    try{
-                        output = FileOutputStream(file)
-                        output!!.write(bytes)
-                    }finally {
-                        if (output != null){
-                            output!!.close()
                         }
                     }
                 }
