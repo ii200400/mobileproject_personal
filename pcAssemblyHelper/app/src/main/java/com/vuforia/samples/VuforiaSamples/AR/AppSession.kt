@@ -145,8 +145,167 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     }
 
     // Starts Vuforia, initialize and starts the camera and start the trackers
+    @Throws(SampleApplicationException::class)
     fun startAR(camera : Int) //throws SampleApplicationException
     {
+        var error: String
 
+        // 아래 오류 메세지는 삭제할 예정
+        if (mCameraRunning)
+        {
+            error = "Camera already running, unable to open again"
+            Log.e(LOGTAG, error)
+            throw SampleApplicationException(
+                    SampleApplicationException.CAMERA_INITIALIZATION_FAILURE, error)
+        }
+
+        mCamera = camera
+        if (!CameraDevice.getInstance().init(camera))
+        {
+            error = "Unable to open camera device: " + camera
+            Log.e(LOGTAG, error)
+            throw SampleApplicationException(
+                    SampleApplicationException.CAMERA_INITIALIZATION_FAILURE, error)
+        }
+
+        if (!CameraDevice.getInstance().selectVideoMode(CameraDevice.MODE.MODE_DEFAULT))
+        {
+            error = "Unable to set video mode"
+            Log.e(LOGTAG, error)
+            throw SampleApplicationException(
+                    SampleApplicationException.CAMERA_INITIALIZATION_FAILURE, error)
+        }
+
+        if (!CameraDevice.getInstance().start())
+        {
+            error = "Unable to start camera device: " + camera
+            Log.e(LOGTAG, error)
+            throw SampleApplicationException(
+                    SampleApplicationException.CAMERA_INITIALIZATION_FAILURE, error)
+        }
+
+        mSessionControl.doStartTrackers()
+
+        mCameraRunning = true
+
+        if (!CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_CONTINUOUSAUTO))
+        {
+            if (!CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_TRIGGERAUTO))
+                CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_NORMAL)
+        }
+    }
+
+    // Stops any ongoing initialization, stops Vuforia
+    @Throws(SampleApplicationException::class)
+    fun stopAR()
+    {
+        // Cancel potentially running tasks
+        if (mInitVuforiaTask != null && mInitVuforiaTask.getStatus() != InitVuforiaTask.Status.FINISHED)
+        {
+            mInitVuforiaTask.cancel(true)
+            mInitVuforiaTask = null
+        }
+
+        if (mLoadTrackerTask != null && mLoadTrackerTask.getStatus() != LoadTrackerTask.Status.FINISHED)
+        {
+            mLoadTrackerTask.cancel(true)
+            mLoadTrackerTask = null
+        }
+
+        mInitVuforiaTask = null
+        mLoadTrackerTask = null
+
+        mStarted = false
+
+        stopCamera()
+
+        // Ensure that all asynchronous operations to initialize Vuforia
+        // and loading the tracker datasets do not overlap:
+        synchronized(mShutdownLock)
+        {
+            val unloadTrackersResult: Boolean
+            val deinitTrackersResult: Boolean
+
+            // Destroy the tracking data set:
+            unloadTrackersResult = mSessionControl.doUnloadTrackersData()
+
+            // Deinitialize the trackers:
+            deinitTrackersResult = mSessionControl.doDeinitTrackers()
+
+            // Deinitialize Vuforia SDK:
+            Vuforia.deinit()
+
+            if (!unloadTrackersResult)
+                throw SampleApplicationException(
+                        SampleApplicationException.UNLOADING_TRACKERS_FAILURE,
+                        "Failed to unload trackers\' data")
+
+            if (!deinitTrackersResult)
+                throw SampleApplicationException(
+                        SampleApplicationException.TRACKERS_DEINITIALIZATION_FAILURE,
+                        "Failed to deinitialize trackers")
+
+        }
+    }
+
+    // Resumes Vuforia, restarts the trackers and the camera
+    @Throws(SampleApplicationException::class)
+    fun resumeAR()
+    {
+        // Vuforia-specific resume operation
+        Vuforia.onResume()
+
+        if (mStarted)
+        {
+            startAR(mCamera)
+        }
+    }
+
+    // Pauses Vuforia and stops the camera
+    @Throws(SampleApplicationException::class)
+    fun pauseAR()
+    {
+        if (mStarted)
+        {
+            stopCamera()
+        }
+
+        Vuforia.onPause()
+    }
+
+    // Manages the configuration changes
+    fun onConfigurationChanged()
+    {
+        Device.getInstance().setConfigurationChanged()
+    }
+
+    // Methods to be called to handle lifecycle
+    fun onResume()
+    {
+        Vuforia.onResume()
+    }
+
+    fun onPause()
+    {
+        Vuforia.onPause()
+    }
+
+    fun onSurfaceChanged(width: Int, height: Int)
+    {
+        Vuforia.onSurfaceChanged(width, height)
+    }
+
+    fun onSurfaceCreated()
+    {
+        Vuforia.onSurfaceCreated()
+    }
+}
+
+// An async task to initialize Vuforia asynchronously.
+class InitVuforiaTask : AsyncTask<Void, Int, Boolean>()
+{
+    // 반드시 오버라이드 해야하는 함수
+    override fun doInBackground(vararg params: Void?): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
