@@ -2,6 +2,8 @@
 package com.example.im.mobileproject
 
 import android.app.Activity
+import android.content.ContentResolver
+import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
@@ -22,6 +24,7 @@ import android.graphics.SurfaceTexture
 import android.hardware.camera2.*
 import android.hardware.camera2.params.StreamConfigurationMap
 import android.media.Image
+import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
@@ -29,6 +32,7 @@ import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.Toast
 import java.io.*
+import java.net.URI
 import java.nio.Buffer
 import java.nio.ByteBuffer
 import java.util.*
@@ -192,6 +196,7 @@ class RegistrationPart_SP : AppCompatActivity() {
                     var output : FileOutputStream? = null
                     var bitmap : Bitmap? = null
                     try{
+                        /*ㅅㄷㄴㅅ
                         image = reader.acquireLatestImage()
                         if(image != null) {
                             val buffer: ByteBuffer = image.planes[0].buffer
@@ -208,15 +213,38 @@ class RegistrationPart_SP : AppCompatActivity() {
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output)
                             output.flush()
                             output.close()
-                            /*
-                            //TODO 갤러리에서 이미지 볼 수 있도록 하기
-                            val values : ContentValues = ContentValues()
-                            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
-                            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-                            values.put(MediaStore.MediaColumns.DATA, fileName);
+                        }
+                        ㅅㄷㄴㅅ*/
+                        //TODO 갤러리에서 이미지 볼 수 있도록 하기
+                        val values: ContentValues = ContentValues()
+                        values.put(MediaStore.Images.Media.TITLE, "사진1");
+                        values.put(MediaStore.Images.Media.DISPLAY_NAME, "사진2");
+                        values.put(MediaStore.Images.Media.DESCRIPTION, "제발..");
+                        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+
+                        //갤러리의 상단에 넣어주기
+                        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis());
+                        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
+
+                        val url : Uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                        image = reader.acquireLatestImage()
+
+                        if(image != null) {
+                            val buffer: ByteBuffer = image.planes[0].buffer
+                            val pixelStride = image.planes[0].pixelStride
+                            val rowStride = image.planes[0].rowStride
+                            val rowPadding = rowStride - pixelStride * reader.width
+                            val imageOut : OutputStream = contentResolver.openOutputStream(url)
+
+                            bitmap = Bitmap.createBitmap(reader.width + rowPadding / pixelStride, reader.height, Bitmap.Config.ARGB_8888)
+                            bitmap.copyPixelsFromBuffer(buffer)
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
+
+                            val id : Long = ContentUris.parseId(url)
+                            val miniThumb = MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id, MediaStore.Images.Thumbnails.MINI_KIND, null)
+
                             //TODO 자신의 context를 불러오는 방법을 알아보기
                             this@RegistrationPart_SP.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-                            */
                         }
                     }catch (e : FileNotFoundException){
                         e.printStackTrace()
