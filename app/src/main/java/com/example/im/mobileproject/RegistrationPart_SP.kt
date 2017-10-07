@@ -7,9 +7,7 @@ import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.ImageFormat
-import android.graphics.PixelFormat
+import android.graphics.*
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.TextureView
@@ -20,7 +18,6 @@ import android.os.HandlerThread
 import android.media.ImageReader
 import android.os.Handler
 import android.util.Size
-import android.graphics.SurfaceTexture
 import android.hardware.camera2.*
 import android.hardware.camera2.params.StreamConfigurationMap
 import android.media.Image
@@ -243,8 +240,23 @@ class RegistrationPart_SP : AppCompatActivity() {
                             val id : Long = ContentUris.parseId(url)
                             val miniThumb = MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id, MediaStore.Images.Thumbnails.MINI_KIND, null)
 
+                            val matrix : Matrix = Matrix()
+                            matrix.setScale(50F / image.width, 50F / image.height)
+
+                            val thumb : Bitmap = Bitmap.createBitmap(bitmap, 0, 0, image.width, image.height, matrix, true)
+                            val values2 : ContentValues = ContentValues(4)
+                            values2.put(MediaStore.Images.Thumbnails.KIND, MediaStore.Images.Thumbnails.MICRO_KIND)
+                            values2.put(MediaStore.Images.Thumbnails.IMAGE_ID, id as Int)
+                            values2.put(MediaStore.Images.Thumbnails.HEIGHT, thumb.height)
+                            values2.put(MediaStore.Images.Thumbnails.WIDTH, thumb.width)
+
+                            val url2 : Uri = contentResolver.insert(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, values)
+                            val thumbOut : OutputStream = contentResolver.openOutputStream(url2)
+                            thumb.compress(Bitmap.CompressFormat.JPEG, 100, thumbOut)
+                            thumbOut.close();
+
                             //TODO 자신의 context를 불러오는 방법을 알아보기
-                            this@RegistrationPart_SP.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                            //this@RegistrationPart_SP.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
                         }
                     }catch (e : FileNotFoundException){
                         e.printStackTrace()
