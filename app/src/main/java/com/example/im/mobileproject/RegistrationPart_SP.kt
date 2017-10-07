@@ -246,17 +246,14 @@ class RegistrationPart_SP : AppCompatActivity() {
                             val thumb : Bitmap = Bitmap.createBitmap(bitmap, 0, 0, image.width, image.height, matrix, true)
                             val values2 : ContentValues = ContentValues(4)
                             values2.put(MediaStore.Images.Thumbnails.KIND, MediaStore.Images.Thumbnails.MICRO_KIND)
-                            values2.put(MediaStore.Images.Thumbnails.IMAGE_ID, id as Int)
+                            values2.put(MediaStore.Images.Thumbnails.IMAGE_ID, id.toInt())
                             values2.put(MediaStore.Images.Thumbnails.HEIGHT, thumb.height)
                             values2.put(MediaStore.Images.Thumbnails.WIDTH, thumb.width)
 
-                            val url2 : Uri = contentResolver.insert(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, values)
+                            val url2 : Uri = contentResolver.insert(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, values2)
                             val thumbOut : OutputStream = contentResolver.openOutputStream(url2)
                             thumb.compress(Bitmap.CompressFormat.JPEG, 100, thumbOut)
                             thumbOut.close();
-
-                            //TODO 자신의 context를 불러오는 방법을 알아보기
-                            //this@RegistrationPart_SP.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
                         }
                     }catch (e : FileNotFoundException){
                         e.printStackTrace()
