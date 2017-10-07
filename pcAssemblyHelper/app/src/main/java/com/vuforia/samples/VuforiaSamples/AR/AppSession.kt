@@ -46,7 +46,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     var mCameraRunning = false
 
     // The async tasks to initialize the Vuforia SDK:
-    lateinit var mInitVuforiaTask : InitVuforiaTask
+    private var mInitVuforiaTask : InitVuforiaTask? = null
     lateinit var mLoadTrackerTask : LoadTrackerTask
 
     // An object used for synchronizing Vuforia initialization, dataset loading
@@ -129,7 +129,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
         {
             try {
                 mInitVuforiaTask = InitVuforiaTask()
-                mInitVuforiaTask.execute()
+                mInitVuforiaTask!!.execute()
             } catch (e: Exception) {
                 val logMessage = "Initializing Vuforia SDK failed"
                 vuforiaException = SampleApplicationException(
@@ -200,9 +200,9 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     fun stopAR()
     {
         // Cancel potentially running tasks
-        if (mInitVuforiaTask != null && mInitVuforiaTask.getStatus() != InitVuforiaTask.Status.FINISHED)
+        if (mInitVuforiaTask != null && mInitVuforiaTask!!.getStatus() != InitVuforiaTask.Status.FINISHED)
         {
-            mInitVuforiaTask.cancel(true)
+            mInitVuforiaTask!!.cancel(true)
             mInitVuforiaTask = null
         }
 
@@ -299,13 +299,201 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     {
         Vuforia.onSurfaceCreated()
     }
-}
 
-// An async task to initialize Vuforia asynchronously.
-class InitVuforiaTask : AsyncTask<Void, Int, Boolean>()
-{
-    // 반드시 오버라이드 해야하는 함수
-    override fun doInBackground(vararg params: Void?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    // An async task to initialize Vuforia asynchronously.
+    private inner class InitVuforiaTask : AsyncTask<Void, Int, Boolean>()
+    {
+        // Initialize with invalid value:
+        var mProgressValue : Int = -1
+
+        // 반드시 오버라이드 해야하는 함수
+        protected override fun doInBackground(vararg params: Void): Boolean
+        {
+            // Prevent the onDestroy() method to overlap with initialization:
+            synchronized(mShutdownLock)
+            {
+                Vuforia.setInitParameters(mActivity, mVuforiaFlags, "AW0IwM3/////AAAAGSFlz9euJEN2tDRjCc5hrsUOLCOEYERKT8ECJEeHssicOqSFVF7g+lMBFQb9eqiRKnFZYt+lNhyf+x1FMd9k0SL5d6/+Xm4HiAKqzIVPySe4BAfARZhCVmroVqzmgUeUaVoZOh81/Gs7GbsW0epxzWPkGU8wFJPxMC/vZ69ziB8a7jaqqKRmjORMnThV7QmiPVaBAerHjls73RQ30cFEFeAvWnoJiuCERHHiYgjKNRUBp+pyN9CcvsSGWD1h2mDEyPM+ckWWRZ9Rtob7RabN3YGlOHj7eFXYOSvbmXu2MhSwKrvPZC0bJ0+9VCnOyA3uQgWy3q6cKsMCLgzYOUe1jW1pfTcU+2hJ9CH9cd2GnWd9")
+
+                do {
+                    // Vuforia.init() blocks until an initialization step is
+                    // complete, then it proceeds to the next step and reports
+                    // progress in percents (0 ... 100%).
+                    // If Vuforia.init() returns -1, it indicates an error.
+                    // Initialization is done when progress has reached 100%.
+                    mProgressValue = Vuforia.init()
+
+                    // Publish the progress value:
+                    publishProgress(mProgressValue)
+
+                    // We check whether the task has been canceled in the
+                    // meantime (by calling AsyncTask.cancel(true)).
+                    // and bail out if it has, thus stopping this thread.
+                    // This is necessary as the AsyncTask will run to completion
+                    // regardless of the status of the component that
+                    // started is.
+                } while (!isCancelled && mProgressValue >= 0
+                        && mProgressValue < 100)
+
+                return mProgressValue > 0
+            }
+        }
+
+        protected fun onProgressUpdate(vararg values: Int)
+        {
+            // Do something with the progress value "values[0]", e.g. update
+            // splash screen, progress bar, etc.
+        }
+
+        override fun onPostExecute(result: Boolean?)
+        {
+            // Done initializing Vuforia, proceed to next application
+            // initialization status:
+
+            var vuforiaException: SampleApplicationException? = null
+
+            if (result!!)
+            {
+                Log.d(LOGTAG, "InitVuforiaTask.onPostExecute: Vuforia " + "initialization successful")
+
+                val initTrackersResult: Boolean
+                initTrackersResult = mSessionControl.doInitTrackers()
+
+                if (initTrackersResult)
+                {
+                    try {
+                        mLoadTrackerTask = LoadTrackerTask()
+                        mLoadTrackerTask.execute()
+                    } catch (e: Exception) {
+                        val logMessage = "Loading tracking data set failed"
+                        vuforiaException = SampleApplicationException(
+                                SampleApplicationException.LOADING_TRACKERS_FAILURE,
+                                logMessage)
+                        Log.e(LOGTAG, logMessage)
+                        mSessionControl.onInitARDone(vuforiaException)
+                    }
+
+                }
+                else
+                {
+                    vuforiaException = SampleApplicationException(
+                            SampleApplicationException.TRACKERS_INITIALIZATION_FAILURE,
+                            "Failed to initialize trackers")
+                    mSessionControl.onInitARDone(vuforiaException)
+                }
+            }
+            else
+            {
+                val logMessage: String
+
+                // NOTE: Check if initialization failed because the device is
+                // not supported. At this point the user should be informed
+                // with a message.
+                logMessage = getInitializationErrorString(mProgressValue)
+
+                // Log error:
+                Log.e(LOGTAG, "InitVuforiaTask.onPostExecute: " + logMessage
+                        + " Exiting.")
+
+                // Send Vuforia Exception to the application and call initDone
+                // to stop initialization process
+                vuforiaException = SampleApplicationException(
+                        SampleApplicationException.INITIALIZATION_FAILURE,
+                        logMessage)
+                mSessionControl.onInitARDone(vuforiaException)
+            }
+        }
+    }
+
+    // An async task to load the tracker data asynchronously.
+    private inner class LoadTrackerTask : AsyncTask<Void, Int, Boolean>()
+    {
+        // 반드시 오버라이드 해야하는 함수
+        protected override fun doInBackground(vararg params: Void?): Boolean
+        {
+            // Prevent the onDestroy() method to overlap:
+            synchronized(mShutdownLock)
+            {
+                // Load the tracker data set:
+                return mSessionControl.doLoadTrackersData()
+            }
+        }
+
+        protected override fun onPostExecute(result: Boolean?)
+        {
+            var vuforiaException: SampleApplicationException? = null
+
+            Log.d(LOGTAG, "LoadTrackerTask.onPostExecute: execution "
+                    + if (result!!) "successful" else "failed")
+
+            if ((!result)!!)
+            {
+                val logMessage = "Failed to load tracker data."
+                // Error loading dataset
+                Log.e(LOGTAG, logMessage)
+                vuforiaException = SampleApplicationException(
+                        SampleApplicationException.LOADING_TRACKERS_FAILURE,
+                        logMessage)
+            }
+            else
+            {
+                // Hint to the virtual machine that it would be a good time to
+                // run the garbage collector:
+                //
+                // NOTE: This is only a hint. There is no guarantee that the
+                // garbage collector will actually be run.
+                System.gc()
+
+                Vuforia.registerCallback(this@AppSession)
+
+                mStarted = true
+            }
+
+            // Done loading the tracker, update application status, send the
+            // exception to check errors
+            mSessionControl.onInitARDone(vuforiaException)
+        }
+    }
+
+    // Returns the error message for each error code
+    private fun getInitializationErrorString(code: Int): String
+    {
+        if (code == INIT_ERRORCODE.INIT_DEVICE_NOT_SUPPORTED)
+            return mActivity.getString(R.string.INIT_ERROR_DEVICE_NOT_SUPPORTED)
+        if (code == INIT_ERRORCODE.INIT_NO_CAMERA_ACCESS)
+            return mActivity.getString(R.string.INIT_ERROR_NO_CAMERA_ACCESS)
+        if (code == INIT_ERRORCODE.INIT_LICENSE_ERROR_MISSING_KEY)
+            return mActivity.getString(R.string.INIT_LICENSE_ERROR_MISSING_KEY)
+        if (code == INIT_ERRORCODE.INIT_LICENSE_ERROR_INVALID_KEY)
+            return mActivity.getString(R.string.INIT_LICENSE_ERROR_INVALID_KEY)
+        if (code == INIT_ERRORCODE.INIT_LICENSE_ERROR_NO_NETWORK_TRANSIENT)
+            return mActivity.getString(R.string.INIT_LICENSE_ERROR_NO_NETWORK_TRANSIENT)
+        if (code == INIT_ERRORCODE.INIT_LICENSE_ERROR_NO_NETWORK_PERMANENT)
+            return mActivity.getString(R.string.INIT_LICENSE_ERROR_NO_NETWORK_PERMANENT)
+        if (code == INIT_ERRORCODE.INIT_LICENSE_ERROR_CANCELED_KEY)
+            return mActivity.getString(R.string.INIT_LICENSE_ERROR_CANCELED_KEY)
+
+        return if (code == INIT_ERRORCODE.INIT_LICENSE_ERROR_PRODUCT_TYPE_MISMATCH)
+            mActivity.getString(R.string.INIT_LICENSE_ERROR_PRODUCT_TYPE_MISMATCH)
+        else {
+            mActivity.getString(R.string.INIT_LICENSE_ERROR_UNKNOWN_ERROR)
+        }
+    }
+
+    fun stopCamera()
+    {
+        if (mCameraRunning)
+        {
+            mSessionControl.doStopTrackers()
+            mCameraRunning = false
+            CameraDevice.getInstance().stop()
+            CameraDevice.getInstance().deinit()
+        }
+    }
+
+    // Returns true if Vuforia is initialized, the trackers started and the
+    // tracker data loaded
+    private fun isARRunning(): Boolean
+    {
+        return mStarted
     }
 }
