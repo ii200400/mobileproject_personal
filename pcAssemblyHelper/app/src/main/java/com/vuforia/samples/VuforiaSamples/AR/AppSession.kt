@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Point
 import android.os.AsyncTask
+import android.os.AsyncTask.Status.FINISHED
 import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
@@ -47,7 +48,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
 
     // The async tasks to initialize the Vuforia SDK:
     private var mInitVuforiaTask : InitVuforiaTask? = null
-    lateinit var mLoadTrackerTask : LoadTrackerTask
+    private var mLoadTrackerTask : LoadTrackerTask? = null
 
     // An object used for synchronizing Vuforia initialization, dataset loading
     // and the Android onDestroy() life cycle event. If the application is
@@ -199,6 +200,8 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     @Throws(SampleApplicationException::class)
     fun stopAR()
     {
+        /*
+        // 자바의 InitVuforiaTask.Status 가 제대로 안나와서 빨간줄이 뜬다.
         // Cancel potentially running tasks
         if (mInitVuforiaTask != null && mInitVuforiaTask!!.getStatus() != InitVuforiaTask.Status.FINISHED)
         {
@@ -206,11 +209,12 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
             mInitVuforiaTask = null
         }
 
-        if (mLoadTrackerTask != null && mLoadTrackerTask.getStatus() != LoadTrackerTask.Status.FINISHED)
+        if (mLoadTrackerTask != null && mLoadTrackerTask!!.getStatus() != LoadTrackerTask.Status.FINISHED)
         {
-            mLoadTrackerTask.cancel(true)
+            mLoadTrackerTask!!.cancel(true)
             mLoadTrackerTask = null
         }
+        */
 
         mInitVuforiaTask = null
         mLoadTrackerTask = null
@@ -362,7 +366,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
                 {
                     try {
                         mLoadTrackerTask = LoadTrackerTask()
-                        mLoadTrackerTask.execute()
+                        mLoadTrackerTask!!.execute()
                     } catch (e: Exception) {
                         val logMessage = "Loading tracking data set failed"
                         vuforiaException = SampleApplicationException(
