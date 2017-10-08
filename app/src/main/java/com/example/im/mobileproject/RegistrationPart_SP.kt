@@ -155,8 +155,8 @@ class RegistrationPart_SP : AppCompatActivity() {
                 width = jpegSizes[0].width
                 height = jpegSizes[0].height
             }
-            //이미지의 크기와 형식을 묘사(?)한다. Create a new reader for images of the desired size and format.
-            val reader : ImageReader = ImageReader.newInstance(width,height,PixelFormat.RGBX_8888,1)
+            //이미지의 크기와 형식을 묘사(?)한다. Create a new reader for images of the desired size and format. PixelFormat.RGBX_8888
+            val reader : ImageReader = ImageReader.newInstance(width,height, 0x1,2)
             val outputSurfaces : ArrayList<Surface> = ArrayList<Surface>(2)
             outputSurfaces.add(reader.surface)
             outputSurfaces.add(Surface(textureView!!.surfaceTexture))
@@ -190,30 +190,11 @@ class RegistrationPart_SP : AppCompatActivity() {
             val readerListener : ImageReader.OnImageAvailableListener  = object : ImageReader.OnImageAvailableListener {
                 override fun onImageAvailable(reader : ImageReader) {
                     var image : Image? = null
-                    var output : FileOutputStream? = null
+                    //var output : FileOutputStream? = null
                     var bitmap : Bitmap? = null
                     try{
-                        /*ㅅㄷㄴㅅ
-                        image = reader.acquireLatestImage()
-                        if(image != null) {
-                            val buffer: ByteBuffer = image.planes[0].buffer
-                            val pixelStride = image.planes[0].pixelStride
-                            val rowStride = image.planes[0].rowStride
-                            val rowPadding = rowStride - pixelStride * reader.width
-
-                            bitmap = Bitmap.createBitmap(reader.width + rowPadding / pixelStride, reader.height, Bitmap.Config.ARGB_8888)
-                            bitmap.copyPixelsFromBuffer(buffer)
-
-                            val fileName: String = String.format("%d.png", System.currentTimeMillis())
-                            output = FileOutputStream(file.toString() + "/" + fileName)
-                            Log.e("--------------",output.toString())
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output)
-                            output.flush()
-                            output.close()
-                        }
-                        ㅅㄷㄴㅅ*/
                         //TODO 갤러리에서 이미지 볼 수 있도록 하기
-                        val values: ContentValues = ContentValues()
+                        val values = ContentValues()
                         values.put(MediaStore.Images.Media.TITLE, "사진1");
                         values.put(MediaStore.Images.Media.DISPLAY_NAME, "사진2");
                         values.put(MediaStore.Images.Media.DESCRIPTION, "제발..");
@@ -240,11 +221,11 @@ class RegistrationPart_SP : AppCompatActivity() {
                             val id : Long = ContentUris.parseId(url)
                             val miniThumb = MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id, MediaStore.Images.Thumbnails.MINI_KIND, null)
 
-                            val matrix : Matrix = Matrix()
-                            matrix.setScale(50F / image.width, 50F / image.height)
+                            val matrix = Matrix()
+                            matrix.setScale(50F / miniThumb.width, 50F / image.height)
 
-                            val thumb : Bitmap = Bitmap.createBitmap(bitmap, 0, 0, image.width, image.height, matrix, true)
-                            val values2 : ContentValues = ContentValues(4)
+                            val thumb : Bitmap = Bitmap.createBitmap(miniThumb, 0, 0, miniThumb.width, miniThumb.height, matrix, true)
+                            val values2 = ContentValues(4)
                             values2.put(MediaStore.Images.Thumbnails.KIND, MediaStore.Images.Thumbnails.MICRO_KIND)
                             values2.put(MediaStore.Images.Thumbnails.IMAGE_ID, id.toInt())
                             values2.put(MediaStore.Images.Thumbnails.HEIGHT, thumb.height)
