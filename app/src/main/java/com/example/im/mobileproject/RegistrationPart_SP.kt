@@ -224,9 +224,9 @@ class RegistrationPart_SP : AppCompatActivity() {
                             val miniThumb = MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id, MediaStore.Images.Thumbnails.MINI_KIND, null)
 
                             val matrix = Matrix()
-                            matrix.setScale(50F / miniThumb.width, 50F / image.height)
+                            matrix.setScale(1.0f, 0.5f)
 
-                            val thumb : Bitmap = Bitmap.createBitmap(miniThumb, 0, 0, miniThumb.width, miniThumb.height, matrix, true)
+                            val thumb : Bitmap = Bitmap.createBitmap(miniThumb, miniThumb.width / 4, miniThumb.height / 4, miniThumb.width / 2, miniThumb.height / 2, matrix, true)
                             val values2 = ContentValues(4)
                             values2.put(MediaStore.Images.Thumbnails.KIND, MediaStore.Images.Thumbnails.MICRO_KIND)
                             values2.put(MediaStore.Images.Thumbnails.IMAGE_ID, id.toInt())
