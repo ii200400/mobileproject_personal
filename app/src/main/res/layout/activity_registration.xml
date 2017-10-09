@@ -37,7 +37,7 @@
         android:layout_height="30dp" />
 
     <ImageView
-        android:id="@+id/imageview"
+        android:id="@+id/pickedImage"
         android:layout_width="match_parent"
         android:layout_height="241dp"
         android:background="?attr/colorControlHighlight" />

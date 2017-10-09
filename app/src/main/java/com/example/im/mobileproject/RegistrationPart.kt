@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_registration.*
@@ -85,7 +84,7 @@ class RegistrationPart: AppCompatActivity() {
             CAMERA_REQUEST_MODE -> {
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     filePath = data.getData()
-                    imageview.setImageBitmap(data.extras.get("data") as Bitmap)
+                    pickedImage.setImageBitmap(data.extras.get("data") as Bitmap)
 
                     //val bitmap:Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath)
                     //iv_preview.setImageBitmap(bitmap);
