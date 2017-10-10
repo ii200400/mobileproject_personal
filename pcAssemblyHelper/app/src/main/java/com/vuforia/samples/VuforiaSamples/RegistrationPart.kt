@@ -27,22 +27,26 @@ class RegistrationPart: AppCompatActivity() {
         setContentView(R.layout.activity_registration)
         setTitle("부품 등록")
 
-        val spin1: Spinner = findViewById(R.id.spinner1) as Spinner
+        val spin1: Spinner = findViewById(R.id.spinner1)
 
         val value = arrayListOf("카테고리","메인보드","CPU","RAM","메모리")
 
         spin1.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,value)
 
-        val btnPicture:Button=findViewById(R.id.button1) as Button
-        val btnUpload:Button=findViewById(R.id.button2) as Button
+        val btnPicture : Button = findViewById(R.id.button1)
+        val btnUpload : Button = findViewById(R.id.button2)
 
         //사진 찍기
         btnPicture.setOnClickListener {
+            /*
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if (intent.resolveActivity(packageManager) != null) {
                 //다른 앱을 불러와 구동
                 startActivityForResult(intent, CAMERA_REQUEST_MODE)
             }
+            */
+            val intent_picture : Intent = Intent(this@RegistrationPart,RegistrationPart_SP::class.java)
+            startActivity(intent_picture)
         }
 
         if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
@@ -81,7 +85,7 @@ class RegistrationPart: AppCompatActivity() {
             CAMERA_REQUEST_MODE -> {
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     filePath = data.getData()
-                    imageview.setImageBitmap(data.extras.get("data") as Bitmap)
+                    pickedImage.setImageBitmap(data.extras.get("data") as Bitmap)
 
                     //val bitmap:Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath)
                     //iv_preview.setImageBitmap(bitmap);

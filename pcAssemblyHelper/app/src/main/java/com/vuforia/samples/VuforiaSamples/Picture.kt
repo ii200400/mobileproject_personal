@@ -16,8 +16,8 @@ class Picture() : AppCompatActivity(), SurfaceHolder.Callback {
         setTitle("사진 찍기")
         var IsTrue:Boolean=false
         var camera:Camera?=null
-        var surfaceview:SurfaceView=findViewById(R.id.surface1) as SurfaceView
-        var btn:Button=findViewById(R.id.button) as Button
+        var surfaceview:SurfaceView=findViewById(R.id.surface1)
+        var btn:Button=findViewById(R.id.button)
         var surfaceholder:SurfaceHolder?=null
 
         getWindow().setFormat(PixelFormat.UNKNOWN)

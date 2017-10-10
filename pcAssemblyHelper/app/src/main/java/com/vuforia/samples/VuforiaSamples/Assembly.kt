@@ -19,8 +19,8 @@ class Assembly : AppCompatActivity() {
         setContentView(R.layout.activity_assembly)
         setTitle("조립 팁")
 
-        val spin1: Spinner = findViewById(R.id.spinner) as Spinner
-        val spin2: Spinner = findViewById(R.id.spinner2) as Spinner
+        val spin1: Spinner = findViewById(R.id.spinner)
+        val spin2: Spinner = findViewById(R.id.spinner2)
 
         val category= arrayOf("카테고리","메인보드","CPU","RAM","메모리")
 
