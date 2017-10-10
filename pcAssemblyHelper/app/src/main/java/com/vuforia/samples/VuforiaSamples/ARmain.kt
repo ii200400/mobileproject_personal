@@ -167,32 +167,50 @@ class ARmain : AppCompatActivity(), SampleApplicationControl
     // AppSession 클래스에 정의된 onConfigurationChanged() 함수도 호출한다.
     override fun onConfigurationChanged(config: Configuration)
     {
+        // 디버깅 편의를 위해 로그 출력
         Log.d("ARmain", "onConfigurationChanged")
+
         super.onConfigurationChanged(config)
 
         vuforiaAppSession.onConfigurationChanged()
     }
 
     // Called when the system is about to start resuming a previous activity.
-    override fun onPause() {
+    // 액티비티가 중지될때 호출되는 함수
+    // 상태 저장 등을 한다.
+    override fun onPause()
+    {
+        // 디버깅 편의를 위해 로그 출력
         Log.d("ARmain", "onPause")
+
         super.onPause()
 
-        if (mGlView != null) {
+        // openGL이 사용되고 있다면
+        // 보이지 않게 invisible로 설정
+        if (mGlView != null)
+        {
             mGlView.visibility = View.INVISIBLE
             mGlView.onPause()
         }
 
         // Turn off the flash
-        if (mFlashOptionView != null && mFlash) {
+        // 플래쉬가 켜져있다면 끄기
+        if (mFlashOptionView != null && mFlash)
+        {
             // OnCheckedChangeListener is called upon changing the checked state
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            // sdk 버전과 안드로이드 버전에 따라 다르게 설정
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+            {
                 (mFlashOptionView as Switch).isChecked = false
-            } else {
+            }
+            else
+            {
                 (mFlashOptionView as CheckBox).isChecked = false
             }
         }
 
+        // AR 일시정지 함수 호출
+        // 디버깅 편의를 위해 try-catch
         try {
             vuforiaAppSession.pauseAR()
         } catch (e: SampleApplicationException) {
@@ -201,10 +219,16 @@ class ARmain : AppCompatActivity(), SampleApplicationControl
     }
 
     // The final call you receive before your activity is destroyed.
-    override fun onDestroy() {
+    // 액티비티가 종료되기 직전 호출되는 함수
+    override fun onDestroy()
+    {
+        // 디버깅 편의를 위해 로그 출력
         Log.d("ARmain", "onDestroy")
+
         super.onDestroy()
 
+        // AR 중지(종료) 함수 호출
+        // 디버깅 편의를 위해 로그 출력
         try {
             vuforiaAppSession.stopAR()
         } catch (e: SampleApplicationException) {
@@ -212,13 +236,19 @@ class ARmain : AppCompatActivity(), SampleApplicationControl
         }
 
         // Unload texture:
+        // openGL 을 이용한 텍스쳐 사용 종료로 인한 초기화
         mTextures!!.clear()
         mTextures = null
 
+        // 가비지 콜렉터 요청
+        // 메모리 사용이 큰 동작이라 추가된 코드
         System.gc()
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
+    // 터치 동작시 이벤트 처리 함수
+    // AR 화면에서는 터치 동작이 필요없기 때문에 해당 함수는 간단히 구현
+    override fun onTouchEvent(event: MotionEvent): Boolean
+    {
         // Process the Gestures
         if (mSampleAppMenu != null && mSampleAppMenu!!.processEvent(event))
             return true

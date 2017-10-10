@@ -39,7 +39,10 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     val LOGTAG = "SampleAppSession"
 
     // Reference to the current activity
+    // 현재 액티비티를 가르킬 레퍼런스
+    // 현재 액티비티는 ARmain 이다.
     lateinit var mActivity : Activity
+
     //var mSessionControl : SampleApplicationControl // 생성자로 편입
 
     // Flags
@@ -47,6 +50,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     var mCameraRunning = false
 
     // The async tasks to initialize the Vuforia SDK:
+    // 뷰포리아 SDK 초기화를 위한 비동기 작업을 위한 변수
     private var mInitVuforiaTask : InitVuforiaTask? = null
     private var mLoadTrackerTask : LoadTrackerTask? = null
 
@@ -54,12 +58,17 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     // and the Android onDestroy() life cycle event. If the application is
     // destroyed while a data set is still being loaded, then we wait for the
     // loading operation to finish before shutting down Vuforia:
+    // 뷰포리아 동기화에 쓰이는 object 클래스의 인스턴스.
+    // 어플리케이션 종료시 호출되는 onDestroy() 함수에서 사용된다.
+    // 어플이 종료될때 뷰포리아와 데이터셋 간의 동기를 맞추는데 사용한다.
     val mShutdownLock = Object()
 
     // Vuforia initialization flags:
+    // 뷰포리아 초기화에 사용할 변수
     var mVuforiaFlags : Int = 0
 
     // Holds the camera configuration to use upon resuming
+    // AR 동작 중에 사용할 카메라 설정을 지정
     var mCamera : Int = CameraDevice.CAMERA_DIRECTION.CAMERA_DIRECTION_DEFAULT
 
     // 반드시 오버라이드 해야하는 함수
@@ -69,12 +78,15 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     }
 
     // Initializes Vuforia and sets up preferences.
+    // 뷰포리아 초기화, 우선권 설정
     fun initAR(activity: Activity, sco: Int)
     {
         var screenOrientation : Int = sco
         var vuforiaException: SampleApplicationException? = null
         mActivity = activity
 
+        // 화면 방향 설정
+        // sdk 버전과 안드로이드 버전에 따라 변경
         if (screenOrientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR
                 && Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO)
             screenOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
@@ -84,10 +96,12 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
         // ie: Left Landscape to Right Landscape.  Vuforia needs to react to this change and the
         // SampleApplicationSession needs to update the Projection Matrix.
 
+        // 화면 방향 전환을 위한 Listener
         val orientationEventListener = object : OrientationEventListener(mActivity)
         {
             var mLastRotation = -1
 
+            // 화면 방향이 바꼈을때 호출되는 함수
             override fun onOrientationChanged(i : Int)
             {
                 val activityRotation : Int = mActivity.windowManager.defaultDisplay.rotation
@@ -99,14 +113,18 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
             }
         }
 
+        // 화면 회전 기능이 켜져있다면
+        // 방향 전환 Listener 사용 가능
         if (orientationEventListener.canDetectOrientation())
             orientationEventListener.enable()
 
         // Apply screen orientation
+        // 화면 방향을 액티비티에 적용
         mActivity.requestedOrientation = screenOrientation
 
         // As long as this window is visible to the user, keep the device's
         // screen turned on and bright:
+        // AR이 켜져있는 동안 화면이 계속 켜져있도록 설정
         mActivity.window.setFlags(
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -118,6 +136,9 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
         //
         // NOTE: This task instance must be created and invoked on the
         // UI thread and it can be executed only once!
+
+        // 뷰포리아 sdk 초기화가 실패했으면
+        // 아래 로그 출력
         if (mInitVuforiaTask != null)
         {
             val logMessage = "Cannot initialize SDK twice"
@@ -126,6 +147,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
             Log.e(LOGTAG, logMessage)
         }
 
+        // 뷰포리아 오류 발생시 아래 로그 출력
         if (vuforiaException == null)
         {
             try {
@@ -141,11 +163,15 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
 
         }
 
+        // 추후 SampleApplicationControl 클래스 재설계 후에
+        // 다시 정리
         if (vuforiaException != null)
             mSessionControl.onInitARDone(vuforiaException)
     }
 
     // Starts Vuforia, initialize and starts the camera and start the trackers
+    // AR 시작시 호출되는 함수
+    // 카메라를 초기화하고 실행한다. 그리고 트래커를 실행한다.
     @Throws(SampleApplicationException::class)
     fun startAR(camera : Int) //throws SampleApplicationException
     {
