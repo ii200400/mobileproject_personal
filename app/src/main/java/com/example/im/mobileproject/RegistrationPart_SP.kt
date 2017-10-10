@@ -215,17 +215,13 @@ class RegistrationPart_SP : AppCompatActivity() {
                             bitmap.copyPixelsFromBuffer(buffer)
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
 
-                            //val input : InputStream = contentResolver.openInputStream(url)
-                            //val inputBitmap : Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, url)
-                            //pickedImage.setImageBitmap(inputBitmap)
-
-
                             val id : Long = ContentUris.parseId(url)
                             val miniThumb = MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id, MediaStore.Images.Thumbnails.MINI_KIND, null)
 
-                            val matrix = Matrix()
-                            matrix.setScale(1.0f, 0.5f)
+                            val matrix = Matrix()  //보여주는 방법을 지정(이미지를 늘리거나 크기 제한, 비율을 지정 가능)
+                            matrix.setScale(0.5f, 0.5f)
 
+                            //저장하는 방법을 지정(이미지를 자르고 어떤 형식(png)으로 저장할지)
                             val thumb : Bitmap = Bitmap.createBitmap(miniThumb, miniThumb.width / 4, miniThumb.height / 4, miniThumb.width / 2, miniThumb.height / 2, matrix, true)
                             val values2 = ContentValues(4)
                             values2.put(MediaStore.Images.Thumbnails.KIND, MediaStore.Images.Thumbnails.MICRO_KIND)
@@ -238,6 +234,9 @@ class RegistrationPart_SP : AppCompatActivity() {
                             thumb.compress(Bitmap.CompressFormat.JPEG, 100, thumbOut)
                             thumbOut.close()
 
+                            val input : InputStream = contentResolver.openInputStream(url)
+
+                            pickedImage.setImageBitmap(thumb)
                         }
                     }catch (e : FileNotFoundException){
                         e.printStackTrace()
