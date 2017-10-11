@@ -171,6 +171,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
 
     // Starts Vuforia, initialize and starts the camera and start the trackers
     // AR 시작시 호출되는 함수
+    // 뷰포리아를 실행한다.
     // 카메라를 초기화하고 실행한다. 그리고 트래커를 실행한다.
     @Throws(SampleApplicationException::class)
     fun startAR(camera : Int) //throws SampleApplicationException
@@ -187,6 +188,9 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
         }
 
         mCamera = camera
+
+        // 카메라가 초기화되지 않았으면
+        // 오류 메세지 출력
         if (!CameraDevice.getInstance().init(camera))
         {
             error = "Unable to open camera device: " + camera
@@ -195,6 +199,8 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
                     SampleApplicationException.CAMERA_INITIALIZATION_FAILURE, error)
         }
 
+        // 카메라의 비디오모드로 설정되지 않는다면
+        // 오류 메세지 출력
         if (!CameraDevice.getInstance().selectVideoMode(CameraDevice.MODE.MODE_DEFAULT))
         {
             error = "Unable to set video mode"
@@ -203,6 +209,8 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
                     SampleApplicationException.CAMERA_INITIALIZATION_FAILURE, error)
         }
 
+        // 카메라가 실행되지 않는다면
+        // 오류 메세지 출력
         if (!CameraDevice.getInstance().start())
         {
             error = "Unable to start camera device: " + camera
@@ -211,10 +219,14 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
                     SampleApplicationException.CAMERA_INITIALIZATION_FAILURE, error)
         }
 
+        // 트래커 실행
         mSessionControl.doStartTrackers()
 
+        // 카메라 동작중이라고 표시
         mCameraRunning = true
 
+        // 카메라를 포커스모드로 설정
+        // 실패시 포커스모드 옵션을 달리해서 포커스모드로 설정
         if (!CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_CONTINUOUSAUTO))
         {
             if (!CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_TRIGGERAUTO))
@@ -223,12 +235,17 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     }
 
     // Stops any ongoing initialization, stops Vuforia
+    // AR 중지시 호출되는 함수
+    // 뷰포리아를 중지시킨다.
     @Throws(SampleApplicationException::class)
     fun stopAR()
     {
         /*
         // 자바의 InitVuforiaTask.Status 가 제대로 안나와서 빨간줄이 뜬다.
+
         // Cancel potentially running tasks
+        // 뷰포리아의 동작이 끝났는지를 체크
+        // 끝나지 않았으면 종료
         if (mInitVuforiaTask != null && mInitVuforiaTask!!.getStatus() != InitVuforiaTask.Status.FINISHED)
         {
             mInitVuforiaTask!!.cancel(true)
@@ -247,29 +264,39 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
 
         mStarted = false
 
+        // 카메라를 중지시키는 함수 호출
         stopCamera()
 
         // Ensure that all asynchronous operations to initialize Vuforia
         // and loading the tracker datasets do not overlap:
+        // 동기화 작업
+        // 실행중일때 다른 스레드에서 접근 방지
         synchronized(mShutdownLock)
         {
             val unloadTrackersResult: Boolean
             val deinitTrackersResult: Boolean
 
             // Destroy the tracking data set:
+            // 트래킹 데이터셋을 삭제
             unloadTrackersResult = mSessionControl.doUnloadTrackersData()
 
             // Deinitialize the trackers:
+            // 트래커 자원 할당 해제
             deinitTrackersResult = mSessionControl.doDeinitTrackers()
 
             // Deinitialize Vuforia SDK:
+            // 뷰포리아 sdk 자원 할당 해제
             Vuforia.deinit()
 
+            // 트래킹 데이터셋 삭제 실패시
+            // 오류 메세지 출력
             if (!unloadTrackersResult)
                 throw SampleApplicationException(
                         SampleApplicationException.UNLOADING_TRACKERS_FAILURE,
                         "Failed to unload trackers\' data")
 
+            // 트래커 자원 할당 해제 실패시
+            // 오류 메세지 출력
             if (!deinitTrackersResult)
                 throw SampleApplicationException(
                         SampleApplicationException.TRACKERS_DEINITIALIZATION_FAILURE,
@@ -279,12 +306,17 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     }
 
     // Resumes Vuforia, restarts the trackers and the camera
+    // 처음, 중지되었다가 다시 AR이 실행되었을때 호출하는 함수
+    // 트래커와 카메라를 다시 실행한다.
     @Throws(SampleApplicationException::class)
     fun resumeAR()
     {
         // Vuforia-specific resume operation
+        // 뷰포리아 resume 함수 호출
         Vuforia.onResume()
 
+        // 이미 AR이 시작되었다면 mStarted는 true
+        // 처음 or 중지되었다가 다시 실행되면 mStarted는 false
         if (mStarted)
         {
             startAR(mCamera)
@@ -292,14 +324,17 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     }
 
     // Pauses Vuforia and stops the camera
+    // 뷰포리아와 카메라를 멈추는 함수
     @Throws(SampleApplicationException::class)
     fun pauseAR()
     {
+        // AR이 실행되고있다면 카메라 중지
         if (mStarted)
         {
             stopCamera()
         }
 
+        // 뷰포리아 pause 함수 호출
         Vuforia.onPause()
     }
 
