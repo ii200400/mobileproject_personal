@@ -339,55 +339,79 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     }
 
     // Manages the configuration changes
+    // 설정 변경 관리
     fun onConfigurationChanged()
     {
+        // 현재 디바이스를 인스턴스로 리턴받아 설정 변경
         Device.getInstance().setConfigurationChanged()
     }
 
     // Methods to be called to handle lifecycle
+    // 생명주기 관리를 위한 onResume 함수
+    // 액티비티에서 오버라이드한 onResume 함수가 아니라
+    // 뷰포리아 자체적으로 생명주기를 맞추기 위해서 뷰포리아.onResume 함수를 호출
     fun onResume()
     {
         Vuforia.onResume()
     }
 
+    // 위의 onResume 함수와 동일
     fun onPause()
     {
         Vuforia.onPause()
     }
 
+    // 카메라마다 해상도가 다르기 때문에 맞춰준다.
     fun onSurfaceChanged(width: Int, height: Int)
     {
         Vuforia.onSurfaceChanged(width, height)
     }
 
+    // 카메라를 생성(오픈)한다.
+    // 오픈된 카메라를 통해 투영시킨다.
     fun onSurfaceCreated()
     {
         Vuforia.onSurfaceCreated()
     }
 
     // An async task to initialize Vuforia asynchronously.
+    // 뷰포리아 초기화를 비동기적으로 하기 위한 작업
+    // AppSession 클래스의 멤버변수를 이용하기 편리하게 inner 클래스로 선언
     private inner class InitVuforiaTask : AsyncTask<Void, Int, Boolean>()
     {
         // Initialize with invalid value:
+        // 초기값으로 진행 안되고있다는 의미로 -1 대입
         var mProgressValue : Int = -1
 
         // 반드시 오버라이드 해야하는 함수
+        // 뷰포리아에 파라미터를 넘겨주고 초기화하는 함수다.
+        // 초기화 성공여부가 리턴된다.
         protected override fun doInBackground(vararg params: Void): Boolean
         {
             // Prevent the onDestroy() method to overlap with initialization:
+            // 초기화하는 도중에 액티비티가 종료되지 않게 방지한다.
+            // 액티비티 종료시 onDestroy 함수가 호출되므로 이를 방지하기 위해
+            // 다른 스레드가 작동되지 못하도록 락을 건다.
             synchronized(mShutdownLock)
             {
+                // 뷰포리아에 액티비티와 플래그, 라이센스키를 셋팅한다.
+                // 해당 라이센스키는 '박재한' 계정으로 발급받은 키이다.
                 Vuforia.setInitParameters(mActivity, mVuforiaFlags, "AW0IwM3/////AAAAGSFlz9euJEN2tDRjCc5hrsUOLCOEYERKT8ECJEeHssicOqSFVF7g+lMBFQb9eqiRKnFZYt+lNhyf+x1FMd9k0SL5d6/+Xm4HiAKqzIVPySe4BAfARZhCVmroVqzmgUeUaVoZOh81/Gs7GbsW0epxzWPkGU8wFJPxMC/vZ69ziB8a7jaqqKRmjORMnThV7QmiPVaBAerHjls73RQ30cFEFeAvWnoJiuCERHHiYgjKNRUBp+pyN9CcvsSGWD1h2mDEyPM+ckWWRZ9Rtob7RabN3YGlOHj7eFXYOSvbmXu2MhSwKrvPZC0bJ0+9VCnOyA3uQgWy3q6cKsMCLgzYOUe1jW1pfTcU+2hJ9CH9cd2GnWd9")
 
+                // 뷰포리아 초기화 작업을 진행한다.
+                // 초기화가 완전히 (100%) 완료되었을때까지 반복한다.
                 do {
                     // Vuforia.init() blocks until an initialization step is
                     // complete, then it proceeds to the next step and reports
                     // progress in percents (0 ... 100%).
                     // If Vuforia.init() returns -1, it indicates an error.
                     // Initialization is done when progress has reached 100%.
+
+                    // 뷰포리아를 초기화하고 성공여부를 리턴받아 저장한다.
                     mProgressValue = Vuforia.init()
 
                     // Publish the progress value:
+                    // 초기화 진행상태를 publish 하는건데 반복문 밖에 쓰는게 나을듯
                     publishProgress(mProgressValue)
 
                     // We check whether the task has been canceled in the
@@ -403,12 +427,14 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
             }
         }
 
+        // 스플래쉬 이미지나 progress 바를 업데이트하는 함수
         protected fun onProgressUpdate(vararg values: Int)
         {
             // Do something with the progress value "values[0]", e.g. update
             // splash screen, progress bar, etc.
         }
 
+        // 초기화 작업이 끝나고나서 다음 단계로 보내는 함수
         override fun onPostExecute(result: Boolean?)
         {
             // Done initializing Vuforia, proceed to next application
@@ -416,13 +442,16 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
 
             var vuforiaException: SampleApplicationException? = null
 
+            // 다음 단계로 무사히 넘어갔을 경우
             if (result!!)
             {
+                // 디버깅 편의를 위해 로그 출력
                 Log.d(LOGTAG, "InitVuforiaTask.onPostExecute: Vuforia " + "initialization successful")
 
-                val initTrackersResult: Boolean
-                initTrackersResult = mSessionControl.doInitTrackers()
+                // 트래커 초기화하고 성공여부 리턴
+                val initTrackersResult: Boolean = mSessionControl.doInitTrackers()
 
+                // 트래커 초기화 성공시
                 if (initTrackersResult)
                 {
                     try {
@@ -438,6 +467,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
                     }
 
                 }
+                // 트래커 초기화 실패시 로그 출력
                 else
                 {
                     vuforiaException = SampleApplicationException(
@@ -446,6 +476,8 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
                     mSessionControl.onInitARDone(vuforiaException)
                 }
             }
+            // 뷰포리아 초기화 끝나고 다음 단계로 넘어가지 못했을 경우
+            // 에러 메세지 출력
             else
             {
                 val logMessage: String
@@ -470,12 +502,17 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     }
 
     // An async task to load the tracker data asynchronously.
+    // 트래커 데이터를 비동기적으로 로드하는 작업을 위한 클래스
+    // 멤버 변수 이용의 편의를 위해 inner 클래스로 선언
     private inner class LoadTrackerTask : AsyncTask<Void, Int, Boolean>()
     {
         // 반드시 오버라이드 해야하는 함수
+        // 트래커 데이터를 로드하는 함수
         protected override fun doInBackground(vararg params: Void?): Boolean
         {
             // Prevent the onDestroy() method to overlap:
+            // 트래커를 로드하는 도중에 액티비티 종료로 인한
+            // onDestory 함수가 호출되지 못하도록 스레드 제어
             synchronized(mShutdownLock)
             {
                 // Load the tracker data set:
@@ -483,13 +520,17 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
             }
         }
 
+        // 트래커 로드하고 나서 다음 작업을 실행하는 함수
         protected override fun onPostExecute(result: Boolean?)
         {
             var vuforiaException: SampleApplicationException? = null
 
+            // 디버깅 편의를 위해 로그 출력
             Log.d(LOGTAG, "LoadTrackerTask.onPostExecute: execution "
                     + if (result!!) "successful" else "failed")
 
+            // 트래커 로드에 실패했을 경우
+            // 오류 메세지 출력
             if ((!result)!!)
             {
                 val logMessage = "Failed to load tracker data."
@@ -499,6 +540,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
                         SampleApplicationException.LOADING_TRACKERS_FAILURE,
                         logMessage)
             }
+            // 트래커 로드에 성공하고 다음 단계로 넘어가는 경우
             else
             {
                 // Hint to the virtual machine that it would be a good time to
@@ -506,6 +548,8 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
                 //
                 // NOTE: This is only a hint. There is no guarantee that the
                 // garbage collector will actually be run.
+
+                // 자바의 가비지콜렉터를 호출
                 System.gc()
 
                 Vuforia.registerCallback(this@AppSession)
@@ -515,6 +559,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
 
             // Done loading the tracker, update application status, send the
             // exception to check errors
+            // 트래커 로딩이 끝나고 예외 체크를 한다.
             mSessionControl.onInitARDone(vuforiaException)
         }
     }
