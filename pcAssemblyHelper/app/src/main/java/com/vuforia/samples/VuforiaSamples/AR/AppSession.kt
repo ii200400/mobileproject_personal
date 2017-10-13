@@ -565,6 +565,7 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
     }
 
     // Returns the error message for each error code
+    // AR 초기화 중에서 일어나는 에러 메세지를 리턴해주는 함수
     private fun getInitializationErrorString(code: Int): String
     {
         if (code == INIT_ERRORCODE.INIT_DEVICE_NOT_SUPPORTED)
@@ -589,8 +590,11 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
         }
     }
 
+    // 카메라를 중지시키는 함수
     fun stopCamera()
     {
+        // 카메라가 작동중이면
+        // 트래커를 중지시키고 디바이스에 중지 및 기록 삭제시킨다.
         if (mCameraRunning)
         {
             mSessionControl.doStopTrackers()
@@ -602,6 +606,9 @@ class AppSession(var mSessionControl: SampleApplicationControl) : UpdateCallback
 
     // Returns true if Vuforia is initialized, the trackers started and the
     // tracker data loaded
+    // AR이 실행되고있는지 리턴해주는 함수
+    // mStarted는 뷰포리아 초기화, 트래커 실행, 트래커 데이터 로드가 모두
+    // 완료되어야 true
     private fun isARRunning(): Boolean
     {
         return mStarted
