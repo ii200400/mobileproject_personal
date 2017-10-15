@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="선택된 부품의 이미지"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        />
+    <Button
+        android:layout_below="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/button"
+        android:text="Tip 등록"
+        />
+
+    <Button
+        android:layout_below="@+id/imageView"
+        android:id="@+id/button2"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="235dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="검색"
+        android:textColor="#ffffffff"
+        />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_below="@+id/TextView"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="350dp"
+        android:layout_height="230dp" />
+
+</RelativeLayout>

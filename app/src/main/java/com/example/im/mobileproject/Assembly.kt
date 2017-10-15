@@ -3,6 +3,9 @@ package com.example.im.mobileproject
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -16,20 +19,26 @@ class Assembly : AppCompatActivity() {
 
         val spin1: Spinner = findViewById(R.id.spinner)
         val spin2: Spinner = findViewById(R.id.spinner2)
-        val bnt:Button=findViewById(R.id.button)
-        val bnt2:Button=findViewById(R.id.button2)
+        //val bnt:Button=findViewById(R.id.button)
+       // val bnt2:Button=findViewById(R.id.button2)
         val category= arrayOf("카테고리","메인보드","CPU","RAM","메모리")
 
         spin2.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,category)
+        var fragmentmanager: FragmentManager=this.supportFragmentManager
+        var transaction: FragmentTransaction;
+        var fragment: Fragment
 
-        bnt.setOnClickListener {
+        fragment=Fragment1()
+        transaction = fragmentmanager.beginTransaction()
+        transaction.add(R.id.container,fragment ).addToBackStack(null).commit()
+       /* bnt.setOnClickListener {
 
         }
 
         bnt2.setOnClickListener {
-            val intent1:Intent=Intent(this@Assembly,Assembly_Register::class.java)
-            startActivity(intent1)
-        }
+           /// val intent1:Intent=Intent(this@Assembly,Assembly_Register::class.java)
+            //startActivity(intent1)
+        }*/
 
     }
 

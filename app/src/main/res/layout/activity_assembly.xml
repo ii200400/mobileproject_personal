@@ -5,11 +5,6 @@
     android:layout_height="match_parent"
     >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:id="@+id/relativeLayout">
-
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="130dp"
@@ -32,41 +27,12 @@
 
         </Spinner>
 
-    </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="선택된 부품의 이미지"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:layout_marginTop="90dp"
-        android:layout_marginLeft="50dp"
-        />
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="400dp"
-        android:id="@+id/button"
-        android:text="Tip 등록"
-        />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="235dp"
-        android:layout_marginTop="400dp"
-        android:background="@android:color/holo_blue_light"
-        android:text="검색"
-        android:textColor="#ffffffff"
-        />
-    <ImageView
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="15dp"
-        android:layout_width="350dp"
-        android:layout_height="230dp" />
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/spinner"></FrameLayout>
 
 </RelativeLayout>
