@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
     tools:context="com.example.im.mobileproject.MainActivity">
 
@@ -16,29 +17,32 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="203dp"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/main_img" />
 
     <TextView
         android:id="@+id/TextView"
         android:layout_width="match_parent"
         android:layout_height="34dp" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button_1"
+        android:background="@drawable/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="조립도우미" />
+         />
 
-    <Button
+    <ImageButton
         android:id="@+id/button_2"
+        android:background="@drawable/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="부품등록" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button_3"
+        android:background="@drawable/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

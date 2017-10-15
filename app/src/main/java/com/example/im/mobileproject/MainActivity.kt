@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,9 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btn1:Button = findViewById(R.id.button_1);
-        val btn2:Button = findViewById(R.id.button_2);
-        val btn3:Button = findViewById(R.id.button_3);
+        val btn1:ImageButton = findViewById(R.id.button_1);
+        val btn2:ImageButton = findViewById(R.id.button_2);
+        val btn3:ImageButton = findViewById(R.id.button_3);
 
         btn1.setOnClickListener{
             val intent1:Intent = Intent(this@MainActivity,SelectPart::class.java)
