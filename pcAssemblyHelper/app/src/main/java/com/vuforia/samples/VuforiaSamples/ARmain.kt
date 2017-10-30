@@ -15,12 +15,11 @@ import android.view.MotionEvent
 import android.widget.RelativeLayout
 import android.widget.CheckBox
 import android.widget.Switch
+import com.vuforia.*
 import java.util.*
 
 import com.vuforia.CameraDevice.FOCUS_MODE
 import com.vuforia.CameraDevice.FOCUS_MODE.FOCUS_MODE_TRIGGERAUTO
-import com.vuforia.CameraDevice
-import com.vuforia.State
 
 // 나중에 지워야함
 import com.vuforia.samples.SampleApplication.SampleApplicationControl
@@ -260,14 +259,46 @@ class ARmain : AppCompatActivity(), SampleApplicationControl
     // 아래 함수들은 SampleApplicationControl 클래스 구현
     // SampleApplicationControl 클래스 재설계 후 구현할 예정
 
+    // 트래커에 할당한 리소스를 해제하는 함수
     override fun doDeinitTrackers(): Boolean
     {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // Indicate if the trackers were deinitialized correctly
+        // 트래커가 할당 해제 되었다는 표시
+        val result = true
+
+        // 트래커의 인스턴스를 받아서 deinit
+        val tManager = TrackerManager.getInstance()
+        tManager.deinitTracker(ObjectTracker.getClassType())
+
+        return result
     }
 
+    // 트래커를 초기화하는 함수
     override fun doInitTrackers(): Boolean
     {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // Indicate if the trackers were initialized correctly
+        // 트래커 초기화가 되었다는 표시
+        var result = true
+
+        val tManager = TrackerManager.getInstance()
+        val tracker: Tracker?
+
+        // Trying to initialize the image tracker
+        // 이미지 트래커 초기화
+        tracker = tManager.initTracker(ObjectTracker.getClassType())
+
+        // 디버깅을 위해 초기화 성공여부에 따라 로그 출력
+        if (tracker == null)
+        {
+            Log.e("ARmain",
+                    "Tracker not initialized. Tracker already initialized or the camera is already started")
+            result = false
+        }
+        else
+        {
+            Log.i("ARmain", "Tracker successfully initialized")
+        }
+        return result
     }
 
     override fun doLoadTrackersData(): Boolean

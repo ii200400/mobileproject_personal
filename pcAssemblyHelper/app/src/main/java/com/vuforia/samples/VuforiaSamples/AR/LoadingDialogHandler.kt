@@ -32,7 +32,8 @@ class LoadingDialogHandler(activity : Activity) : Handler()
         {
             mLoadingDialogContainer!!.visibility = View.VISIBLE
 
-        } else if (msg.what == HIDE_LOADING_DIALOG)
+        }
+        else if (msg.what == HIDE_LOADING_DIALOG)
         {
             mLoadingDialogContainer!!.visibility = View.GONE
         }
