@@ -28,12 +28,16 @@ import com.vuforia.samples.SampleApplication.utils.LoadingDialogHandler
 import com.vuforia.samples.SampleApplication.utils.Texture
 import com.vuforia.samples.SampleApplication.SampleApplicationException
 import com.vuforia.samples.SampleApplication.utils.SampleApplicationGLView
+import com.vuforia.samples.VuforiaSamples.app.ImageTargets.ImageTargetRenderer
 import com.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenu
+import com.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenuInterface
 
 
 // AR 구현할 클래스
 class ARmain : AppCompatActivity(), SampleApplicationControl
 {
+    lateinit var mUILayout : RelativeLayout
+
     lateinit var vuforiaAppSession : SampleApplicationSession
 
     lateinit var mGestureDetector : GestureDetector
@@ -45,12 +49,24 @@ class ARmain : AppCompatActivity(), SampleApplicationControl
     var mIsDroidDevice : Boolean = false
 
     // openGL을 사용하기 위한 인스턴스
-    lateinit var mGlView: SampleApplicationGLView
+    lateinit var mGlView : SampleApplicationGLView
 
+    // 카메라 설정에 사용할 변수
     lateinit var mFlashOptionView : View
     var mFlash : Boolean = false
+    var mContAutofocus : Boolean = false
+    var mExtendedTracking : Boolean = false
 
-    var mSampleAppMenu: SampleAppMenu? = null
+    var mSampleAppMenu : SampleAppMenu? = null
+
+    // 트래커 데이터셋에 사용할 변수들
+    var mCurrentDataset : DataSet? = null
+    var mCurrentDatasetSelectionIndex : Int = 0
+    var mStartDatasetsIndex : Int = 0
+    var mDatasetsNumber : Int = 0
+    var mDatasetStrings = ArrayList<String>()
+
+    lateinit var mRenderer: ImageTargetRenderer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +77,7 @@ class ARmain : AppCompatActivity(), SampleApplicationControl
         vuforiaAppSession = SampleApplicationSession(this)
 
         // AR에 사용할 카메라용 레이아웃 설정
-        var mUILayout = View.inflate(this, R.layout.camera_overlay,null) as RelativeLayout
+        mUILayout = View.inflate(this, R.layout.camera_overlay,null) as RelativeLayout
 
         // 레이아웃의 visibility on
         mUILayout.setVisibility(View.VISIBLE)
@@ -301,34 +317,215 @@ class ARmain : AppCompatActivity(), SampleApplicationControl
         return result
     }
 
+    // 트래커 데이터를 로드하는 함수
+    // 리턴타입은 성공여부
     override fun doLoadTrackersData(): Boolean
     {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // 트래커 매니저를 이용해서 데이터 로드
+        val tManager = TrackerManager.getInstance()
+
+        // 오브젝트트래커를 트래커매니저에서 받아옴
+        var objectTracker : ObjectTracker? = tManager.getTracker(ObjectTracker.getClassType()) as ObjectTracker?
+
+        // 트래커매니저에서 받아오지 못하면 로드 실패
+        if (objectTracker == null)
+        {
+            return false
+        }
+
+        // 현재 데이터셋이 없으면
+        if (mCurrentDataset == null)
+        {
+            // 데이터셋 생성
+            mCurrentDataset = objectTracker!!.createDataSet()
+        }
+
+        // 데이터셋이 없으면
+        // 주로 데이터셋 생성 실패시
+        // 로드 실패
+        if (mCurrentDataset == null)
+        {
+            return false
+        }
+
+        // 내부저장소에서 데이터셋의 파일을 불러오지 못하면 로드 실패
+        if (!mCurrentDataset!!.load(mDatasetStrings.get(mCurrentDatasetSelectionIndex),
+                STORAGE_TYPE.STORAGE_APPRESOURCE))
+        {
+            return false
+        }
+
+        // 활성화된 데이터셋이 없으면 로드 실패
+        if (!objectTracker!!.activateDataSet(mCurrentDataset))
+        {
+            return false
+        }
+
+        // 데이터셋에서 트래킹 가능한 데이터의 수만큼 반복
+        val numTrackables = mCurrentDataset!!.getNumTrackables()
+        for (count in 0 until numTrackables)
+        {
+            val trackable = mCurrentDataset!!.getTrackable(count)
+
+            // 해당 인덱스의 데이터가 동작중인지 확인
+            if (isExtendedTrackingActive())
+            {
+                // 동작중이라면 실행
+                trackable.startExtendedTracking()
+            }
+
+            // 디버깅 편의를 위해 현재 데이터셋과 사용한 데이터를 로그 출력
+            val name = "Current Dataset : " + trackable.getName()
+            trackable.setUserData(name)
+            Log.d("doLoadTrackersData", "UserData:Set the following user data "
+                    + trackable.getUserData() as String)
+        }
+
+        // 모든 과정을 다 거치면 로드 성공
+        return true
     }
 
+    // 트래커를 실행하는 함수
     override fun doStartTrackers(): Boolean
     {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // Indicate if the trackers were started correctly
+        // 트래커가 제대로 실행되었다는 표시
+        var result = true
+
+        // 트래커 실행
+        val objectTracker : Tracker = TrackerManager.getInstance().getTracker(ObjectTracker.getClassType())
+        objectTracker?.start()
+
+        return result
     }
 
+    // 트래커를 중지하는 함수
     override fun doStopTrackers(): Boolean
     {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // Indicate if the trackers were stopped correctly
+        // 트래커가 제대로 중지되었다는 표시
+        var result = true
+
+        // 트래커 중지
+        val objectTracker = TrackerManager.getInstance().getTracker(ObjectTracker.getClassType())
+        objectTracker?.stop()
+
+        return result
     }
 
+    // 로딩된 트래커 데이터를 삭제하는 함수
     override fun doUnloadTrackersData(): Boolean
     {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // Indicate if the trackers were unloaded correctly
+        // 트래커 데이터가 제대로 삭제되었다는 표시
+        var result = true
+
+        // 트래커 매니저를 통해 트래커 객체 얻기
+        val tManager = TrackerManager.getInstance()
+        val objectTracker : ObjectTracker? = tManager.getTracker(ObjectTracker.getClassType()) as ObjectTracker?
+
+        // 트러캐 객체를 제대로 불러오지 못하면 삭제 실패
+        if (objectTracker == null)
+        {
+            return false
+        }
+
+        // 현재 데이터셋에 데이터가 존재하고 동작중이면
+        // 현재 데이터셋에 동작중인 데이터가 없다면 이미 트래커 데이터가 삭제된 것이다.
+        if (mCurrentDataset != null && mCurrentDataset!!.isActive())
+        {
+            // 트래커 객체에 작동중인 데이터셋이 존재하면 실패
+            if (objectTracker!!.getActiveDataSet(0) == mCurrentDataset && !objectTracker!!.deactivateDataSet(mCurrentDataset))
+            {
+                result = false
+            }
+            // 트래커 객체에 데이터셋 삭제가 실패하면
+            else if (!objectTracker!!.destroyDataSet(mCurrentDataset))
+            {
+                result = false
+            }
+
+            // 트래커 객체에 데이터셋 삭제가 성공적으로 되었을때
+            mCurrentDataset = null
+        }
+
+        // 삭제 완료
+        return result
     }
 
-    override fun onInitARDone(e: SampleApplicationException?)
+    // AR 초기화하고 실행하는 함수
+    override fun onInitARDone(exception : SampleApplicationException?)
     {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // 예외사항이 없다면 초기화 시작
+        if (exception == null)
+        {
+            // AR 실행하는 함수 호출
+            initApplicationAR()
+
+            // 렌더링 작동한다고 설정
+            mRenderer.setActive(true)
+
+            // Now add the GL surface view. It is important
+            // that the OpenGL ES surface view gets added
+            // BEFORE the camera is started and video
+            // background is configured.
+            // openGL을 사용해서 카메라 화면을 띄워준다.
+            addContentView(mGlView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT))
+
+            // Sets the UILayout to be drawn in front of the camera
+            // 카메라에 보여질 UI 레이아웃 세팅
+            mUILayout.bringToFront()
+
+            // Sets the layout background to transparent
+            // 카메라이기 때문에 배경을 투명하게 해야한다.
+            // 그래야 화면에 카메라 화면이 잡힘
+            mUILayout.setBackgroundColor(Color.TRANSPARENT)
+
+            // AR 실행
+            // 예외발생시 오류 출력
+            try {
+                vuforiaAppSession.startAR(CameraDevice.CAMERA_DIRECTION.CAMERA_DIRECTION_DEFAULT)
+            } catch (e: SampleApplicationException) {
+                Log.e("onInitARDone", e.string)
+            }
+
+            // 카메라 오토포커스 모드로 세팅하고 결과를 리턴
+            val result = CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_CONTINUOUSAUTO)
+
+            // 카메라 오토포커스 모드가 세팅되었으면
+            if (result)
+            {
+                mContAutofocus = true
+            }
+            // 세팅 실패시 오류 출력
+            else
+            {
+                Log.e("onInitARDone", "Unable to enable continuous autofocus")
+            }
+
+            // 아래 appmenu 부분은 수정해야함
+            mSampleAppMenu = SampleAppMenu(this as SampleAppMenuInterface, this, "Image Targets",
+                    mGlView, mUILayout, null)
+            setSampleAppMenuSettings()
+        }
+        // 예외사항 발생시 초기화하지 않고 오류 출력
+        else
+        {
+            Log.e("onInitARDone", exception.getString())
+            showInitializationErrorMessage(exception.getString())
+        }
     }
 
     override fun onVuforiaUpdate(state: State?)
     {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    // 확장된 트래킹이 작동 중인지 리턴해주는 함수
+    fun isExtendedTrackingActive() : Boolean
+    {
+        return mExtendedTracking
     }
 }
 
