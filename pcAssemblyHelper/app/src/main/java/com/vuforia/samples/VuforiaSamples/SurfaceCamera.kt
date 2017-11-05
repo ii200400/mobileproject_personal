@@ -146,7 +146,7 @@ class SurfaceCamera : AppCompatActivity() {
                 height = jpegSizes[0].height
             }
             //이미지의 크기와 형식을 묘사(?)한다. Create a new reader for images of the desired size and format. PixelFormat.RGBX_8888
-            val reader : ImageReader = ImageReader.newInstance(width,height, 0x2,2)
+            val reader : ImageReader = ImageReader.newInstance(width,height, 0x1,2)
             val outputSurfaces : ArrayList<Surface> = ArrayList<Surface>(2)
             outputSurfaces.add(reader.surface)
             outputSurfaces.add(Surface(textureView!!.surfaceTexture))
