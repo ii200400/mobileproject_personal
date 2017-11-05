@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">mobileProject</string>
+    <string name="category_prompt">부품종류</string>
+    <string name="name_prompt">부품이름</string>
 </resources>

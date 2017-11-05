@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category">
+        <item>CPU</item>
+        <item>MainBoard</item>
+        <item>Ram</item>
+        <item>그래픽카드</item>
+    </string-array>
+    <string-array name="name">
+        <item>intel core i7</item>
+        <item>intel core i5</item>
+        <item>intel core i3</item>
+    </string-array>
+    <string-array name="mb_name">
+        <item>main 1</item>
+        <item>main 2</item>
+        <item>main 3</item>
+    </string-array>
+    <string-array name="ram_name">
+        <item>ram 1</item>
+        <item>ram 2</item>
+        <item>ram 3</item>
+    </string-array>
+    <string-array name="graphics_name">
+        <item>graphics 1</item>
+        <item>graphics 2</item>
+        <item>graphics 3</item>
+    </string-array>
+</resources>

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Spinner
 
 class SelectPart:AppCompatActivity() {
@@ -16,6 +17,7 @@ class SelectPart:AppCompatActivity() {
         setContentView(R.layout.activity_select)
         setTitle("부품 선택")
 
+        val imageview2 : ImageView = findViewById(R.id.imageview2)
         val spin1:Spinner = findViewById(R.id.spinner1)
         val spin2:Spinner = findViewById(R.id.spinner2)
         val spin3:Spinner = findViewById(R.id.spinner3)
@@ -36,6 +38,7 @@ class SelectPart:AppCompatActivity() {
         spin4.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,vga)
         spin5.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,hdd)
         spin6.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,etc)
+        imageview2.setImageResource(R.drawable.intel_i7)
     }
 
 }

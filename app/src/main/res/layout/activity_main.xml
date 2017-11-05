@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/bcg_img_main"
     android:orientation="vertical"
     tools:context="com.example.im.mobileproject.MainActivity">
 
@@ -14,18 +14,16 @@
         android:layout_height="75dp" />
 
     <ImageView
+        android:layout_marginTop="50dp"
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="203dp"
+        android:layout_height="150dp"
         app:srcCompat="@drawable/main_img" />
 
-    <TextView
-        android:id="@+id/TextView"
-        android:layout_width="match_parent"
-        android:layout_height="34dp" />
 
     <ImageButton
         android:id="@+id/button_1"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

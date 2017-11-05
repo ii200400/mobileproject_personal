@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -17,12 +16,14 @@
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="100dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@drawable/spinner_bg"/>
 
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="100dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@drawable/spinner_bg"/>
 
     </LinearLayout>
 
@@ -36,12 +37,14 @@
         <Spinner
             android:id="@+id/spinner3"
             android:layout_width="100dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@drawable/spinner_bg"/>
 
         <Spinner
             android:id="@+id/spinner4"
             android:layout_width="100dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@drawable/spinner_bg"/>
     </LinearLayout>
 
     <LinearLayout
@@ -54,26 +57,24 @@
         <Spinner
             android:id="@+id/spinner5"
             android:layout_width="100dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@drawable/spinner_bg"/>
 
         <Spinner
             android:id="@+id/spinner6"
             android:layout_width="100dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@drawable/spinner_bg"/>
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="match_parent"
-        android:layout_height="239dp"
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:id="@+id/imageview2"
+        android:layout_width="350dp"
+        android:layout_height="230dp"
         android:layout_weight="1"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
 
     <Button
         android:id="@+id/button2"
