@@ -460,7 +460,7 @@ class ARmain : AppCompatActivity(), SampleApplicationControl
         if (exception == null)
         {
             // AR 실행하는 함수 호출
-            initApplicationAR()
+            //initApplicationAR()
 
             // 렌더링 작동한다고 설정
             mRenderer.setActive(true)
@@ -507,13 +507,13 @@ class ARmain : AppCompatActivity(), SampleApplicationControl
             // 아래 appmenu 부분은 수정해야함
             mSampleAppMenu = SampleAppMenu(this as SampleAppMenuInterface, this, "Image Targets",
                     mGlView, mUILayout, null)
-            setSampleAppMenuSettings()
+            //setSampleAppMenuSettings()
         }
         // 예외사항 발생시 초기화하지 않고 오류 출력
         else
         {
             Log.e("onInitARDone", exception.getString())
-            showInitializationErrorMessage(exception.getString())
+            //showInitializationErrorMessage(exception.getString())
         }
     }
 
