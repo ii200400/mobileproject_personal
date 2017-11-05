@@ -7,7 +7,7 @@ def NATIVE_LIB_DIR = 'build/lib'
 def JAR_DIR = 'build/java/vuforia'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 26
     buildToolsVersion '25.0.0'
 
     sourceSets.main {
@@ -17,8 +17,8 @@ android {
 
     defaultConfig {
         applicationId "com.vuforia.samples.VuforiaSamples"
-        minSdkVersion 9
-        targetSdkVersion 22
+        minSdkVersion 21
+        targetSdkVersion 26
         versionCode 600
         versionName "6.0"
     }
@@ -30,7 +30,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             ndk {
-                abiFilters "armeabi-v7a"
+                abiFilters "armeabi-v7a", "x86"
             }
         }
         debug {
@@ -44,9 +44,9 @@ android {
 }
 
 dependencies {
-    compile files("$VUFORIA_SDK_DIR/$JAR_DIR/Vuforia.jar")
+    compile files("../../AR-test/vuforia-sdk-android-6-2-10/build/java/vuforia/Vuforia.jar")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:22.2.1'
+    implementation 'com.android.support:appcompat-v7:26.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {

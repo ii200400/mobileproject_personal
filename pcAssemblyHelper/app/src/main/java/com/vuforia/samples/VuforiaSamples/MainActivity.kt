@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-
 import com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityLauncher
 
 class MainActivity : AppCompatActivity() {
@@ -14,10 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btn1 : Button = findViewById(R.id.button_1) as Button
-        val btn2 : Button = findViewById(R.id.button_2) as Button
-        val btn3 : Button = findViewById(R.id.button_3) as Button
-        val btn4 : Button = findViewById(R.id.button_4) as Button
+        val btn1 : Button = findViewById(R.id.button_1)
+        val btn2 : Button = findViewById(R.id.button_2)
+        val btn3 : Button = findViewById(R.id.button_3)
+        val btn4 : Button = findViewById(R.id.button_4)
 
         btn1.setOnClickListener{
             val intent1:Intent = Intent(this@MainActivity,SelectPart::class.java)
