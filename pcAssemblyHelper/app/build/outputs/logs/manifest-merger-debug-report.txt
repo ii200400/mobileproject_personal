@@ -281,24 +281,24 @@ ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\
 		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:208:13-43
 	android:name
 		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:207:13-45
-activity#com.vuforia.samples.VuforiaSamples.RegistrationPart_SP
+activity#com.vuforia.samples.VuforiaSamples.SurfaceCamera
 ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:209:9-211:45
 	android:theme
 		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:211:13-43
 	android:name
-		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:210:13-48
+		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:210:13-42
 activity#com.vuforia.samples.VuforiaSamples.Assembly
 ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:212:9-214:45
 	android:theme
 		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:214:13-43
 	android:name
 		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:213:13-37
-activity#com.vuforia.samples.VuforiaSamples.Picture
+activity#com.vuforia.samples.VuforiaSamples.PreviewImage
 ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:215:9-217:45
 	android:theme
 		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:217:13-43
 	android:name
-		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:216:13-36
+		ADDED from C:\Users\im\AndroidStudioProjects\mobileProject\pcAssemblyHelper\app\src\main\AndroidManifest.xml:216:13-41
 meta-data#android.support.VERSION
 ADDED from [com.android.support:appcompat-v7:26.0.2] C:\Users\im\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.2.aar\d3fdd0125fb9943c56a6e38b6495c299\AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:animated-vector-drawable:26.0.2] C:\Users\im\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.0.2.aar\a53e87cf2a8b159d691df820989156db\AndroidManifest.xml:23:9-25:38

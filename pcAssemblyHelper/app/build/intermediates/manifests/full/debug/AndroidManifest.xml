@@ -173,13 +173,13 @@
             android:name="com.vuforia.samples.VuforiaSamples.RegistrationPart"
             android:theme="@style/NoTitle" />
         <activity
-            android:name="com.vuforia.samples.VuforiaSamples.RegistrationPart_SP"
+            android:name="com.vuforia.samples.VuforiaSamples.SurfaceCamera"
             android:theme="@style/NoTitle" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.Assembly"
             android:theme="@style/NoTitle" />
         <activity
-            android:name="com.vuforia.samples.VuforiaSamples.Picture"
+            android:name="com.vuforia.samples.VuforiaSamples.PreviewImage"
             android:theme="@style/NoTitle" />
 
         <meta-data

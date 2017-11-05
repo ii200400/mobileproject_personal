@@ -207,13 +207,13 @@
             android:name=".RegistrationPart"
             android:theme="@style/NoTitle"/>
         <activity
-            android:name=".RegistrationPart_SP"
+            android:name=".SurfaceCamera"
             android:theme="@style/NoTitle"/>
         <activity
             android:name=".Assembly"
             android:theme="@style/NoTitle"/>
         <activity
-            android:name=".Picture"
+            android:name=".PreviewImage"
             android:theme="@style/NoTitle"/>
          
     </application>
