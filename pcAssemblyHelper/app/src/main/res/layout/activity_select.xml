@@ -69,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="239dp"
         android:layout_weight="1"
-        android:srcCompat="@android:drawable/btn_dialog" />
+        android:src="@android:drawable/btn_dialog" />
 
     <TextView
         android:id="@+id/textView1"
