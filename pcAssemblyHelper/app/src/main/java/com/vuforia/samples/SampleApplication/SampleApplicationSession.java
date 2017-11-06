@@ -321,8 +321,8 @@ public class SampleApplicationSession implements UpdateCallbackInterface
     }
     
     // An async task to initialize Vuforia asynchronously.
-    private class InitVuforiaTask extends AsyncTask<Void, Integer, Boolean>
-    {
+        private class InitVuforiaTask extends AsyncTask<Void, Integer, Boolean>
+        {
         // Initialize with invalid value:
         private int mProgressValue = -1;
         

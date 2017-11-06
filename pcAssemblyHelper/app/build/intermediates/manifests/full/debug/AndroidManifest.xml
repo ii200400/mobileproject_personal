@@ -9,10 +9,8 @@
 
         android:minSdkVersion = application's required minimum API level to run
         android:targetSdkVersion = application's targeted API level
-        android:largeHeap = largger buffer size
     -->
     <uses-sdk
-        android:largeHeap="true"
         android:minSdkVersion="21"
         android:targetSdkVersion="26" />
 
@@ -34,17 +32,10 @@
     -->
     <uses-feature android:name="android.hardware.camera" />
 
-<!--         Add this permission to get access to the camera. -->
+    <!-- Add this permission to get access to the camera. -->
     <uses-permission android:name="android.permission.CAMERA" />
 
-<!--         외부 저장소를 쓰고 읽을 수 있도록 한다. -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-<!--         Camera2의 함수를 불러오는 역할 -->
-    <uses-feature android:name="android.hardware.camera2.full" />
-
-<!--         Add this permission to allow opening network sockets. -->
+    <!-- Add this permission to allow opening network sockets. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!--
@@ -52,6 +43,9 @@
         active type: 3G/WiFi).
     -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!--
       NOTE: The setting 'android:launchMode="singleTask"' makes sure
@@ -70,24 +64,15 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:launchMode="singleTask"
-        android:testOnly="true"
         android:theme="@style/SampleAppsTheme" >
+        <activity
+            android:name="com.vuforia.samples.VuforiaSamples.MainSplash"
+            android:screenOrientation="portrait"
+            android:theme="@style/SampleAppsTheme" >
 
-        <!--
-          NOTE: The values in 'android:configChanges' ensure that Android will 
-          not destroy and re-create the activity when the user flips the 
-          keyboard, changes the orientation of the device, or the actual or 
-          physical screen resolution changes, but calls the Activity's 
-          onConfigurationChanged() function instead.
+            <!-- 여기에 밑에 있는 intent-filter 지우고 붙여넣기 -->
 
-          NOTE 2: In order to prevent automatic reactions to orientation
-          changes in addition to setting proper values for
-          'android:configChanges', you also must explicitly specify the screen
-          orientation used by the application, either by setting the attribute
-          'android:screenOrientation' or in code by calling
-          Activity.setRequestedOrientation().
-        -->
-        <!-- Splash Screen Activity -->
+        </activity>
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivitySplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
@@ -102,68 +87,57 @@
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.ui.ActivityList.AboutScreen"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:noHistory="true"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.app.ImageTargets.ImageTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme" >
-        </activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.app.VuMark.VuMark"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme" >
-        </activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.app.TextRecognition.TextReco"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme" >
-        </activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.app.CylinderTargets.CylinderTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme" >
-        </activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.app.VirtualButtons.VirtualButtons"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme" >
-        </activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.app.UserDefinedTargets.UserDefinedTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme" >
-        </activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.app.MultiTargets.MultiTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme" >
-        </activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.app.CloudRecognition.CloudReco"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme" >
-        </activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.app.ObjectRecognition.ObjectTargets"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:theme="@style/SampleAppsTheme" >
-        </activity>
+            android:theme="@style/SampleAppsTheme" />
         <activity
             android:name="com.vuforia.samples.VuforiaSamples.MainActivity"
             android:theme="@style/NoTitle" />
@@ -174,14 +148,12 @@
             android:name="com.vuforia.samples.VuforiaSamples.RegistrationPart"
             android:theme="@style/NoTitle" />
         <activity
-            android:name="com.vuforia.samples.VuforiaSamples.SurfaceCamera"
-            android:theme="@style/NoTitle" />
-        <activity
             android:name="com.vuforia.samples.VuforiaSamples.Assembly"
             android:theme="@style/NoTitle" />
         <activity
-            android:name="com.vuforia.samples.VuforiaSamples.PreviewImage"
+            android:name="com.vuforia.samples.VuforiaSamples.Picture"
             android:theme="@style/NoTitle" />
+        <activity android:name="com.vuforia.samples.VuforiaSamples.ARmain" />
 
         <meta-data
             android:name="android.support.VERSION"

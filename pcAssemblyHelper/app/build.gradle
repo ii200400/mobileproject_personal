@@ -24,7 +24,7 @@ android {
     }
 
     archivesBaseName = rootProject.projectDir.getName()
-	
+
     buildTypes {
         release {
             minifyEnabled false
