@@ -1,18 +1,11 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "outputFile": "C:\\Users\\im\\AndroidStudioProjects\\mobileProject\\pcAssemblyHelper\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\3e729680cb2845f3e5fd9df3afd5a3da\\res\\values-port\\values-port.xml",
+                    "source": "C:\\Users\\im\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\fe2b9082eaf01684f432573fca433305\\res\\values-port\\values-port.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "4",
-                        "startOffsets": "291",
-                        "endColumns": "55",
-                        "endOffsets": "342"
-                    },
-                    "to": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",

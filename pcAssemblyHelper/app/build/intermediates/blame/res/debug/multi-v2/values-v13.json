@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v13\\values-v13.xml",
+            "outputFile": "C:\\Users\\im\\AndroidStudioProjects\\mobileProject\\pcAssemblyHelper\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v13\\values-v13.xml",
             "map": [
                 {
-                    "source": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\src\\main\\res\\values-v13\\styles.xml",
+                    "source": "C:\\Users\\im\\AndroidStudioProjects\\mobileProject\\pcAssemblyHelper\\app\\src\\main\\res\\values-v13\\styles.xml",
                     "from": {
                         "startLines": "8,3",
                         "startColumns": "4,4",
@@ -14,12 +14,22 @@
                         "endOffsets": "512,343"
                     },
                     "to": {
-                        "startLines": "2,6",
+                        "startLines": "3,7",
                         "startColumns": "4,4",
-                        "startOffsets": "55,223",
-                        "endLines": "5,9",
+                        "startOffsets": "114,282",
+                        "endLines": "6,10",
                         "endColumns": "12,12",
-                        "endOffsets": "218,451"
+                        "endOffsets": "277,510"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\im\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\fe2b9082eaf01684f432573fca433305\\res\\values-v13\\values-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "58",
+                        "endOffsets": "109"
                     }
                 }
             ]

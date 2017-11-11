@@ -6,9 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_registration.*
 import android.widget.Toast
@@ -40,17 +38,21 @@ class RegistrationPart: AppCompatActivity() {
 
         //사진 찍기
         btnPicture.setOnClickListener {
+            /*
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if (intent.resolveActivity(packageManager) != null) {
                 //다른 앱을 불러와 구동
                 startActivityForResult(intent, CAMERA_REQUEST_MODE)
             }
+            */
+            val intent_picture : Intent = Intent(this@RegistrationPart,RegistrationPart_SP::class.java)
+            startActivity(intent_picture)
         }
 
         if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //API 23 이상이면
-                // 런타임 퍼미션 처리 필요
+                // 런타임 권한 처리 필요
 
                 val hasCameraPermission = ContextCompat.checkSelfPermission(this,
                         Manifest.permission.CAMERA)
@@ -58,9 +60,9 @@ class RegistrationPart: AppCompatActivity() {
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
                 if (hasCameraPermission == PackageManager.PERMISSION_GRANTED && hasWriteExternalStoragePermission == PackageManager.PERMISSION_GRANTED) {
-                }//이미 퍼미션을 가지고 있음
+                }//이미 권한을 가지고 있음
                 else {
-                    //퍼미션 요청
+                    //권한 요청
                     ActivityCompat.requestPermissions(this,
                             arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
                             PERMISSIONS_REQUEST_CODE)
@@ -82,7 +84,7 @@ class RegistrationPart: AppCompatActivity() {
             CAMERA_REQUEST_MODE -> {
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     filePath = data.getData()
-                    imageview.setImageBitmap(data.extras.get("data") as Bitmap)
+                    pickedImage.setImageBitmap(data.extras.get("data") as Bitmap)
 
                     //val bitmap:Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath)
                     //iv_preview.setImageBitmap(bitmap);

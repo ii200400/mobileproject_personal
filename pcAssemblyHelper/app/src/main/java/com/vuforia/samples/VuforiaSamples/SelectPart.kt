@@ -17,12 +17,12 @@ class SelectPart:AppCompatActivity() {
         setContentView(R.layout.activity_select)
         setTitle("부품 선택")
 
-        val spin1:Spinner = findViewById(R.id.spinner1) as Spinner
-        val spin2:Spinner = findViewById(R.id.spinner2) as Spinner
-        val spin3:Spinner = findViewById(R.id.spinner3) as Spinner
-        val spin4:Spinner = findViewById(R.id.spinner4) as Spinner
-        val spin5:Spinner = findViewById(R.id.spinner5) as Spinner
-        val spin6:Spinner = findViewById(R.id.spinner6) as Spinner
+        val spin1:Spinner = findViewById(R.id.spinner1)
+        val spin2:Spinner = findViewById(R.id.spinner2)
+        val spin3:Spinner = findViewById(R.id.spinner3)
+        val spin4:Spinner = findViewById(R.id.spinner4)
+        val spin5:Spinner = findViewById(R.id.spinner5)
+        val spin6:Spinner = findViewById(R.id.spinner6)
 
         val mainBoard = arrayListOf("메인보드")
         val cpu = arrayListOf("CPU")
@@ -38,7 +38,7 @@ class SelectPart:AppCompatActivity() {
         spin5.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,hdd) as SpinnerAdapter?
         spin6.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,etc) as SpinnerAdapter?
 
-        val startbtn : Button = findViewById(R.id.button_startAR) as Button
+        val startbtn : Button = findViewById(R.id.button_startAR)
 
         startbtn.setOnClickListener{
             val intent : Intent = Intent(this, ImageTargets::class.java)

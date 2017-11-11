@@ -149,9 +149,6 @@
         <activity
             android:name=".Assembly"
             android:theme="@style/NoTitle" />
-        <activity
-            android:name=".Picture"
-            android:theme="@style/NoTitle" />
         <activity android:name=".ARmain"></activity>
     </application>
 
