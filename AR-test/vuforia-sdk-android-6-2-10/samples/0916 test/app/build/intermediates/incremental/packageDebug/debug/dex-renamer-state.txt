@@ -1,4 +1,0 @@
-#Sun Sep 17 21:13:15 KST 2017
-base.0=D\:\\Git-project\\master\\AR-test\\vuforia-sdk-android-6-2-10\\samples\\0916 test\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-renamed.0=classes.dex
-file.0=D\:\\Git-project\\master\\AR-test\\vuforia-sdk-android-6-2-10\\samples\\0916 test\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
