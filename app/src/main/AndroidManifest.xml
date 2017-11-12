@@ -156,6 +156,9 @@
             android:name=".Assembly"
             android:theme="@style/NoTitle" />
         <activity android:name=".ARmain"></activity>
+        <activity
+            android:name=".test.FirebaseTest"
+            android:theme="@style/NoTitle" />
     </application>
 
 </manifest>

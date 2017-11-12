@@ -8,6 +8,7 @@ import android.widget.Button
 
 import com.vuforia.samples.VuforiaSamples.app.ImageTargets.ImageTargets
 import com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityLauncher
+import com.vuforia.samples.VuforiaSamples.test.FirebaseTest
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
         btn4.setOnClickListener{
             //val intent4:Intent = Intent(this@MainActivity,ActivityLauncher::class.java)
-            val intent4:Intent = Intent(this@MainActivity,ImageTargets::class.java)
+            val intent4:Intent = Intent(this@MainActivity,FirebaseTest::class.java)
             startActivity(intent4)
         }
     }
