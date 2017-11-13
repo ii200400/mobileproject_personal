@@ -1,1 +1,0 @@
-com.vuforia.samples.VuforiaSamples.test
