@@ -161,7 +161,7 @@
             android:theme="@style/NoTitle" />
         <activity
             android:name=".test.Drawertest"
-            android:theme="@style/NoTitle" />
+            android:theme="@style/test"/>
     </application>
 
 </manifest>
