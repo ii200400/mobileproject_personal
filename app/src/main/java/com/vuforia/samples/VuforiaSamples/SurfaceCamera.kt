@@ -132,7 +132,7 @@ class SurfaceCamera : AppCompatActivity() {
         }
         val manager : CameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
         try{
-            //TODO 카메라 이미지 크기 조작?
+            //카메라 장치의 기능을 query한다는데..?
             val characteristics : CameraCharacteristics = manager.getCameraCharacteristics(cameraDevice!!.getId())
             var jpegSizes : Array<Size>? = null
 
@@ -144,6 +144,7 @@ class SurfaceCamera : AppCompatActivity() {
             if (jpegSizes != null && 0 < jpegSizes.size){
                 width = jpegSizes[0].width
                 height = jpegSizes[0].height
+                Log.e("---------", width.toString() + " " + height.toString())
             }
             //이미지의 크기와 형식을 묘사(?)한다. Create a new reader for images of the desired size and format. PixelFormat.RGBX_8888
             var num : Int = 1
@@ -193,7 +194,7 @@ class SurfaceCamera : AppCompatActivity() {
                     var image : Image? = null
                     var bitmap : Bitmap? = null
                     try{
-                        //TODO 갤러리에서 이미지 볼 수 있도록 하기
+                        //put으로 key : value로 값을 values에 넣는다.
                         val values = ContentValues()
                         values.put(MediaStore.Images.Media.TITLE, "사진1")
                         values.put(MediaStore.Images.Media.DISPLAY_NAME, "사진2")
@@ -204,19 +205,23 @@ class SurfaceCamera : AppCompatActivity() {
                         values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis())
                         values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
 
+                        //갤러리 permission이 있으면 갤러리에서 values값을 가지는 이미지 볼 수 있도록 하기
                         val url = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
                         image = reader.acquireLatestImage()
 
                         if(image != null) {
                             val buffer: ByteBuffer = image.planes[0].buffer
-                            val pixelStride = image.planes[0].pixelStride
-                            val rowStride = image.planes[0].rowStride
-                            val rowPadding = rowStride - pixelStride * reader.width
                             val imageOut : OutputStream = contentResolver.openOutputStream(url)
 
-                            bitmap = Bitmap.createBitmap(reader.width + rowPadding / pixelStride, reader.height, Bitmap.Config.ARGB_8888)
+                            bitmap = Bitmap.createBitmap(image.width, image.height, Bitmap.Config.ARGB_8888)
+                            val resize : Bitmap = Bitmap.createScaledBitmap(bitmap, 300, 400, true);
+
                             bitmap.copyPixelsFromBuffer(buffer)
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
+
+                            answer_intent.putExtra("image", bitmap)
+                            imageOut.flush()
+                            imageOut.close()
 
                             val id : Long = ContentUris.parseId(url)
                             val miniThumb : Bitmap = MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id, MediaStore.Images.Thumbnails.MINI_KIND, null)
@@ -236,7 +241,7 @@ class SurfaceCamera : AppCompatActivity() {
                             val url2 = contentResolver.insert(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, values2)
                             val thumbOut : OutputStream = contentResolver.openOutputStream(url2)
                             thumb!!.compress(Bitmap.CompressFormat.JPEG, 100, thumbOut)
-                            answer_intent.putExtra("image", thumb)
+                            imageOut.flush()
                             thumbOut.close()
 
                             //val input : InputStream = contentResolver.openInputStream(url)
