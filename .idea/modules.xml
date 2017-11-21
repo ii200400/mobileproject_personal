@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/master.iml" filepath="$PROJECT_DIR$/master.iml" />
-      <module fileurl="file://D:\Git-project\master\mobileProject.iml" filepath="D:\Git-project\master\mobileProject.iml" />
     </modules>
   </component>
 </project>
