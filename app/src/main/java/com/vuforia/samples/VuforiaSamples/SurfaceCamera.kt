@@ -212,16 +212,18 @@ class SurfaceCamera : AppCompatActivity() {
                         if(image != null) {
                             val buffer: ByteBuffer = image.planes[0].buffer
                             val imageOut : OutputStream = contentResolver.openOutputStream(url)
+                            Log.e("--------", image.width.toString() + " " + image.height.toString())
+                            Log.e("--------", reader.width.toString() + " " + reader.height.toString())
 
                             bitmap = Bitmap.createBitmap(image.width, image.height, Bitmap.Config.ARGB_8888)
                             val resize : Bitmap = Bitmap.createScaledBitmap(bitmap, 300, 400, true);
 
-                            bitmap.copyPixelsFromBuffer(buffer)
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
-
-                            answer_intent.putExtra("image", bitmap)
+                            resize.copyPixelsFromBuffer(buffer)
+                            resize.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
                             imageOut.flush()
                             imageOut.close()
+
+                            answer_intent.putExtra("image", resize)
 
                             val id : Long = ContentUris.parseId(url)
                             val miniThumb : Bitmap = MediaStore.Images.Thumbnails.getThumbnail(contentResolver, id, MediaStore.Images.Thumbnails.MINI_KIND, null)
