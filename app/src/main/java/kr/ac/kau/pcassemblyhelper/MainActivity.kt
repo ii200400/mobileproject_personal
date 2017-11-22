@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 
 import kr.ac.kau.pcassemblyhelper.test.Drawertest
+import kr.ac.kau.pcassemblyhelper.test.Tip1
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
         btn4.setOnClickListener{
             //val intent4:Intent = Intent(this@MainActivity,ActivityLauncher::class.java)
-            val intent4:Intent = Intent(this@MainActivity, Drawertest::class.java)
+            val intent4:Intent = Intent(this@MainActivity, Tip1::class.java)
             startActivity(intent4)
         }
     }

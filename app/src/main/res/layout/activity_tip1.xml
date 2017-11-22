@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.ac.kau.pcassemblyhelper.test.Tip1">
+
+    <Spinner
+        android:id="@+id/spinner7"
+        android:layout_width="134dp"
+        android:layout_height="49dp"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="29dp" />
+
+    <Spinner
+        android:id="@+id/spinner8"
+        android:layout_width="349dp"
+        android:layout_height="56dp"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="95dp" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="348dp"
+        android:layout_height="54dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="180dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="256dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="92dp"
+        android:layout_height="86dp"
+        app:srcCompat="@drawable/icon"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="298dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="428dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="238dp"
+        tools:layout_editor_absoluteY="428dp" />
+</android.support.constraint.ConstraintLayout>
