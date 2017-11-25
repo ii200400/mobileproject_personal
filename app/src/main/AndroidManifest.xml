@@ -37,7 +37,6 @@
         <activity android:name=".SurfaceCamera" />
         <activity android:name=".PreviewImage" />
         <activity android:name=".Assembly" />
-        <activity android:name=".test.FirebaseTest" />
         <activity android:name=".test.Drawertest" />
         <activity android:name=".test.Tip1"></activity>
     </application>

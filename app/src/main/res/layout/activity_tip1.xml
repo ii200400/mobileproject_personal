@@ -6,59 +6,87 @@
     android:layout_height="match_parent"
     tools:context="kr.ac.kau.pcassemblyhelper.test.Tip1">
 
+    <Space
+        android:id="@+id/space"
+        android:layout_width="46dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.92" />
+
     <Spinner
-        android:id="@+id/spinner7"
-        android:layout_width="134dp"
+        android:id="@+id/spinner_category"
+        android:layout_width="139dp"
         android:layout_height="49dp"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="29dp" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/space2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner8"
-        android:layout_width="349dp"
+        android:id="@+id/spinner_name"
+        android:layout_width="293dp"
         android:layout_height="56dp"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="95dp" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="348dp"
-        android:layout_height="54dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="180dp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="256dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.213"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="92dp"
-        android:layout_height="86dp"
-        app:srcCompat="@drawable/icon"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="298dp" />
+        android:layout_width="195dp"
+        android:layout_height="187dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_name"
+        app:layout_constraintVertical_bias="0.14"
+        app:srcCompat="@drawable/icon" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="428dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="글쓰기"
+        app:layout_constraintBottom_toBottomOf="@+id/space"
+        app:layout_constraintEnd_toStartOf="@+id/space"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/space" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="238dp"
-        tools:layout_editor_absoluteY="428dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="검색"
+        app:layout_constraintBottom_toBottomOf="@+id/space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toTopOf="@+id/space" />
+
+    <Space
+        android:id="@+id/space2"
+        android:layout_width="54dp"
+        android:layout_height="34dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075" />
+
 </android.support.constraint.ConstraintLayout>
