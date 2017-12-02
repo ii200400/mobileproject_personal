@@ -9,6 +9,7 @@
     <string name="activities_list_empty">No activities</string>
 
     <string name="button_OK">OK</string>
+    <string name="take_picture">Take Picture</string>
 
     <string name="UPDATE_ERROR_AUTHORIZATION_FAILED_TITLE">Authorization Error</string>
     <string name="UPDATE_ERROR_PROJECT_SUSPENDED_TITLE">Authorization Error</string>

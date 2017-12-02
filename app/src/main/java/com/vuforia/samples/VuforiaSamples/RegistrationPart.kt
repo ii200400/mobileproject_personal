@@ -10,7 +10,9 @@ import android.widget.*
 import kotlinx.android.synthetic.main.activity_registration.*
 import android.widget.Toast
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
+import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 
@@ -78,8 +80,12 @@ class RegistrationPart : AppCompatActivity() {
         when (requestCode) {
             CAMERA_REQUEST_MODE -> {
                 if (resultCode == Activity.RESULT_OK && data != null) {
-                    image_bitmap = data.extras.get("image") as Bitmap
-                    pickedImage.setImageBitmap(image_bitmap)
+                    //image_bitmap = data.extras.get("image") as Bitmap
+                    //pickedImage.setImageBitmap(image_bitmap)
+
+                    val uri : Uri = data.extras.get("uri") as Uri
+                    val bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
+                    pickedImage.setImageBitmap(bitmap)
                 }
             }
             else -> {
