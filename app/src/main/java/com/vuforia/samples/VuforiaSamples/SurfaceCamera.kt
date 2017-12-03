@@ -107,14 +107,16 @@ class SurfaceCamera : AppCompatActivity() {
         when (requestCode){
             PREVIEW_CODE->{
                 if (resultCode == Activity.RESULT_OK && data != null) {
-                    val confirm: Boolean = data.extras.get("confirm") as Boolean
+                    val confirm : Boolean = data.extras.get("confirm") as Boolean
                     if (confirm) {
                         saveImageToGallary()
+                        mCamera!!.release()
 
                         val answer_intent : Intent = Intent()
                         answer_intent.putExtra("uri", uri)
                         setResult(Activity.RESULT_OK, answer_intent)
                         //bitmap!!.recycle()
+
                         finish()
                     }
                 }else{
