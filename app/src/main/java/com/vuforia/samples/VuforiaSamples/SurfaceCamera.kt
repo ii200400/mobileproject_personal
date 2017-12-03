@@ -33,11 +33,9 @@ class SurfaceCamera : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         mCamera = getCameraInstance()
-        Log.e("--------",mCamera.toString())
 
         if (mCamera != null && checkCameraHardware(this)) {
             ImageSurfaceView = SurfaceClass(this, mCamera!!)
-            Log.e("--------",ImageSurfaceView.toString())
             texture.addView(ImageSurfaceView)
         }
 
