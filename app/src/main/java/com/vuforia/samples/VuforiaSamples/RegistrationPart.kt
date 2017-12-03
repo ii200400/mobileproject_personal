@@ -20,8 +20,6 @@ class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_REQUEST_CODE = 100
     val CAMERA_REQUEST_MODE = 100
 
-    var image_bitmap : Bitmap? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)

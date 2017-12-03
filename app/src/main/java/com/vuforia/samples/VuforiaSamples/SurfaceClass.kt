@@ -1,6 +1,7 @@
 package com.vuforia.samples.VuforiaSamples
 
 import android.content.Context
+import android.graphics.ImageFormat
 import android.hardware.Camera
 import android.util.Log
 import android.view.SurfaceHolder
@@ -21,7 +22,6 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
-        Log.e("----------","11")
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
             mCamera!!.setPreviewDisplay(holder)
@@ -32,12 +32,14 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
     }
 
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
-        Log.e("----------","22")
         // Now that the size is known, set up the camera parameters and begin
         // the preview.
-        val parameters = mCamera!!.getParameters()
+        val parameters = mCamera!!.parameters
+        parameters.pictureFormat = ImageFormat.JPEG
+        parameters.jpegQuality = 100
+        parameters.setRotation(90)
         parameters.setPreviewSize(width, height)
-        mCamera!!.setParameters(parameters)
+        mCamera!!.parameters = parameters
 
         // Important: Call startPreview() to start updating the preview surface.
         // Preview must be started before you can take a picture.
@@ -45,7 +47,6 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder?) {
-        Log.e("----------","33")
         // empty. Take care of releasing the Camera preview in your activity.
         // Surface will be destroyed when we return, so stop the preview.
         // Because the CameraDevice object is not a shared resource, it's very

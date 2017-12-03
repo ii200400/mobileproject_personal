@@ -9,6 +9,7 @@ import android.hardware.Camera
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.net.Uri
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
@@ -46,6 +47,7 @@ class SurfaceCamera : AppCompatActivity() {
 
     var pictureCallback: Camera.PictureCallback = Camera.PictureCallback { data, camera ->
         if (data != null) {
+            //TODO 이미지 변형
             val options: BitmapFactory.Options = BitmapFactory.Options()
             options.inSampleSize = 2
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.size, null)
@@ -89,16 +91,33 @@ class SurfaceCamera : AppCompatActivity() {
         values.put(MediaStore.Images.Media.DISPLAY_NAME, "사진2")
         values.put(MediaStore.Images.Media.DESCRIPTION, "제발..")
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+        values.put(MediaStore.Images.Media.ORIENTATION, 90)
 
         //갤러리의 상단에 넣어주기
         values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis())
         values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
 
-        uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-        val imageOut : OutputStream = contentResolver.openOutputStream(uri)
+        //uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        //val imageOut : OutputStream = contentResolver.openOutputStream(uri)
+        //bitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
+        val file : File = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "camtest")
+        Log.e("-------", file.toString())
+        if (!file.exists()) {
+            if (!file.mkdirs()) {
+                Log.d("------", "failed to create directory");
+                return
+            }
+        }
+
+        val imageOut : OutputStream = FileOutputStream(file.getPath() + File.separator + "YOUR_FILE_NAME.jpg")
+        Log.e("-------", file.getPath() + File.separator + "YOUR_FILE_NAME.jpg")
         bitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
+
+        //System.currentTimeMillis().toString() + ".jpg"
         imageOut.flush()
         imageOut.close()
+
+        MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
