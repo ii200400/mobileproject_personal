@@ -3,7 +3,6 @@ package com.vuforia.samples.VuforiaSamples
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.*
@@ -70,9 +69,6 @@ class RegistrationPart : AppCompatActivity() {
         when (requestCode) {
             CAMERA_REQUEST_MODE -> {
                 if (resultCode == Activity.RESULT_OK && data != null) {
-                    //image_bitmap = data.extras.get("image") as Bitmap
-                    //pickedImage.setImageBitmap(image_bitmap)
-
                     val uri : Uri = data.extras.get("uri") as Uri
                     val bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
                     pickedImage.setImageBitmap(bitmap)

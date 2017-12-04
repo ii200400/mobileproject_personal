@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.net.Uri
 import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.camera_api.*
@@ -50,8 +49,9 @@ class SurfaceCamera : AppCompatActivity() {
     var pictureCallback: Camera.PictureCallback = Camera.PictureCallback { data, camera ->
         if (data != null) {
             //TODO 이미지 변형
-            val options: BitmapFactory.Options = BitmapFactory.Options()
-            options.inSampleSize = 2
+            //val options: BitmapFactory.Options = BitmapFactory.Options()
+            //options.inSampleSize = 2
+            //options.inJustDecodeBounds = true
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.size, null)
 
             saveImageToGallary()
@@ -121,6 +121,13 @@ class SurfaceCamera : AppCompatActivity() {
                         //bitmap!!.recycle()
 
                         finish()
+                    }else{
+                        val delete_file : File = File(uri!!.getPath())
+                        if (delete_file.delete()) {
+                            System.out.println("file Deleted :" + delete_file)
+                        } else {
+                            System.out.println("file not Deleted :" + delete_file)
+                        }
                     }
                 }else{
                     mCamera!!.startPreview()

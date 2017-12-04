@@ -3,10 +3,9 @@ package com.vuforia.samples.VuforiaSamples
 import android.content.Context
 import android.graphics.ImageFormat
 import android.hardware.Camera
-import android.util.Log
-import android.view.SurfaceHolder
-import android.view.SurfaceView
 import java.io.IOException
+import android.view.*
+
 
 /**
  * Created by im on 2017-12-03.
@@ -38,8 +37,15 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
         val parameters = mCamera!!.parameters
         parameters.pictureFormat = ImageFormat.JPEG
         parameters.jpegQuality = 100
-        parameters.setRotation(90)
+        //TODO 기종마다 문제가 되는 경우가 있다.
         parameters.setPreviewSize(width, height)
+
+        val windowManager : WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val rotation : Int = windowManager.getDefaultDisplay().getRotation()
+        when (rotation){
+            Surface.ROTATION_0 -> mCamera.setDisplayOrientation(90)
+            Surface.ROTATION_270 -> mCamera.setDisplayOrientation(180)
+        }
         mCamera!!.parameters = parameters
 
         // Important: Call startPreview() to start updating the preview surface.
