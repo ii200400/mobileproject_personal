@@ -15,6 +15,8 @@ import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.camera_api.*
 import java.io.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -89,7 +91,7 @@ class SurfaceCamera : AppCompatActivity() {
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "사진1")
         values.put(MediaStore.Images.Media.DISPLAY_NAME, "사진2")
-        values.put(MediaStore.Images.Media.DESCRIPTION, "제발..")
+        values.put(MediaStore.Images.Media.DESCRIPTION, "MobileProject")
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
         values.put(MediaStore.Images.Media.ORIENTATION, 90)
 
@@ -100,24 +102,24 @@ class SurfaceCamera : AppCompatActivity() {
         //uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         //val imageOut : OutputStream = contentResolver.openOutputStream(uri)
         //bitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
-        val file : File = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "camtest")
-        Log.e("-------", file.toString())
+
+        val file : File = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "/camtest")
         if (!file.exists()) {
             if (!file.mkdirs()) {
-                Log.d("------", "failed to create directory");
+                Log.d("------", "failed to create directory")
                 return
             }
         }
 
-        val imageOut : OutputStream = FileOutputStream(file.getPath() + File.separator + "YOUR_FILE_NAME.jpg")
-        Log.e("-------", file.getPath() + File.separator + "YOUR_FILE_NAME.jpg")
+        val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val file_path : File = File(file.getPath() + File.separator + timeStamp + ".jpg")
+        val imageOut : OutputStream = FileOutputStream(file_path)
         bitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
 
-        //System.currentTimeMillis().toString() + ".jpg"
         imageOut.flush()
         imageOut.close()
 
-        MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
+        //MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
