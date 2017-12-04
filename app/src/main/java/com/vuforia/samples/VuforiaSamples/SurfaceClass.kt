@@ -38,7 +38,7 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
         parameters.pictureFormat = ImageFormat.JPEG
         parameters.jpegQuality = 100
         parameters.setRotation(90)
-        parameters.setPreviewSize(width, height)
+        parameters.setPreviewSize(640, 480)
         mCamera!!.parameters = parameters
 
         // Important: Call startPreview() to start updating the preview surface.
