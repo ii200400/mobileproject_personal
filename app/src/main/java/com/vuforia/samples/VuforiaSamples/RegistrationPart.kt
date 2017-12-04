@@ -14,10 +14,22 @@ import android.os.Build
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import android.support.annotation.NonNull
+import android.util.Log
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.storage.UploadTask
+import com.google.android.gms.tasks.OnSuccessListener
+
+
 
 class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_REQUEST_CODE = 100
     val CAMERA_REQUEST_MODE = 100
+
+    private val mStorageRef : StorageReference = FirebaseStorage.getInstance().getReference()
+    var uri : Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +41,10 @@ class RegistrationPart : AppCompatActivity() {
 
         spin1.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,value)
 
+
+
         //사진 찍기
-        button1.setOnClickListener {
+        button_camera.setOnClickListener {
             if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //API 23 이상이면
                     // 런타임 권한 처리 필요
@@ -48,6 +62,24 @@ class RegistrationPart : AppCompatActivity() {
                 }
             }else {
                 Toast.makeText(this, "Camera not supported", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        button_upload.setOnClickListener {
+            if (uri!=null){
+                val riversRef : StorageReference = mStorageRef.child("images/rivers.jpg")
+
+                riversRef.putFile(uri!!)
+                        .addOnSuccessListener(OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
+                            // Get a URL to the uploaded content
+                            val downloadUrl = taskSnapshot.downloadUrl
+                            Log.e("-------","wow")
+                        })
+                        .addOnFailureListener(OnFailureListener {
+                            // Handle unsuccessful uploads
+                            // ...
+                            Log.e("-------","no..")
+                        })
             }
         }
     }
@@ -69,7 +101,7 @@ class RegistrationPart : AppCompatActivity() {
         when (requestCode) {
             CAMERA_REQUEST_MODE -> {
                 if (resultCode == Activity.RESULT_OK && data != null) {
-                    val uri : Uri = data.extras.get("uri") as Uri
+                    uri = data.extras.get("uri") as Uri
                     val bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
                     pickedImage.setImageBitmap(bitmap)
                 }
