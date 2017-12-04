@@ -19,6 +19,7 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
         // underlying surface is created and destroyed.
         surfaceHolder = getHolder()
         surfaceHolder.addCallback(this)
+
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
@@ -38,7 +39,7 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
         parameters.pictureFormat = ImageFormat.JPEG
         parameters.jpegQuality = 100
         parameters.setRotation(90)
-        parameters.setPreviewSize(640, 480)
+        parameters.setPreviewSize(width, height)
         mCamera!!.parameters = parameters
 
         // Important: Call startPreview() to start updating the preview surface.

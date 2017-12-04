@@ -54,12 +54,12 @@ class SurfaceCamera : AppCompatActivity() {
             options.inSampleSize = 2
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.size, null)
 
-
             saveImageToGallary()
+
             //Bitmap을 바로 넣어주면 크기가 커서 그런지 아예 intent가 바뀌지 않는다고 한다.
-//            val preview_intent = Intent(applicationContext, PreviewImage::class.java)
-//            preview_intent.putExtra("image", data)
-//            startActivityForResult(preview_intent, PREVIEW_CODE)
+            val preview_intent = Intent(applicationContext, PreviewImage::class.java)
+            preview_intent.putExtra("uri", uri)
+            startActivityForResult(preview_intent, PREVIEW_CODE)
         } else {
             Toast.makeText(this, "Captured image is empty", Toast.LENGTH_LONG).show()
         }
@@ -100,29 +100,11 @@ class SurfaceCamera : AppCompatActivity() {
 
         val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val file_path : File = File(file.getPath() + File.separator + timeStamp + ".jpg")
+        uri = Uri.fromFile(file_path)
         val imageOut : OutputStream = FileOutputStream(file_path)
         bitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, imageOut)
         imageOut.flush()
         imageOut.close()
-
-//        //갤러리에서 이미지 볼 수 있도록 하기
-//        val values = ContentValues()
-//        values.put(MediaStore.Images.Media.TITLE, "사진1")
-//        values.put(MediaStore.Images.Media.DISPLAY_NAME, "사진2")
-//        values.put(MediaStore.Images.Media.DESCRIPTION, "MobileProject")
-//        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-//        values.put(MediaStore.Images.Media.ORIENTATION, 90)
-//
-//        //갤러리의 상단에 넣어주기
-//        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis())
-//        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
-//
-//        val fileUri : Uri = Uri.fromFile(file)
-//        uri = contentResolver.insert(fileUri, values)
-//        val gallary_imageOut : OutputStream = getContentResolver().openOutputStream(uri)
-//        bitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, gallary_imageOut)
-//        imageOut.flush()
-//        imageOut.close()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -131,7 +113,6 @@ class SurfaceCamera : AppCompatActivity() {
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     val confirm : Boolean = data.extras.get("confirm") as Boolean
                     if (confirm) {
-                        saveImageToGallary()
                         mCamera!!.release()
 
                         val answer_intent : Intent = Intent()

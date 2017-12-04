@@ -32,14 +32,6 @@ class RegistrationPart : AppCompatActivity() {
 
         //사진 찍기
         button1.setOnClickListener {
-            /*
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if (intent.resolveActivity(packageManager) != null) {
-                //다른 앱을 불러와 구동
-                startActivityForResult(intent, CAMERA_REQUEST_MODE)
-            }
-            */
-
             if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //API 23 이상이면
                     // 런타임 권한 처리 필요

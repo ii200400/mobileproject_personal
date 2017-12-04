@@ -3,7 +3,9 @@ package com.vuforia.samples.VuforiaSamples
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.camera_preview.*
 
@@ -17,8 +19,9 @@ class PreviewImage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.camera_preview)
 
-        val image_bytes = intent.extras.get("image") as ByteArray
-        previewImage.setImageBitmap(BitmapFactory.decodeByteArray(image_bytes, 0, image_bytes.size, null))
+        val uri = intent.extras.get("uri") as Uri
+        val bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
+        previewImage.setImageBitmap(bitmap)
 
         confirm_button.setOnClickListener(){
             answer_intent.putExtra("confirm", true)
