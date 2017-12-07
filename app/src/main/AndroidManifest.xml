@@ -26,11 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SelectPart" />
         <activity android:name=".RegistrationPart" />
@@ -38,7 +34,18 @@
         <activity android:name=".PreviewImage" />
         <activity android:name=".Assembly" />
         <activity android:name=".test.Drawertest" />
-        <activity android:name=".test.Tip1"></activity>
+        <activity android:name=".test.Tip1" />
+
+        <activity
+            android:name=".test.Splash"
+            android:theme="@style/Splash"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
