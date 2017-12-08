@@ -38,7 +38,7 @@
 
         <activity
             android:name=".test.Splash"
-            android:theme="@style/Splash"
+            android:theme="@style/Splash_gif"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kr.ac.kau.pcassemblyhelper.test.Splash">
+    tools:context="kr.ac.kau.pcassemblyhelper.test.Splash"
+    android:background="#F0F0F0">
 
     <com.felipecsl.gifimageview.library.GifImageView
         android:id="@+id/gifImageView"
@@ -14,13 +15,5 @@
         android:scaleType="fitCenter">
 
     </com.felipecsl.gifimageview.library.GifImageView>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
