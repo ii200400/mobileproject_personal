@@ -25,9 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".SelectPart" />
         <activity android:name=".RegistrationPart" />
         <activity android:name=".SurfaceCamera" />
@@ -35,17 +33,17 @@
         <activity android:name=".Assembly" />
         <activity android:name=".test.Drawertest" />
         <activity android:name=".test.Tip1" />
-
         <activity
             android:name=".test.Splash"
-            android:theme="@style/Splash_gif"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash_gif">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".test.Tip2"></activity>
     </application>
 
 </manifest>

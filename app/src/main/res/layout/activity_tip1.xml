@@ -5,100 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0F0"
-    tools:context="kr.ac.kau.pcassemblyhelper.test.Tip1">
-
-    <!--
-    <Space
-        android:id="@+id/space"
-        android:layout_width="46dp"
-        android:layout_height="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
-
-    <Spinner
-        android:id="@+id/spinner_category"
-        android:layout_width="139dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/space2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinner_name"
-        android:layout_width="293dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.213"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="195dp"
-        android:layout_height="187dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/space"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_name"
-        app:layout_constraintVertical_bias="0.14"
-        app:srcCompat="@drawable/icon" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="글쓰기"
-        app:layout_constraintBottom_toBottomOf="@+id/space"
-        app:layout_constraintEnd_toStartOf="@+id/space"
-        app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/space" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="검색"
-        app:layout_constraintBottom_toBottomOf="@+id/space"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/space"
-        app:layout_constraintTop_toTopOf="@+id/space" />
+    android:background="#F0F0F0">
 
     <Space
-        android:id="@+id/space2"
-        android:layout_width="54dp"
-        android:layout_height="34dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
-        -->
-
-    <Space
-        android:id="@+id/space_bias"
+        android:id="@+id/space_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -110,7 +24,7 @@
         android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/space_bias"
+        app:layout_constraintLeft_toRightOf="@+id/space_left"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.1"
         tools:text="Category" />
@@ -120,7 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginLeft="25dp"
-        android:background="#AAAAAA"
+        android:background="#DDDDDD"
         app:layout_constraintBottom_toBottomOf="@+id/text_category"
         app:layout_constraintLeft_toRightOf="@+id/text_category"
         app:layout_constraintRight_toLeftOf="@+id/space_right"
@@ -135,17 +49,17 @@
         android:inputType="textPersonName"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/space_bias"
-        app:layout_constraintRight_toLeftOf="@+id/space_right"
+        app:layout_constraintLeft_toRightOf="@+id/space_left"
+        app:layout_constraintRight_toLeftOf="@+id/imgbtn_search"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <Space
         android:id="@+id/space_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.90"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -154,9 +68,9 @@
         android:id="@+id/img_select"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toTopOf="@+id/space_bottom"
-        app:layout_constraintLeft_toRightOf="@+id/space_bias"
+        app:layout_constraintLeft_toRightOf="@+id/space_left"
         app:layout_constraintRight_toLeftOf="@+id/space_right"
         app:layout_constraintTop_toBottomOf="@+id/edit_name"
         app:srcCompat="@drawable/icon" />
@@ -170,4 +84,35 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.85" />
+
+    <Button
+        android:id="@+id/btn_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="글쓰기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btn_search"
+        app:layout_constraintTop_toBottomOf="@+id/space_bottom" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/edit_name"
+        app:layout_constraintLeft_toRightOf="@id/edit_name"
+        app:layout_constraintRight_toLeftOf="@+id/space_right"
+        app:layout_constraintTop_toTopOf="@id/edit_name"
+        app:srcCompat="@android:drawable/ic_menu_search" />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="검색"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_write"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space_bottom" />
+
 </android.support.constraint.ConstraintLayout>
