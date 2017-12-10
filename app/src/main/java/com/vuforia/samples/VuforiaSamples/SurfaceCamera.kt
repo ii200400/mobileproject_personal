@@ -135,4 +135,12 @@ class SurfaceCamera : AppCompatActivity() {
             }
         }
     }
+
+    override fun onDestroy() {
+        //SurfaceClass의 mCamera.stopPreview()가 불리고 나서 불러야 하므로 이 함수를 쓴다.
+        //onBackPressed에 넣으면 relase()가 먼저 불려서 에러가 난다.
+        mCamera!!.release()
+
+        super.onDestroy()
+    }
 }

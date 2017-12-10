@@ -3,6 +3,7 @@ package com.vuforia.samples.VuforiaSamples
 import android.content.Context
 import android.graphics.ImageFormat
 import android.hardware.Camera
+import android.util.Log
 import java.io.IOException
 import android.view.*
 
@@ -24,8 +25,8 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
     override fun surfaceCreated(holder: SurfaceHolder?) {
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
-            mCamera!!.setPreviewDisplay(holder)
-            mCamera!!.startPreview()
+            mCamera.setPreviewDisplay(holder)
+            mCamera.startPreview()
         } catch (e : IOException) {
             e.printStackTrace()
         }
@@ -46,11 +47,11 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
             Surface.ROTATION_0 -> mCamera.setDisplayOrientation(90)
             Surface.ROTATION_270 -> mCamera.setDisplayOrientation(180)
         }
-        mCamera!!.parameters = parameters
+        mCamera.parameters = parameters
 
         // Important: Call startPreview() to start updating the preview surface.
         // Preview must be started before you can take a picture.
-        mCamera!!.startPreview()
+        mCamera.startPreview()
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder?) {
