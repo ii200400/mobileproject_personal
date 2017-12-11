@@ -11,11 +11,16 @@ import android.support.v7.app.AppCompatActivity
 import android.net.Uri
 import android.os.Environment
 import android.util.Log
+import android.view.Surface
+import android.view.WindowManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.camera_api.*
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+import android.R.attr.angle
+
+
 
 
 /**
@@ -53,6 +58,15 @@ class SurfaceCamera : AppCompatActivity() {
             //options.inSampleSize = 2
             //options.inJustDecodeBounds = true
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.size, null)
+
+            val matrix = Matrix()
+            val windowManager : WindowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val rotation : Int = windowManager.getDefaultDisplay().getRotation()
+            when (rotation){
+                Surface.ROTATION_0 ->  matrix.postRotate(90f)
+                Surface.ROTATION_270 ->  matrix.postRotate(180f)
+            }
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap!!.getWidth(), bitmap!!.getHeight(), matrix, true)
 
             saveImageToGallary()
 
