@@ -24,8 +24,8 @@ import java.util.*
 import android.R.attr.data
 import android.content.Context
 import android.graphics.Bitmap
+import android.media.ExifInterface
 import java.io.IOException
-
 
 class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_CAMERA_CODE = 100
@@ -108,7 +108,6 @@ class RegistrationPart : AppCompatActivity() {
                     })
                     .addOnFailureListener(OnFailureListener {
                         // Handle unsuccessful uploads
-                        // ...
                         Toast.makeText(this, "사진 전송에 실패했습니다.", Toast.LENGTH_SHORT).show()
                     })
         }else{
@@ -160,7 +159,11 @@ class RegistrationPart : AppCompatActivity() {
             GALLERY_REQUEST_MODE->{
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     try {
-                        val bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.data)
+                        var bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.data)
+
+                        val exif : ExifInterface = ExifInterface(data.data.getPath());
+                        val rotation : Int = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+                        bitmap = ChangePicture(this).LowerQuality(bitmap)
                         pickedImage.setImageBitmap(bitmap)
                     } catch (e: IOException) {
                         e.printStackTrace()

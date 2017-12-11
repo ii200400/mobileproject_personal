@@ -53,10 +53,6 @@ class SurfaceCamera : AppCompatActivity() {
 
     var pictureCallback: Camera.PictureCallback = Camera.PictureCallback { data, camera ->
         if (data != null) {
-            //TODO 이미지 변형
-            //val options: BitmapFactory.Options = BitmapFactory.Options()
-            //options.inSampleSize = 2
-            //options.inJustDecodeBounds = true
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.size, null)
 
             val matrix = Matrix()
