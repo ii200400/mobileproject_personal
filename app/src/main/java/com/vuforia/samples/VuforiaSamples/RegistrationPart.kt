@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_registration.*
-import android.widget.Toast
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -16,7 +15,6 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import android.support.annotation.NonNull
 import android.util.Log
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.storage.UploadTask
@@ -69,14 +67,15 @@ class RegistrationPart : AppCompatActivity() {
 
         //사진 등록하기
         button_upload.setOnClickListener {
-            //TODO apk 최소사양 확인해보기
+            //TODO apk 23 이상 핸드폰에서 확인 필요
             val permissionList : Array<String> = arrayOf(Manifest.permission.INTERNET)
             val needpermission : Boolean = permissioncheck(permissionList, PERMISSIONS_INTERNET_CODE)
             if (needpermission){
-                sendPicture()
-            }else{
                 //인터넷 권한 요청
                 ActivityCompat.requestPermissions(this, permissionList, PERMISSIONS_INTERNET_CODE)
+            }else{
+                Toast.makeText(this, "사진 전송을 시도합니다.", Toast.LENGTH_SHORT).show()
+                sendPicture()
             }
         }
     }
@@ -123,11 +122,13 @@ class RegistrationPart : AppCompatActivity() {
                 val intent_picture: Intent = Intent(this@RegistrationPart, SurfaceCamera::class.java)
                 startActivityForResult(intent_picture, CAMERA_REQUEST_MODE)
             }else{
-                Toast.makeText(this, "카메라와 저장소 권한이 필요한데 없군요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "카메라와 저장소 권한이 있어야 실행 가능합니다.", Toast.LENGTH_SHORT).show()
             }
         }else if(requestCode == PERMISSIONS_INTERNET_CODE){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 sendPicture()
+            }else{
+                Toast.makeText(this, "인터넷 권한을 해주셔야 사진을 보낼 수 있습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
