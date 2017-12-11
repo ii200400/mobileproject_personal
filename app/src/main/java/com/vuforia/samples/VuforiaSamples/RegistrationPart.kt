@@ -21,13 +21,17 @@ import com.google.firebase.storage.UploadTask
 import com.google.android.gms.tasks.OnSuccessListener
 import java.text.SimpleDateFormat
 import java.util.*
+import android.R.attr.data
+import android.content.Context
+import android.graphics.Bitmap
+import java.io.IOException
 
 
 class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_CAMERA_CODE = 100
     private val PERMISSIONS_INTERNET_CODE = 99
     private val CAMERA_REQUEST_MODE = 100
-
+    private val GALLERY_REQUEST_MODE = 98
 
     private val mStorageRef : StorageReference = FirebaseStorage.getInstance().getReference()
     var uri : Uri? = null
@@ -65,6 +69,14 @@ class RegistrationPart : AppCompatActivity() {
             }
         }
 
+        //앨범에서 사진 가져오기
+        button_callgallery.setOnClickListener(){
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT//
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST_MODE)
+        }
+
         //사진 등록하기
         button_upload.setOnClickListener {
             //TODO apk 23 이상 핸드폰에서 확인 필요
@@ -100,7 +112,7 @@ class RegistrationPart : AppCompatActivity() {
                         Toast.makeText(this, "사진 전송에 실패했습니다.", Toast.LENGTH_SHORT).show()
                     })
         }else{
-            Toast.makeText(this, "사진을 먼저 찍어주세요", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "사진을 먼저 선택해주세요.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -117,21 +129,22 @@ class RegistrationPart : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == PERMISSIONS_CAMERA_CODE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                val intent_picture: Intent = Intent(this@RegistrationPart, SurfaceCamera::class.java)
-                startActivityForResult(intent_picture, CAMERA_REQUEST_MODE)
-            }else{
-                Toast.makeText(this, "카메라와 저장소 권한이 있어야 실행 가능합니다.", Toast.LENGTH_SHORT).show()
+        when (requestCode) {
+            PERMISSIONS_CAMERA_CODE -> {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    val intent_picture: Intent = Intent(this@RegistrationPart, SurfaceCamera::class.java)
+                    startActivityForResult(intent_picture, CAMERA_REQUEST_MODE)
+                } else {
+                    Toast.makeText(this, "카메라와 저장소 권한이 있어야 실행 가능합니다.", Toast.LENGTH_SHORT).show()
+                }
             }
-        }else if(requestCode == PERMISSIONS_INTERNET_CODE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                sendPicture()
-            }else{
-                Toast.makeText(this, "인터넷 권한을 해주셔야 사진을 보낼 수 있습니다.", Toast.LENGTH_SHORT).show()
-            }
+            PERMISSIONS_INTERNET_CODE ->
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    sendPicture()
+                } else {
+                    Toast.makeText(this, "인터넷 권한을 해주셔야 사진을 보낼 수 있습니다.", Toast.LENGTH_SHORT).show()
+                }
         }
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
@@ -142,6 +155,16 @@ class RegistrationPart : AppCompatActivity() {
                     uri = data.extras.get("uri") as Uri
                     val bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
                     pickedImage.setImageBitmap(bitmap)
+                }
+            }
+            GALLERY_REQUEST_MODE->{
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    try {
+                        val bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.data)
+                        pickedImage.setImageBitmap(bitmap)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
                 }
             }
             else -> {

@@ -47,25 +47,42 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
         <Button
             android:id="@+id/button_camera"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center"
+            android:layout_gravity="bottom"
             android:text="사진찍기" />
 
+        <Button
+            android:id="@+id/button_callgallery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:text="앨범사진" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
         <Button
             android:id="@+id/button_upload"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center"
+            android:layout_gravity="top"
             android:text="등록" />
+
     </LinearLayout>
+
 
 </LinearLayout>
