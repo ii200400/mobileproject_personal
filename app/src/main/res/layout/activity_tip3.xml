@@ -53,9 +53,11 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/space_bottom"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toRightOf="@+id/space_left"
         app:layout_constraintRight_toLeftOf="@+id/space_right"
-        app:layout_constraintTop_toBottomOf="@+id/text_title">
+        app:layout_constraintTop_toBottomOf="@+id/text_title"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:id="@+id/layout_content"
@@ -81,7 +83,7 @@
             <ListView
                 android:id="@+id/list_reple"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
             </ListView>
 
