@@ -45,7 +45,11 @@
         </activity>
         <activity android:name=".test.Tip2" />
         <activity android:name=".test.Tip3" />
-        <activity android:name=".test.board"></activity>
+        <activity android:name=".test.board" />
+        <activity
+            android:name=".test.drawerSample"
+            android:label="@string/title_activity_drawer_sample"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

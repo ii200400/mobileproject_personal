@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:text="등록"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/space_left"
+        app:layout_constraintLeft_toRightOf="@id/btn_cancle"
         app:layout_constraintRight_toLeftOf="@+id/space_right"
         app:layout_constraintTop_toBottomOf="@+id/space_bottom" />
 
@@ -119,5 +119,15 @@
         app:layout_constraintRight_toLeftOf="@+id/space_right"
         app:layout_constraintTop_toTopOf="@+id/text_file"
         app:srcCompat="@android:drawable/ic_menu_upload" />
+
+    <Button
+        android:id="@+id/btn_cancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="취소"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_reg"
+        app:layout_constraintLeft_toRightOf="@+id/space_left"
+        app:layout_constraintRight_toLeftOf="@+id/btn_reg"
+        app:layout_constraintTop_toTopOf="@+id/btn_reg" />
 
 </android.support.constraint.ConstraintLayout>
