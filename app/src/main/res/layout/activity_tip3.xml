@@ -4,14 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F0F0F0">
 
     <Space
         android:id="@+id/space_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.90"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,37 +54,37 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/space_bottom"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toRightOf="@+id/space_left"
         app:layout_constraintRight_toLeftOf="@+id/space_right"
-        app:layout_constraintTop_toBottomOf="@+id/text_title"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/text_title">
 
         <LinearLayout
             android:id="@+id/layout_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/textview_border"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/text_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/textview_border"
+                android:background="@drawable/tip3_content_border"
                 android:text="Content\naaaa\naaaaaa\naaaa\naaaaa\naaaaaa\naaaaaaa\naaaaaa\naaaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaa"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:padding="5dp"/>
 
             <ImageView
                 android:id="@+id/img_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/icon" />
+                app:srcCompat="@drawable/icon"
+                android:layout_marginTop="10dp"/>
 
             <ListView
                 android:id="@+id/list_reple"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
             </ListView>
 
@@ -91,21 +92,22 @@
                 android:id="@+id/layout_reple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="499dp">
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/edit_reple"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/textview_border"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tip3_content_border"
                     android:ems="10"
                     android:hint="write reple\naaaaa\naaa"
                     android:inputType="textMultiLine"
                     android:maxLines="3"
+                    android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/edit_reple"
+                    app:layout_constraintRight_toLeftOf="@id/btn_reple"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button

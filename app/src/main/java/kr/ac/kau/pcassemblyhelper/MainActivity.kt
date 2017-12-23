@@ -8,6 +8,7 @@ import android.widget.Button
 
 import kr.ac.kau.pcassemblyhelper.test.Drawertest
 import kr.ac.kau.pcassemblyhelper.test.Tip1
+import kr.ac.kau.pcassemblyhelper.test.Tip3
 import kr.ac.kau.pcassemblyhelper.test.drawerSample
 
 class MainActivity : AppCompatActivity() {
