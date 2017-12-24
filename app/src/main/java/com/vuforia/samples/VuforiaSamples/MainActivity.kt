@@ -3,11 +3,10 @@ package com.vuforia.samples.VuforiaSamples
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
+import com.vuforia.samples.VuforiaSamples.Camera.RegistrationPart
 
 import com.vuforia.samples.VuforiaSamples.app.ImageTargets.ImageTargets
-import com.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityLauncher
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,11 +20,11 @@ class MainActivity : AppCompatActivity() {
         val btn4 : Button = findViewById(R.id.button_4)
 
         btn1.setOnClickListener{
-            val intent1:Intent = Intent(this@MainActivity,SelectPart::class.java)
+            val intent1:Intent = Intent(this@MainActivity, SelectPart::class.java)
             startActivity(intent1)
         }
         btn2.setOnClickListener{
-            val intent2:Intent = Intent(this@MainActivity,RegistrationPart::class.java)
+            val intent2:Intent = Intent(this@MainActivity, RegistrationPart::class.java)
             startActivity(intent2)
         }
         btn3.setOnClickListener{

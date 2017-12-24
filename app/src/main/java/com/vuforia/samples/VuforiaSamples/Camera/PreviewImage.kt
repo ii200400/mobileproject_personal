@@ -1,10 +1,11 @@
-package com.vuforia.samples.VuforiaSamples
+package com.vuforia.samples.VuforiaSamples.Camera
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
+import com.vuforia.samples.VuforiaSamples.R
 import kotlinx.android.synthetic.main.camera_preview.*
 
 /**

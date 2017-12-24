@@ -1,4 +1,4 @@
-package com.vuforia.samples.VuforiaSamples
+package com.vuforia.samples.VuforiaSamples.Camera
 
 import android.content.Context
 import android.graphics.ImageFormat

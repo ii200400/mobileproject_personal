@@ -1,4 +1,4 @@
-package com.vuforia.samples.VuforiaSamples
+package com.vuforia.samples.VuforiaSamples.Camera
 
 import android.app.Activity
 import android.content.*
@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.Surface
 import android.view.WindowManager
 import android.widget.Toast
+import com.vuforia.samples.VuforiaSamples.R
 import kotlinx.android.synthetic.main.camera_api.*
 import java.io.*
 import java.text.SimpleDateFormat

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.vuforia.samples.VuforiaSamples.RegistrationPart">
+    tools:context="com.vuforia.samples.VuforiaSamples.Camera.RegistrationPart">
 
     <TextView
         android:id="@+id/textView1"

@@ -145,13 +145,13 @@
             android:name=".SelectPart"
             android:theme="@style/NoTitle" />
         <activity
-            android:name=".RegistrationPart"
+            android:name=".Camera.RegistrationPart"
             android:theme="@style/NoTitle" />
         <activity
-            android:name=".SurfaceCamera"
+            android:name=".Camera.SurfaceCamera"
             android:theme="@style/NoTitle" />
         <activity
-            android:name=".PreviewImage"
+            android:name=".Camera.PreviewImage"
             android:theme="@style/NoTitle" />
         <activity
             android:name=".Assembly"
