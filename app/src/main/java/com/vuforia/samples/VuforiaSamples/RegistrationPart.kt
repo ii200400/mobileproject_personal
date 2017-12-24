@@ -16,12 +16,13 @@ import android.support.v4.content.ContextCompat
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import android.util.Log
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.firebase.storage.UploadTask
-import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
 import java.io.IOException
+
+
 
 class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_CAMERA_CODE = 100
@@ -30,6 +31,7 @@ class RegistrationPart : AppCompatActivity() {
     private val GALLERY_REQUEST_MODE = 98
 
     private val mStorageRef : StorageReference = FirebaseStorage.getInstance().getReference()
+    private val mDBRef : DatabaseReference = FirebaseDatabase.getInstance().getReference("images")
     var uri : Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,21 +95,40 @@ class RegistrationPart : AppCompatActivity() {
             val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
             val riversRef : StorageReference = mStorageRef.child("images/" + timeStamp + ".jpg")
             riversRef.putFile(uri!!)
-                    .addOnSuccessListener(OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
-                        // Get a URL to the uploaded content
-                        val downloadUrl = taskSnapshot.downloadUrl
+                    .addOnSuccessListener({ taskSnapshot ->
+                        // URL과 이름을 다운로드한 이미지로부터 가져온다.
+                        val downloadUrl : Uri? = taskSnapshot.downloadUrl
+                        val name : String? = taskSnapshot.metadata!!.getName()
+                        //Realtime Database에 이름과 uri를 기록한다. (목록생성을 위함)
+                        writeRealtimeDB(name, downloadUrl.toString())
 
                         uri = null
                         pickedImage.setImageBitmap(null)
                         Toast.makeText(this, "사진 전송에 성공했습니다.", Toast.LENGTH_SHORT).show()
                     })
-                    .addOnFailureListener(OnFailureListener {
+                    .addOnFailureListener({
                         // Handle unsuccessful uploads
                         Toast.makeText(this, "사진 전송에 실패했습니다.", Toast.LENGTH_SHORT).show()
                     })
+            //progress dialog사용하는 경우
+//                    .addOnProgressListener({ taskSnapshot->
+//                        // progress percentage
+//                        val progress : Double = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount()
+//
+//                        // percentage in progress dialog
+//                        progressDialog.setMessage("Uploaded " + progress.toInt() + "%...")
+//                    })
         }else{
             Toast.makeText(this, "사진을 먼저 선택해주세요.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    //Realtime DB에 Storage이미지의 사진과 uri저장하기
+    fun writeRealtimeDB(name : String?, uri : String?){
+        val info = UploadImageInfo(name, uri)
+        val key = mDBRef.push().getKey()
+
+        mDBRef.child(key).setValue(info)
     }
 
     // 런타임 권한 확인

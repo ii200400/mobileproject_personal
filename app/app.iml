@@ -147,8 +147,10 @@
     <orderEntry type="library" name="play-services-base-11.0.4" level="project" />
     <orderEntry type="library" scope="TEST" name="runner-1.0.1" level="project" />
     <orderEntry type="library" name="support-compat-26.0.2" level="project" />
+    <orderEntry type="library" name="firebase-database-11.0.4" level="project" />
     <orderEntry type="library" name="constraint-layout-solver-1.0.2" level="project" />
     <orderEntry type="library" name="annotations-13.0" level="project" />
+    <orderEntry type="library" name="firebase-database-connection-11.0.4" level="project" />
     <orderEntry type="library" scope="TEST" name="javax.inject-1" level="project" />
     <orderEntry type="library" name="support-fragment-26.0.2" level="project" />
     <orderEntry type="library" name="animated-vector-drawable-26.0.2" level="project" />

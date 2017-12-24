@@ -46,6 +46,7 @@ android {
 dependencies {
     implementation 'com.google.firebase:firebase-storage:11.0.4'
     implementation 'com.google.firebase:firebase-auth:11.0.4'
+    implementation 'com.google.firebase:firebase-database:11.0.4'
     compile files("$VUFORIA_SDK_DIR/$JAR_DIR/Vuforia.jar")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.0.2'
