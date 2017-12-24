@@ -19,7 +19,6 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
         // underlying surface is created and destroyed.
         surfaceHolder = getHolder()
         surfaceHolder.addCallback(this)
-
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {

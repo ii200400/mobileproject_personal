@@ -21,10 +21,6 @@ import com.google.firebase.storage.UploadTask
 import com.google.android.gms.tasks.OnSuccessListener
 import java.text.SimpleDateFormat
 import java.util.*
-import android.R.attr.data
-import android.content.Context
-import android.graphics.Bitmap
-import android.media.ExifInterface
 import java.io.IOException
 
 class RegistrationPart : AppCompatActivity() {
@@ -45,7 +41,6 @@ class RegistrationPart : AppCompatActivity() {
         val value = arrayListOf("카테고리","메인보드","CPU","RAM","메모리")
 
         spin1.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,value)
-
 
         //사진 찍기
         button_camera.setOnClickListener {
@@ -127,8 +122,10 @@ class RegistrationPart : AppCompatActivity() {
         return needpermission
     }
 
+    //권한 거부, 동의에 따른 코드
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
+            //카메라
             PERMISSIONS_CAMERA_CODE -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     val intent_picture: Intent = Intent(this@RegistrationPart, SurfaceCamera::class.java)
@@ -137,6 +134,7 @@ class RegistrationPart : AppCompatActivity() {
                     Toast.makeText(this, "카메라와 저장소 권한이 있어야 실행 가능합니다.", Toast.LENGTH_SHORT).show()
                 }
             }
+            //인터넷
             PERMISSIONS_INTERNET_CODE ->
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     sendPicture()
@@ -147,8 +145,10 @@ class RegistrationPart : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    //액티비티에서 돌아오고 난후
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
+            //카메라로 사진을 찍은 후
             CAMERA_REQUEST_MODE -> {
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     uri = data.extras.get("uri") as Uri
@@ -156,14 +156,12 @@ class RegistrationPart : AppCompatActivity() {
                     pickedImage.setImageBitmap(bitmap)
                 }
             }
+            //갤러리에서 사진을 가져온 후
             GALLERY_REQUEST_MODE->{
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     try {
-                        var bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.data)
-
-                        val exif : ExifInterface = ExifInterface(data.data.getPath());
-                        val rotation : Int = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-                        bitmap = ChangePicture(this).LowerQuality(bitmap)
+                        uri = data.data;
+                        var bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
                         pickedImage.setImageBitmap(bitmap)
                     } catch (e: IOException) {
                         e.printStackTrace()

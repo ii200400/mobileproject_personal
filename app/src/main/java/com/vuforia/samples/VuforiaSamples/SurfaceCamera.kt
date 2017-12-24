@@ -18,10 +18,6 @@ import kotlinx.android.synthetic.main.camera_api.*
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
-import android.R.attr.angle
-
-
-
 
 /**
  * Created by im on 2017-09-19.
@@ -46,7 +42,7 @@ class SurfaceCamera : AppCompatActivity() {
             texture.addView(ImageSurfaceView)
         }
 
-        btn_takepicture.setOnClickListener(){
+        btn_takepicture.setOnClickListener{
             mCamera!!.takePicture(null, null, pictureCallback)
         }
     }
