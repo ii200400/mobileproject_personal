@@ -27,9 +27,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".SelectPart" />
-        <activity android:name=".RegistrationPart" />
-        <activity android:name=".SurfaceCamera" />
-        <activity android:name=".PreviewImage" />
+        <activity android:name=".Camera.RegistrationPart" />
+        <activity android:name=".Camera.SurfaceCamera" />
+        <activity android:name=".Camera.PreviewImage" />
         <activity android:name=".Assembly" />
         <activity android:name=".test.Drawertest" />
         <activity android:name=".test.Tip1" />
@@ -43,31 +43,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
 
-        <activity
-            android:name=".SelectPart"/>
-            
-        <activity
-            android:name=".Camera.RegistrationPart" />
-
-        <activity
-            android:name=".Camera.SurfaceCamera" />
-
-        <activity
-            android:name=".Camera.PreviewImage" />
-
-        <activity
-            android:name=".Assembly" />
-
-        <!--<activity-->
-        <!--android:name=".test.FirebaseTest" />-->
-
-=======
         <activity android:name=".test.Tip2" />
         <activity android:name=".test.Tip3" />
         <activity android:name=".test.board" />
->>>>>>> JHan
         <activity
             android:name=".test.drawerSample"
             android:label="@string/title_activity_drawer_sample"

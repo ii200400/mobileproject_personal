@@ -14,7 +14,7 @@ class BitmapController {
         options.inJustDecodeBounds = true
         BitmapFactory.decodeByteArray(bytes, 0, ONE_MEGABYTE, options)
 
-        // Calculate inSampleSize
+        // 사진 크기(화질)을 정하기
         options.inSampleSize = calculateSize(options, reqWidth, reqHeight)
 
         // Decode bitmap with inSampleSize set
