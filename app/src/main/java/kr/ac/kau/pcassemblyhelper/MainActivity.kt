@@ -4,13 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-<<<<<<< HEAD
 import kr.ac.kau.pcassemblyhelper.Camera.RegistrationPart
-
-import kr.ac.kau.pcassemblyhelper.test.Drawertest
-=======
 import kr.ac.kau.pcassemblyhelper.test.*
->>>>>>> JHan
+
 
 class MainActivity : AppCompatActivity() {
 
