@@ -1,6 +1,7 @@
 package com.example.kitoha.myapplication
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -27,6 +28,7 @@ class WriteBoard : AppCompatActivity() {
 
     var names = arrayListOf<String>()
     var adapter : ArrayAdapter<String>? =  null
+    var bitmap : Bitmap? = null
 
     lateinit var title:String
     lateinit var text:String
@@ -40,7 +42,9 @@ class WriteBoard : AppCompatActivity() {
         val up_btn:Button=findViewById(R.id.up_write)
 
         adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,names)
-        //adapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        imageView.setImageBitmap(bitmap)
+        imageNames.adapter = adapter
 
         up_btn.setOnClickListener {
             val intent: Intent = Intent(this,Board::class.java)
@@ -59,6 +63,7 @@ class WriteBoard : AppCompatActivity() {
             info.date=now_data
             info.description=text
             info.user_id=user.uid
+            info.imagename=imageNames.selectedItem.toString()
 
             Log.d("디버깅 중",title)
             myRef.child("BoardInform").push().setValue(info)
@@ -79,7 +84,7 @@ class WriteBoard : AppCompatActivity() {
             val ONE_MEGABYTE : Long = 1024 * 1024
             downloadRef.getBytes(ONE_MEGABYTE)
                     .addOnSuccessListener({ bytes->
-                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
+                        bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
                         imageView.setImageBitmap(bitmap)
 
                         Toast.makeText(this, "사진 다운로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
