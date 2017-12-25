@@ -99,15 +99,12 @@ class RegistrationPart : AppCompatActivity() {
         button_firebase.setOnClickListener{
             Toast.makeText(this, "사진을 다운로드 합니다.", Toast.LENGTH_SHORT).show()
             val imageNmae = spinner1.selectedItem.toString()
-            val imageUri = mDBRef.child(imageNmae).child("uri")
-            Log.e("--------", imageNmae)
-            Log.e("--------",imageUri.toString())
             val downloadRef : StorageReference = mStorageRef.child("images/" + imageNmae + ".jpg")
 
             val ONE_MEGABYTE : Int = 1024 * 1024
             downloadRef.getBytes(ONE_MEGABYTE.toLong())
                     .addOnSuccessListener({ bytes->
-                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, ONE_MEGABYTE, null)
+                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
                         pickedImage.setImageBitmap(bitmap)
 
                         Toast.makeText(this, "사진 다운로드에 성공했습니다.", Toast.LENGTH_SHORT).show()
