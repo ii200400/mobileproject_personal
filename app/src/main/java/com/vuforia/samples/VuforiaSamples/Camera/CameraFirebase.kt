@@ -3,6 +3,7 @@ package com.vuforia.samples.VuforiaSamples.Camera
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -59,19 +60,36 @@ class CameraFirebase(val context : Context) {
         mDBRef.child(key).setValue(info)
     }
 
-    mDBRef.addListenerForSingleValueEvent(object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot) {
-            for (snapshot in dataSnapshot.children) {
-                Log.d("---------", "ValueEventListener : " + snapshot.key.toString())
-                Log.d("---------", "ValueEventListener : " + snapshot.child("name").value.toString())
-                Log.d("---------", "ValueEventListener : " + snapshot.child("uri").value.toString())
-//                accounts.add(CheckingAccount(snapshot.key.toString(), snapshot.child("balance").value.toString().toInt(),
-//                        snapshot.child("interest").value.toString().toDouble()) as Account)
+    fun initList(names : ArrayList<String>, adapter : ArrayAdapter<String>) {
+        mDBRef.addListenerForSingleValueEvent(object : ValueEventListener { //한번만 호출
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    Log.d("---------", "1ValueEventListener : " + snapshot.key.toString())
+                    Log.d("---------", "1ValueEventListener : " + snapshot.child("name").value.toString())
+                    Log.d("---------", "1ValueEventListener : " + snapshot.child("uri").value.toString())
+                    names.add(snapshot.child("name").value.toString())
+                }
             }
-        }
 
-        override fun onCancelled(databaseError: DatabaseError) {
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w("--------", "Failed to read value.", databaseError.toException())
+            }
+        })
 
-        }
-    })
+        mDBRef.addValueEventListener(object : ValueEventListener {  //바뀔때 마다 호출
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    Log.d("---------", "2ValueEventListener : " + snapshot.key.toString())
+                    Log.d("---------", "2ValueEventListener : " + snapshot.child("name").value.toString())
+                    Log.d("---------", "2ValueEventListener : " + snapshot.child("uri").value.toString())
+                    names.add(snapshot.child("name").value.toString())
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // 읽기에 실패
+                Log.w("--------", "Failed to read value.", error.toException())
+            }
+        })
+    }
 }

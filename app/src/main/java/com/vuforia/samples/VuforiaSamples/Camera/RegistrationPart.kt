@@ -20,10 +20,6 @@ import java.io.IOException
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 
-
-
-
-
 class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_CAMERA_CODE = 100
     private val PERMISSIONS_INTERNET_CODE = 99
@@ -34,7 +30,7 @@ class RegistrationPart : AppCompatActivity() {
 
     var uri : Uri? = null
     var spinnerPosition = 0
-    val value = arrayListOf("카테고리","메인보드","CPU","RAM","메모리")
+    var names = arrayListOf<String>()
     var adapter : ArrayAdapter<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +38,8 @@ class RegistrationPart : AppCompatActivity() {
         setContentView(R.layout.activity_registration)
         setTitle("부품 등록")
 
-        adapter =  ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,value)
+        adapter =  ArrayAdapter(this,android.R.layout.simple_list_item_1,names)
+        connectFirebase.initList(names, adapter)
         spinner1.adapter = adapter
 
         //사진 찍기 및 퍼미션 요청
