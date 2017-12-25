@@ -5,11 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-
-import kr.ac.kau.pcassemblyhelper.test.Drawertest
-import kr.ac.kau.pcassemblyhelper.test.Tip1
-import kr.ac.kau.pcassemblyhelper.test.Tip3
-import kr.ac.kau.pcassemblyhelper.test.drawerSample
+import kr.ac.kau.pcassemblyhelper.test.*
 
 class MainActivity : AppCompatActivity() {
 

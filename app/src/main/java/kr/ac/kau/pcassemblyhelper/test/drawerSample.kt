@@ -1,6 +1,8 @@
 package kr.ac.kau.pcassemblyhelper.test
 
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -28,6 +30,11 @@ class drawerSample : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
+        if (Build.VERSION.SDK_INT >= 21)
+        {
+            window.statusBarColor = Color.BLACK
+        }
+/*
         val btn1 : Button = findViewById(R.id.button_1)
         val btn2 : Button = findViewById(R.id.button_2)
         val btn3 : Button = findViewById(R.id.button_3)
@@ -51,6 +58,7 @@ class drawerSample : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent4)
             finish()
         }
+        */
     }
 
     override fun onBackPressed()

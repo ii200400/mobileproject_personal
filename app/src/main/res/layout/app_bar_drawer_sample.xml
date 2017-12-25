@@ -23,6 +23,6 @@
 <!--
     <include layout="@layout/content_drawer_sample" />
     -->
-    <include layout="@layout/activity_main" />
+    <include layout="@layout/test_mainactivity" />
 
 </android.support.design.widget.CoordinatorLayout>
