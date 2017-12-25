@@ -19,11 +19,12 @@ import com.vuforia.samples.VuforiaSamples.R
 import java.io.IOException
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import com.vuforia.samples.VuforiaSamples.R.id.spinner
-import java.lang.reflect.AccessibleObject.setAccessible
-import android.widget.Spinner
-
-
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_CAMERA_CODE = 100
@@ -32,6 +33,8 @@ class RegistrationPart : AppCompatActivity() {
     private val GALLERY_REQUEST_MODE = 98
 
     private val connectFirebase : CameraFirebase = CameraFirebase(this)
+    private val mStorageRef : StorageReference = FirebaseStorage.getInstance().getReference()
+    private val mDBRef : DatabaseReference = FirebaseDatabase.getInstance().getReference("images")
 
     var uri : Uri? = null
     var spinnerPosition = 0
@@ -111,6 +114,44 @@ class RegistrationPart : AppCompatActivity() {
         }
     }
 
+    fun sendPicture(){
+        val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val riversRef : StorageReference = mStorageRef.child("images/" + timeStamp + ".jpg")
+        riversRef.putFile(uri!!)
+                .addOnSuccessListener({ taskSnapshot ->
+                    // URL과 이름을 다운로드한 이미지로부터 가져온다.
+                    val downloadUrl : Uri? = taskSnapshot.downloadUrl
+                    val name : String? = taskSnapshot.metadata!!.getName()
+
+                    //Realtime Database에 이름과 uri를 기록한다. (목록생성을 위함)
+                    writeRealtimeDB(name, downloadUrl.toString())
+
+                    uri = null
+                    pickedImage.setImageBitmap(null)
+                    Toast.makeText(this, "사진 전송에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                })
+                .addOnFailureListener({
+                    // Handle unsuccessful uploads
+                    Toast.makeText(this, "사진 전송에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                })
+        //progress dialog사용하는 경우
+//                    .addOnProgressListener({ taskSnapshot->
+//                        // progress percentage
+//                        val progress : Double = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount()
+//
+//                        // percentage in progress dialog
+//                        progressDialog.setMessage("Uploaded " + progress.toInt() + "%...")
+//                    })
+    }
+
+    //Realtime DB에 Storage이미지의 사진과 uri저장하기
+    fun writeRealtimeDB(name : String?, uri : String?){
+        val info = UploadImageInfo(name, uri)
+        val key = mDBRef.push().getKey()
+
+        mDBRef.child(key).setValue(info)
+    }
+
     //퍼미션 권한 거부, 동의에 따른 코드
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
@@ -180,16 +221,7 @@ class RegistrationPart : AppCompatActivity() {
     //uri가 null 여부 확인 후 firebase접속
     fun prepareFirebase(){
         if (uri!=null){
-            val result = connectFirebase.sendPicture(uri!!)
-            if(result){
-                Log.e("-------","!!")
-                uri = null
-                pickedImage.setImageBitmap(null)
-
-                //TODO 드롭다운에 글씨 추가 해야함
-                adapter!!.notifyDataSetChanged()
-            }
-            Log.e("-------","??")
+            sendPicture()
         }else{
             Toast.makeText(this, "사진을 먼저 선택해주세요.", Toast.LENGTH_SHORT).show()
         }
