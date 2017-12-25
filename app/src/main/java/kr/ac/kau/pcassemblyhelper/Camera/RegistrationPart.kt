@@ -104,10 +104,10 @@ class RegistrationPart : AppCompatActivity() {
             Log.e("--------",imageUri.toString())
             val downloadRef : StorageReference = mStorageRef.child("images/" + imageNmae + ".jpg")
 
-            val ONE_MEGABYTE : Long = 1024 * 1024
-            downloadRef.getBytes(ONE_MEGABYTE)
+            val ONE_MEGABYTE : Int = 1024 * 1024
+            downloadRef.getBytes(ONE_MEGABYTE.toLong())
                     .addOnSuccessListener({ bytes->
-                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
+                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, ONE_MEGABYTE, null)
                         pickedImage.setImageBitmap(bitmap)
 
                         Toast.makeText(this, "사진 다운로드에 성공했습니다.", Toast.LENGTH_SHORT).show()
