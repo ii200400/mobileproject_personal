@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.net.Uri
 import android.os.Environment
+import android.support.v4.graphics.BitmapCompat
 import android.util.Log
 import android.view.Surface
 import android.view.WindowManager
@@ -28,8 +29,10 @@ class SurfaceCamera : AppCompatActivity() {
 
     var uri : Uri? = null
     var bitmap : Bitmap? = null
+
     private var ImageSurfaceView: SurfaceClass? = null
     private var mCamera: Camera? = null
+    val bitmapController : BitmapController = BitmapController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +53,10 @@ class SurfaceCamera : AppCompatActivity() {
 
     var pictureCallback: Camera.PictureCallback = Camera.PictureCallback { data, camera ->
         if (data != null) {
+            BitmapController()
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.size, null)
 
+            //사진 회전
             val matrix = Matrix()
             val windowManager : WindowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
             val rotation : Int = windowManager.getDefaultDisplay().getRotation()
