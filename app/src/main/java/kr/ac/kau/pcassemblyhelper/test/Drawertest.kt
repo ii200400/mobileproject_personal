@@ -27,7 +27,7 @@ class Drawertest : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.test_mainactivity)
-
+/*
         var items = arrayListOf<String>("menu1", "menu2", "menu3")
         var adapter : ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
 
@@ -93,5 +93,6 @@ class Drawertest : AppCompatActivity()
             //var intent : Intent = Intent(this@Drawertest, ImageTargets::class.java)
             //startActivity(intent)
         }
+        */
     }
 }

@@ -12,5 +12,11 @@
     <string name="overlay_build_target_help">Hold the device parallel to the target</string>
     <string name="target_quality_error_title">Low Quality Image</string>
     <string name="target_quality_error_desc">The image has very little detail, please try another.</string>
+    <string name="title_activity_drawer_sample">drawerSample</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>

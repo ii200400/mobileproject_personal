@@ -2,14 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kr.ac.kau.pcassemblyhelper">
 
-<!--
+    <!--
     <uses-sdk
         android:minSdkVersion="21"
         android:targetSdkVersion="22" />
 
     <uses-feature android:glEsVersion="0x00020000" />
--->
+    -->
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,17 +22,28 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SelectPart" />
+        <activity android:name=".RegistrationPart" />
+        <activity android:name=".SurfaceCamera" />
+        <activity android:name=".PreviewImage" />
+        <activity android:name=".Assembly" />
+        <activity android:name=".test.Drawertest" />
+        <activity android:name=".test.Tip1" />
+        <activity
+            android:name=".test.Splash"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash_gif">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
 
         <activity
             android:name=".SelectPart"/>
@@ -51,9 +63,18 @@
         <!--<activity-->
         <!--android:name=".test.FirebaseTest" />-->
 
+=======
+        <activity android:name=".test.Tip2" />
+        <activity android:name=".test.Tip3" />
+        <activity android:name=".test.board" />
+>>>>>>> JHan
         <activity
-            android:name=".test.Drawertest"/>
-
+            android:name=".test.drawerSample"
+            android:label="@string/title_activity_drawer_sample"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".test.testMain"
+            android:theme="@style/CustomAppTheme"/>
+        <activity android:name=".test.testRegistration"></activity>
     </application>
 
 </manifest>

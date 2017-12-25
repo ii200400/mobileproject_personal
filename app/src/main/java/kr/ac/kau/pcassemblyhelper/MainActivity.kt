@@ -4,9 +4,13 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+<<<<<<< HEAD
 import kr.ac.kau.pcassemblyhelper.Camera.RegistrationPart
 
 import kr.ac.kau.pcassemblyhelper.test.Drawertest
+=======
+import kr.ac.kau.pcassemblyhelper.test.*
+>>>>>>> JHan
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,8 +37,9 @@ class MainActivity : AppCompatActivity() {
         }
         btn4.setOnClickListener{
             //val intent4:Intent = Intent(this@MainActivity,ActivityLauncher::class.java)
-            val intent4:Intent = Intent(this@MainActivity, Drawertest::class.java)
+            val intent4:Intent = Intent(this@MainActivity, drawerSample::class.java)
             startActivity(intent4)
+            finish()
         }
     }
 }

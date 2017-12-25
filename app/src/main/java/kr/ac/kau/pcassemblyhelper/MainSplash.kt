@@ -9,7 +9,7 @@ class MainSplash : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mainsplash)
+        //setContentView(R.layout.activity_mainsplash)
 
         // 1초 동안 정지하고 스플래시 이미지 띄우기
         try {
