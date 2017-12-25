@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.vuforia.samples.VuforiaSamples.Camera.RegistrationPart">
+    tools:context="kr.ac.kau.pcassemblyhelper.Camera.RegistrationPart">
 
     <LinearLayout
         android:layout_width="match_parent"

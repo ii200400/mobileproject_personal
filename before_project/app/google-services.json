@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "538905871328",
+    "firebase_url": "https://pcassemblyhelper.firebaseio.com",
+    "project_id": "pcassemblyhelper",
+    "storage_bucket": "pcassemblyhelper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538905871328:android:c02930d659a0d0d0",
+        "android_client_info": {
+          "package_name": "com.vuforia.samples.VuforiaSamples"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538905871328-e1ctsesib2nqj47jsqm45vu88tc1i795.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuforia.samples.VuforiaSamples",
+            "certificate_hash": "dd1556bffa928356780cd1d2995470f5f9408dc8"
+          }
+        },
+        {
+          "client_id": "538905871328-s4s6iun02kikv422o3sj1kc6trv1puop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-aa9g4pxopSxh2bnqFsqIlgo8KXPrfVs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538905871328-s4s6iun02kikv422o3sj1kc6trv1puop.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

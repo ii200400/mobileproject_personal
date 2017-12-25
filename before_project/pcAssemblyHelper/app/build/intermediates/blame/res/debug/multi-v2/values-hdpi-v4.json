@@ -1,0 +1,45 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "D:\\Git-project\\master\\pcAssemblyHelper\\app\\src\\main\\res\\values-hdpi\\dimens.xml",
+                    "from": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "59,109",
+                        "endColumns": "48,49",
+                        "endOffsets": "103,154"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,104",
+                        "endColumns": "48,49",
+                        "endOffsets": "99,149"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\J\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\bba9f4cb612a461c43519cf1317b1ee3\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
+                    },
+                    "to": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "154",
+                        "endLines": "8",
+                        "endColumns": "13",
+                        "endOffsets": "426"
+                    }
+                }
+            ]
+        }
+    ]
+}
