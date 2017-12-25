@@ -17,7 +17,7 @@ class CameraFirebase(val context : Context) {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 names.clear()
                 for (snapshot in dataSnapshot.children) {
-                    names.add(snapshot.child("name").value.toString())
+                    names.add(snapshot.key.toString())
                 }
 
                 adapter.notifyDataSetChanged()

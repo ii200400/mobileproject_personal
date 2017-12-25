@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_registration.*
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.support.annotation.NonNull
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
@@ -19,6 +21,7 @@ import com.vuforia.samples.VuforiaSamples.R
 import java.io.IOException
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -98,30 +101,49 @@ class RegistrationPart : AppCompatActivity() {
             }
         }
 
-        spinner1.setOnItemSelectedListener(object : OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val spinnerPosition : Int = position
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                //TODO("not implemented")
-            }
-        })
+        //spinner!!
+//        spinner1.setOnItemSelectedListener(object : OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+//
+//
+//            }
+//            override fun onNothingSelected(p0: AdapterView<*>?) {
+//                //TODO("not implemented")
+//            }
+//        })
+
         //파이어 베이스에서 사진 로드하기
         button_firebase.setOnClickListener{
-            Log.e("---------",spinnerPosition.toString())
-            Log.e("--------", spinner1.selectedItemPosition.toString())
-            //connectFirebase.
+            Toast.makeText(this, "사진을 다운로드 합니다.", Toast.LENGTH_SHORT).show()
+            val imageNmae = spinner1.selectedItem.toString()
+            val imageUri = mDBRef.child(imageNmae).child("uri")
+            Log.e("--------", imageNmae)
+            Log.e("--------",imageUri.toString())
+            val downloadRef : StorageReference = mStorageRef.child("images/" + imageNmae + ".jpg")
+
+            val ONE_MEGABYTE : Long = 1024 * 1024
+            downloadRef.getBytes(ONE_MEGABYTE)
+                    .addOnSuccessListener({ bytes->
+                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
+                        pickedImage.setImageBitmap(bitmap)
+
+                        Toast.makeText(this, "사진 다운로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    })
+                    .addOnFailureListener({
+
+                    })
         }
     }
 
+    //파이어 베이스 동기화 싫다.
     fun sendPicture(){
         val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val riversRef : StorageReference = mStorageRef.child("images/" + timeStamp + ".jpg")
-        riversRef.putFile(uri!!)
+        val uploadRef : StorageReference = mStorageRef.child("images/" + timeStamp + ".jpg")
+        uploadRef.putFile(uri!!)
                 .addOnSuccessListener({ taskSnapshot ->
                     // URL과 이름을 다운로드한 이미지로부터 가져온다.
                     val downloadUrl : Uri? = taskSnapshot.downloadUrl
-                    val name : String? = taskSnapshot.metadata!!.getName()
+                    val name : String? = taskSnapshot.metadata!!.getName()!!.split(".")[0]
 
                     //Realtime Database에 이름과 uri를 기록한다. (목록생성을 위함)
                     writeRealtimeDB(name, downloadUrl.toString())
@@ -146,10 +168,7 @@ class RegistrationPart : AppCompatActivity() {
 
     //Realtime DB에 Storage이미지의 사진과 uri저장하기
     fun writeRealtimeDB(name : String?, uri : String?){
-        val info = UploadImageInfo(name, uri)
-        val key = mDBRef.push().getKey()
-
-        mDBRef.child(key).setValue(info)
+        mDBRef.child(name).setValue(uri)
     }
 
     //퍼미션 권한 거부, 동의에 따른 코드
