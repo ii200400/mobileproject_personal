@@ -13,8 +13,14 @@ import android.os.Build
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.util.Log
+import android.view.View
 import com.vuforia.samples.VuforiaSamples.R
 import java.io.IOException
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+
+
 
 
 
@@ -27,16 +33,17 @@ class RegistrationPart : AppCompatActivity() {
     private val connectFirebase : CameraFirebase = CameraFirebase(this)
 
     var uri : Uri? = null
+    var spinnerPosition = 0
+    val value = arrayListOf("카테고리","메인보드","CPU","RAM","메모리")
+    var adapter : ArrayAdapter<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         setTitle("부품 등록")
 
-        val spin1: Spinner = findViewById(R.id.spinner1)
-        val value = arrayListOf("카테고리","메인보드","CPU","RAM","메모리")
-
-        spin1.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,value)
+        adapter =  ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,value)
+        spinner1.adapter = adapter
 
         //사진 찍기 및 퍼미션 요청
         button_camera.setOnClickListener {
@@ -80,6 +87,21 @@ class RegistrationPart : AppCompatActivity() {
                 Toast.makeText(this, "사진 전송을 시도합니다.", Toast.LENGTH_SHORT).show()
                 prepareFirebase()
             }
+        }
+
+        spinner1.setOnItemSelectedListener(object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val spinnerPosition : Int = position
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //TODO("not implemented")
+            }
+        })
+        //파이어 베이스에서 사진 로드하기
+        button_firebase.setOnClickListener{
+            Log.e("---------",spinnerPosition.toString())
+            Log.e("--------", spinner1.selectedItemPosition.toString())
+            //connectFirebase.
         }
     }
 
@@ -155,6 +177,9 @@ class RegistrationPart : AppCompatActivity() {
             if(connectFirebase.sendPicture(uri!!)){
                 uri = null
                 pickedImage.setImageBitmap(null)
+
+                //TODO 드롭다운에 글씨 추가 해야함
+                adapter!!.notifyDataSetChanged()
             }
         }else{
             Toast.makeText(this, "사진을 먼저 선택해주세요.", Toast.LENGTH_SHORT).show()

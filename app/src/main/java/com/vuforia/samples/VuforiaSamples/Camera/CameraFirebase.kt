@@ -2,9 +2,9 @@ package com.vuforia.samples.VuforiaSamples.Camera
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.text.SimpleDateFormat
@@ -58,4 +58,20 @@ class CameraFirebase(val context : Context) {
 
         mDBRef.child(key).setValue(info)
     }
+
+    mDBRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            for (snapshot in dataSnapshot.children) {
+                Log.d("---------", "ValueEventListener : " + snapshot.key.toString())
+                Log.d("---------", "ValueEventListener : " + snapshot.child("name").value.toString())
+                Log.d("---------", "ValueEventListener : " + snapshot.child("uri").value.toString())
+//                accounts.add(CheckingAccount(snapshot.key.toString(), snapshot.child("balance").value.toString().toInt(),
+//                        snapshot.child("interest").value.toString().toDouble()) as Account)
+            }
+        }
+
+        override fun onCancelled(databaseError: DatabaseError) {
+
+        }
+    })
 }
