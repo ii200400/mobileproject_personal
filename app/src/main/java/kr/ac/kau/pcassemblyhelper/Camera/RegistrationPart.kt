@@ -34,6 +34,7 @@ class RegistrationPart : AppCompatActivity() {
     private val mStorageRef : StorageReference = FirebaseStorage.getInstance().getReference()
     private val mDBRef : DatabaseReference = FirebaseDatabase.getInstance().getReference("images")
 
+    val bitmapController : BitmapController = BitmapController()
     var uri : Uri? = null
     var names = arrayListOf<String>()
     var adapter : ArrayAdapter<String>? =  null
@@ -189,8 +190,11 @@ class RegistrationPart : AppCompatActivity() {
             GALLERY_REQUEST_MODE->{
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     try {
-                        uri = data.data;
-                        var bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
+                        uri = data.data
+                        //var bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
+                        val bytes : ByteArray =  getContentResolver().openInputStream(uri).readBytes()
+                        val bitmap = bitmapController.smallerBitmap(bytes, 1400, 1400)
+
                         pickedImage.setImageBitmap(bitmap)
                     } catch (e: IOException) {
                         e.printStackTrace()

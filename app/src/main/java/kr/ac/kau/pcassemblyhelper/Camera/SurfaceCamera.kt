@@ -54,7 +54,7 @@ class SurfaceCamera : AppCompatActivity() {
     var pictureCallback: Camera.PictureCallback = Camera.PictureCallback { data, camera ->
         if (data != null) {
             BitmapController()
-            bitmap = BitmapFactory.decodeByteArray(data, 0, data.size, null)
+            bitmap = bitmapController.smallerBitmap(data, 1400,1400)
 
             //사진 회전
             val matrix = Matrix()
@@ -64,6 +64,7 @@ class SurfaceCamera : AppCompatActivity() {
                 Surface.ROTATION_0 ->  matrix.postRotate(90f)
                 Surface.ROTATION_270 ->  matrix.postRotate(180f)
             }
+
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap!!.getWidth(), bitmap!!.getHeight(), matrix, true)
 
             saveImageToGallary()
