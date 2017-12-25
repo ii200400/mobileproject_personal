@@ -1,20 +1,20 @@
 package com.example.kitoha.myapplication
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ValueEventListener
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
+import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.activity_write_board.*
 import java.util.*
 
 
@@ -22,7 +22,12 @@ class WriteBoard : AppCompatActivity() {
 
     val database:FirebaseDatabase = FirebaseDatabase.getInstance()
     val myRef:DatabaseReference = database.getReference()
+    val mStorageRef : StorageReference = FirebaseStorage.getInstance().getReference()
     val user: FirebaseUser = FirebaseAuth.getInstance().getCurrentUser() as FirebaseUser
+
+    var names = arrayListOf<String>()
+    var adapter : ArrayAdapter<String>? =  null
+
     lateinit var title:String
     lateinit var text:String
 
@@ -33,6 +38,9 @@ class WriteBoard : AppCompatActivity() {
         val titleinfo:EditText=findViewById(R.id.titleinfo)
         val textinfo:EditText=findViewById(R.id.textinfo)
         val up_btn:Button=findViewById(R.id.up_write)
+
+        adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,names)
+        //adapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         up_btn.setOnClickListener {
             val intent: Intent = Intent(this,Board::class.java)
@@ -50,7 +58,7 @@ class WriteBoard : AppCompatActivity() {
             val now_data:String=year+"-"+month+"-"+day+" "+hour+":"+min+":"+sec
             info.date=now_data
             info.description=text
-            info.user_id=user.uid.toString()
+            info.user_id=user.uid
 
             Log.d("디버깅 중",title)
             myRef.child("BoardInform").push().setValue(info)
@@ -63,15 +71,36 @@ class WriteBoard : AppCompatActivity() {
 
 
         // Read from the database
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+        download_button.setOnClickListener{
+            Toast.makeText(this, "사진을 다운로드 합니다.", Toast.LENGTH_SHORT).show()
+            val imageNmae = imageNames.selectedItem.toString()
+            val downloadRef : StorageReference = mStorageRef.child("images/" + imageNmae + ".jpg")
 
+            val ONE_MEGABYTE : Long = 1024 * 1024
+            downloadRef.getBytes(ONE_MEGABYTE)
+                    .addOnSuccessListener({ bytes->
+                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
+                        imageView.setImageBitmap(bitmap)
+
+                        Toast.makeText(this, "사진 다운로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    })
+                    .addOnFailureListener({
+                    })
+        }
+
+        myRef.addValueEventListener(object : ValueEventListener {  //바뀔때 마다 호출
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                names.clear()
+                for (snapshot in dataSnapshot.children) {
+                    names.add(snapshot.key.toString())
+                }
+
+                adapter!!.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
+                // 읽기에 실패
+                Log.w("--------", "Failed to read value.", error.toException())
             }
         })
     }
