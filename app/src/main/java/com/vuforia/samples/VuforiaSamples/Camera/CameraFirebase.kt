@@ -61,29 +61,14 @@ class CameraFirebase(val context : Context) {
     }
 
     fun initList(names : ArrayList<String>, adapter : ArrayAdapter<String>) {
-        mDBRef.addListenerForSingleValueEvent(object : ValueEventListener { //한번만 호출
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (snapshot in dataSnapshot.children) {
-                    Log.d("---------", "1ValueEventListener : " + snapshot.key.toString())
-                    Log.d("---------", "1ValueEventListener : " + snapshot.child("name").value.toString())
-                    Log.d("---------", "1ValueEventListener : " + snapshot.child("uri").value.toString())
-                    names.add(snapshot.child("name").value.toString())
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.w("--------", "Failed to read value.", databaseError.toException())
-            }
-        })
-
         mDBRef.addValueEventListener(object : ValueEventListener {  //바뀔때 마다 호출
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                names.clear()
                 for (snapshot in dataSnapshot.children) {
-                    Log.d("---------", "2ValueEventListener : " + snapshot.key.toString())
-                    Log.d("---------", "2ValueEventListener : " + snapshot.child("name").value.toString())
-                    Log.d("---------", "2ValueEventListener : " + snapshot.child("uri").value.toString())
                     names.add(snapshot.child("name").value.toString())
                 }
+
+                adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {

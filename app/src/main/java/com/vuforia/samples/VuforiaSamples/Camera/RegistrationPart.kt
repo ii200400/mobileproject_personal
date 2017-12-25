@@ -19,6 +19,11 @@ import com.vuforia.samples.VuforiaSamples.R
 import java.io.IOException
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import com.vuforia.samples.VuforiaSamples.R.id.spinner
+import java.lang.reflect.AccessibleObject.setAccessible
+import android.widget.Spinner
+
+
 
 class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_CAMERA_CODE = 100
@@ -31,15 +36,19 @@ class RegistrationPart : AppCompatActivity() {
     var uri : Uri? = null
     var spinnerPosition = 0
     var names = arrayListOf<String>()
-    var adapter : ArrayAdapter<String>? = null
+    var adapter : ArrayAdapter<String>? =  null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         setTitle("부품 등록")
 
-        adapter =  ArrayAdapter(this,android.R.layout.simple_list_item_1,names)
-        connectFirebase.initList(names, adapter)
+        //spinner에 값 넣기
+        adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,names)
+        adapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        connectFirebase.initList(names, adapter!!)
+
+        //TODO spinner가 슬라이드가 가능하도록
         spinner1.adapter = adapter
 
         //사진 찍기 및 퍼미션 요청
@@ -171,13 +180,16 @@ class RegistrationPart : AppCompatActivity() {
     //uri가 null 여부 확인 후 firebase접속
     fun prepareFirebase(){
         if (uri!=null){
-            if(connectFirebase.sendPicture(uri!!)){
+            val result = connectFirebase.sendPicture(uri!!)
+            if(result){
+                Log.e("-------","!!")
                 uri = null
                 pickedImage.setImageBitmap(null)
 
                 //TODO 드롭다운에 글씨 추가 해야함
                 adapter!!.notifyDataSetChanged()
             }
+            Log.e("-------","??")
         }else{
             Toast.makeText(this, "사진을 먼저 선택해주세요.", Toast.LENGTH_SHORT).show()
         }
