@@ -2,15 +2,14 @@ package com.vuforia.samples.VuforiaSamples.Camera
 
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-
+import android.net.Uri
 
 
 /**
  * Created by im on 2017-12-25.
  */
 class BitmapController {
-//    fun smallerBitmap(res: uri, resId: Int,
-//                                        reqWidth: Int, reqHeight: Int): Bitmap {
+//    fun smallerBitmap(uri : Uri, resId: Int, reqWidth: Int, reqHeight: Int): Bitmap {
 //
 //        // First decode with inJustDecodeBounds=true to check dimensions
 //        val options = BitmapFactory.Options()
