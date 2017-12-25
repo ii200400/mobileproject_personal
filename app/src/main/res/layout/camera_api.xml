@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.vuforia.samples.VuforiaSamples.MainActivity">
-    <TextureView
+    tools:context="kr.ac.kau.pcassemblyhelper.MainActivity">
+
+    <FrameLayout
         android:id="@+id/texture"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_takepicture"
-        android:layout_alignParentTop="true"/>
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" />
     <Button
         android:id="@+id/btn_takepicture"
         android:layout_width="wrap_content"

@@ -3,8 +3,8 @@ package kr.ac.kau.pcassemblyhelper
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
+import kr.ac.kau.pcassemblyhelper.Camera.RegistrationPart
 
 import kr.ac.kau.pcassemblyhelper.test.Drawertest
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent1)
         }
         btn2.setOnClickListener{
-            val intent2:Intent = Intent(this@MainActivity,RegistrationPart::class.java)
+            val intent2:Intent = Intent(this@MainActivity, RegistrationPart::class.java)
             startActivity(intent2)
         }
         btn3.setOnClickListener{

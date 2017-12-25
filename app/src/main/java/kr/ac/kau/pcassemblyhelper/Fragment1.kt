@@ -2,11 +2,9 @@ package kr.ac.kau.pcassemblyhelper
 
 import android.app.Fragment
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 
 /**
  * Created by kitoha on 2017-09-15.
