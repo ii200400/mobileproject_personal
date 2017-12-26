@@ -2,6 +2,7 @@ package kr.ac.kau.pcassemblyhelper.Camera
 
 import android.Manifest
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -45,12 +46,23 @@ class RegistrationPart : AppCompatActivity() {
         setTitle("부품 등록")
 
         //spinner에 값 넣기
-        adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,names)
-        adapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
         connectFirebase.initList(names, adapter!!)
 
-        //TODO spinner가 슬라이드가 가능하도록
-        spinner1.adapter = adapter
+        //spinner가 슬라이드 되도록
+        try {
+            val popup : java.lang.reflect.Field = imageNames.javaClass.getDeclaredField("mPopup")
+            popup.isAccessible = true
+
+            // Popup 변수를 통해 ListPopupWindow를 불러온다.
+            var popupWindow = popup.get(imageNames) as ListPopupWindow
+            //popupWindow에 높이 지정
+            popupWindow.height = 300
+        }
+        catch (e : Exception){
+            e.printStackTrace()
+        }
+        imageNames.adapter = adapter
 
         //사진 찍기 및 퍼미션 요청
         button_camera.setOnClickListener {
@@ -73,16 +85,7 @@ class RegistrationPart : AppCompatActivity() {
                 Toast.makeText(this, "카메라 장치가 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
-
-        //앨범에서 사진 가져오기 (커스텀 아님)
-        button_callgallery.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST_MODE)
-        }
-
-        //사진을 파이어 베이스에 등록하기 및 인터넷 퍼미션 요청
+        //인터넷 퍼미션 요청
         button_upload.setOnClickListener {
             //TODO apk 23 이상 핸드폰에서 확인 필요
             val permissionList : Array<String> = arrayOf(Manifest.permission.INTERNET)
@@ -91,36 +94,28 @@ class RegistrationPart : AppCompatActivity() {
                 //인터넷 권한 요청
                 ActivityCompat.requestPermissions(this, permissionList, PERMISSIONS_INTERNET_CODE)
             }else{
+                //사진을 파이어 베이스에 등록 시도
                 Toast.makeText(this, "사진 전송을 시도합니다.", Toast.LENGTH_SHORT).show()
                 prepareFirebase()
             }
         }
 
-        //파이어 베이스에서 사진 로드하기
-        button_firebase.setOnClickListener{
-            Toast.makeText(this, "사진을 다운로드 합니다.", Toast.LENGTH_SHORT).show()
-            val imageNmae = spinner1.selectedItem.toString()
-            val downloadRef : StorageReference = mStorageRef.child("images/" + imageNmae + ".jpg")
-
-            val ONE_MEGABYTE : Int = 1024 * 1024
-            downloadRef.getBytes(ONE_MEGABYTE.toLong())
-                    .addOnSuccessListener({ bytes->
-                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
-                        pickedImage.setImageBitmap(bitmap)
-
-                        Toast.makeText(this, "사진 다운로드에 성공했습니다.", Toast.LENGTH_SHORT).show()
-                    })
-                    .addOnFailureListener({
-                        Toast.makeText(this, "사진 다운로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
-                    })
+        //앨범에서 사진 가져오기 (커스텀 아님)
+        button_callgallery.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST_MODE)
         }
     }
 
     //파이어 베이스 동기화 싫다.
     fun sendPicture(){
+        val progressDialog : ProgressDialog = ProgressDialog(this)
         val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val uploadRef : StorageReference = mStorageRef.child("images/" + timeStamp + ".jpg")
         uploadRef.putFile(uri!!)
+                //사진 전송이 성공한 경우
                 .addOnSuccessListener({ taskSnapshot ->
                     // URL과 이름을 다운로드한 이미지로부터 가져온다.
                     val downloadUrl : Uri? = taskSnapshot.downloadUrl
@@ -129,22 +124,25 @@ class RegistrationPart : AppCompatActivity() {
                     //Realtime Database에 이름과 uri를 기록한다. (목록생성을 위함)
                     writeRealtimeDB(name, downloadUrl.toString())
 
+                    progressDialog.dismiss()
                     uri = null
                     pickedImage.setImageBitmap(null)
                     Toast.makeText(this, "사진 전송에 성공했습니다.", Toast.LENGTH_SHORT).show()
                 })
+                //사진 전송이 실패한 경우
                 .addOnFailureListener({
                     // Handle unsuccessful uploads
                     Toast.makeText(this, "사진 전송에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 })
-        //progress dialog사용하는 경우
-//                    .addOnProgressListener({ taskSnapshot->
-//                        // progress percentage
-//                        val progress : Double = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount()
-//
-//                        // percentage in progress dialog
-//                        progressDialog.setMessage("Uploaded " + progress.toInt() + "%...")
-//                    })
+                //progress dialog로 진행상태 보여주기
+                .addOnProgressListener({ taskSnapshot->
+                    progressDialog.show()
+                    // progress percentage
+                    val progress : Double = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount()
+
+                    // percentage in progress dialog
+                    progressDialog.setMessage("Uploaded " + progress.toInt() + "%...")
+                })
     }
 
     //Realtime DB에 Storage이미지의 사진과 uri저장하기

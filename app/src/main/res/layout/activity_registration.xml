@@ -6,23 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
+    android:layout_marginBottom="50dp"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="kr.ac.kau.pcassemblyhelper.Camera.RegistrationPart">
 
-    <LinearLayout
+    <Spinner
+        android:id="@+id/imageNames"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:minHeight="46dp" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:minHeight="46dp" />
 
     <ImageView
         android:id="@+id/pickedImage"
@@ -60,14 +55,5 @@
         android:layout_gravity="top"
         android:layout_weight="0"
         android:text="등록" />
-
-    <Button
-        android:id="@+id/button_firebase"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_marginBottom="50dp"
-        android:layout_weight="0"
-        android:text="firebase" />
 
 </LinearLayout>
