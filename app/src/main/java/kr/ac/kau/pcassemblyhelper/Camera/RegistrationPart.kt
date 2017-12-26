@@ -23,7 +23,6 @@ import com.google.firebase.storage.StorageReference
 import kr.ac.kau.pcassemblyhelper.R
 import java.text.SimpleDateFormat
 import java.util.*
-//import kotlinx.android.synthetic.main.activity_registration.*
 import kotlinx.android.synthetic.main.ui_registration.*
 
 class RegistrationPart : AppCompatActivity() {
@@ -43,7 +42,6 @@ class RegistrationPart : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_registration)
         setContentView(R.layout.ui_registration)
         setTitle("부품 등록")
 
