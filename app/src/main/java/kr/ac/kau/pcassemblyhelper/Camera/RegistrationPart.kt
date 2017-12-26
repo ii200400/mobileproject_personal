@@ -31,38 +31,16 @@ class RegistrationPart : AppCompatActivity() {
     private val CAMERA_REQUEST_MODE = 100
     private val GALLERY_REQUEST_MODE = 98
 
-    private val connectFirebase : CameraFirebase = CameraFirebase(this)
     private val mStorageRef : StorageReference = FirebaseStorage.getInstance().getReference()
     private val mDBRef : DatabaseReference = FirebaseDatabase.getInstance().getReference("images")
 
     val bitmapController : BitmapController = BitmapController()
     var uri : Uri? = null
-    var names = arrayListOf<String>()
-    var adapter : ArrayAdapter<String>? =  null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ui_registration)
         setTitle("부품 등록")
-
-        //spinner에 값 넣기
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
-        connectFirebase.initList(names, adapter!!)
-
-//        //spinner가 슬라이드 되도록
-//        try {
-//            val popup : java.lang.reflect.Field = imageNames.javaClass.getDeclaredField("mPopup")
-//            popup.isAccessible = true
-//
-//            // Popup 변수를 통해 ListPopupWindow를 불러온다.
-//            var popupWindow = popup.get(imageNames) as ListPopupWindow
-//            //popupWindow에 높이 지정
-//            popupWindow.height = 300
-//        }
-//        catch (e : Exception){
-//            e.printStackTrace()
-//        }
-//        imageNames.adapter = adapter
 
         //사진 찍기 및 퍼미션 요청
         button_camera.setOnClickListener {
