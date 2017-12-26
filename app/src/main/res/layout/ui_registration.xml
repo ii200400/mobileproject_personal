@@ -35,19 +35,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.8" />
 
-    <Spinner
-        android:id="@+id/imageNames"
+    <EditText
+        android:id="@+id/imageName"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginLeft="25dp"
         android:background="#DDDDDD"
+        android:hint="사진 이름 입력"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/space_right"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05"/>
+        app:layout_constraintVertical_bias="0.05" />
 
     <ImageView
         android:id="@+id/pickedImage"
@@ -55,7 +56,7 @@
         android:layout_height="241dp"
         android:layout_marginTop="10dp"
         android:background="#DDDDDD"
-        app:layout_constraintTop_toBottomOf="@+id/imageNames"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageName"/>
 
     <ImageButton
         android:id="@+id/button_camera"
@@ -101,26 +102,9 @@
         android:text="등록"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/button_firebase"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/button_camera"
         app:layout_constraintRight_toLeftOf="@+id/button_callgallery"
-        app:layout_constraintTop_toBottomOf="@+id/button_camera" />
-
-    <Button
-        android:id="@+id/button_firebase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonshape"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="Firebase"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/button_upload"
-        app:layout_constraintRight_toRightOf="@+id/button_upload"
-        app:layout_constraintTop_toBottomOf="@+id/button_upload" />
+        app:layout_constraintTop_toBottomOf="@id/space_bottom" />
 
 </android.support.constraint.ConstraintLayout>

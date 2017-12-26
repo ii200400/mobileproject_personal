@@ -31,13 +31,12 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
     }
 
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
-        // preview시작
+        //파라미터 지정
         val parameters = mCamera!!.parameters
         parameters.pictureFormat = ImageFormat.JPEG
         parameters.jpegQuality = 100
-        //TODO 기종마다 문제가 되는 경우가 있다.
-        parameters.setPreviewSize(width, height)
 
+        //화면 상태에 따라 사진 돌리기
         val windowManager : WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val rotation : Int = windowManager.getDefaultDisplay().getRotation()
         when (rotation){
@@ -45,17 +44,16 @@ class SurfaceClass(context: Context, val mCamera: Camera) : SurfaceView(context)
             Surface.ROTATION_270 -> mCamera.setDisplayOrientation(180)
         }
         mCamera.parameters = parameters
+        mCamera.getParameters().getSupportedVideoSizes()
+        mCamera.getParameters().getSupportedPictureSizes()
+        mCamera.getParameters().getSupportedPreviewSizes()
 
-        // Important: Call startPreview() to start updating the preview surface.
-        // Preview must be started before you can take a picture.
+        // preview 시작
         mCamera.startPreview()
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder?) {
-        // empty. Take care of releasing the Camera preview in your activity.
-        // Surface will be destroyed when we return, so stop the preview.
-        // Because the CameraDevice object is not a shared resource, it's very
-        // important to release it when the activity is paused.
+        // preview 멈춤
         mCamera.stopPreview()
     }
 }

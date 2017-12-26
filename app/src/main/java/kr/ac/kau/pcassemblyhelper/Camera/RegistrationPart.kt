@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.*
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
@@ -28,6 +27,7 @@ import kotlinx.android.synthetic.main.ui_registration.*
 class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_CAMERA_CODE = 100
     private val PERMISSIONS_INTERNET_CODE = 99
+    private val PERMISSIONS_GALLERY_CODE = 98
     private val CAMERA_REQUEST_MODE = 100
     private val GALLERY_REQUEST_MODE = 98
 
@@ -49,20 +49,20 @@ class RegistrationPart : AppCompatActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
         connectFirebase.initList(names, adapter!!)
 
-        //spinner가 슬라이드 되도록
-        try {
-            val popup : java.lang.reflect.Field = imageNames.javaClass.getDeclaredField("mPopup")
-            popup.isAccessible = true
-
-            // Popup 변수를 통해 ListPopupWindow를 불러온다.
-            var popupWindow = popup.get(imageNames) as ListPopupWindow
-            //popupWindow에 높이 지정
-            popupWindow.height = 300
-        }
-        catch (e : Exception){
-            e.printStackTrace()
-        }
-        imageNames.adapter = adapter
+//        //spinner가 슬라이드 되도록
+//        try {
+//            val popup : java.lang.reflect.Field = imageNames.javaClass.getDeclaredField("mPopup")
+//            popup.isAccessible = true
+//
+//            // Popup 변수를 통해 ListPopupWindow를 불러온다.
+//            var popupWindow = popup.get(imageNames) as ListPopupWindow
+//            //popupWindow에 높이 지정
+//            popupWindow.height = 300
+//        }
+//        catch (e : Exception){
+//            e.printStackTrace()
+//        }
+//        imageNames.adapter = adapter
 
         //사진 찍기 및 퍼미션 요청
         button_camera.setOnClickListener {
@@ -71,15 +71,13 @@ class RegistrationPart : AppCompatActivity() {
                     val permissionList : Array<String> = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     val needpermission : Boolean = permissioncheck(permissionList, PERMISSIONS_CAMERA_CODE)
                     if (needpermission){
-                        val intent_picture: Intent = Intent(this@RegistrationPart, SurfaceCamera::class.java)
-                        startActivityForResult(intent_picture, CAMERA_REQUEST_MODE)
-                    }else{
                         //카메라, 저장소 이미지 권한 요청
                         ActivityCompat.requestPermissions(this, permissionList, PERMISSIONS_CAMERA_CODE)
+                    }else{
+                        callPreview()
                     }
                 }else{
-                    val intent_picture: Intent = Intent(this@RegistrationPart, SurfaceCamera::class.java)
-                    startActivityForResult(intent_picture, CAMERA_REQUEST_MODE)
+                    callPreview()
                 }
             }else {
                 Toast.makeText(this, "카메라 장치가 없습니다.", Toast.LENGTH_SHORT).show()
@@ -87,33 +85,61 @@ class RegistrationPart : AppCompatActivity() {
         }
         //인터넷 퍼미션 요청
         button_upload.setOnClickListener {
-            //TODO apk 23 이상 핸드폰에서 확인 필요
-            val permissionList : Array<String> = arrayOf(Manifest.permission.INTERNET)
-            val needpermission : Boolean = permissioncheck(permissionList, PERMISSIONS_INTERNET_CODE)
-            if (needpermission){
-                //인터넷 권한 요청
-                ActivityCompat.requestPermissions(this, permissionList, PERMISSIONS_INTERNET_CODE)
+            val permissionList: Array<String> = arrayOf(Manifest.permission.INTERNET)
+            val needpermission: Boolean = permissioncheck(permissionList, PERMISSIONS_INTERNET_CODE)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //API 23 이상이면
+                if (needpermission) {
+                    //인터넷 권한 요청
+                    ActivityCompat.requestPermissions(this, permissionList, PERMISSIONS_INTERNET_CODE)
+                } else {
+                    //사진을 파이어 베이스에 등록 시도
+                    Toast.makeText(this, "사진 전송을 시도합니다.", Toast.LENGTH_SHORT).show()
+                    prepareFirebase()
+                }
             }else{
-                //사진을 파이어 베이스에 등록 시도
-                Toast.makeText(this, "사진 전송을 시도합니다.", Toast.LENGTH_SHORT).show()
-                prepareFirebase()
+                ActivityCompat.requestPermissions(this, permissionList, PERMISSIONS_INTERNET_CODE)
             }
         }
 
         //앨범에서 사진 가져오기 (커스텀 아님)
         button_callgallery.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST_MODE)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //API 23 이상이면
+                val permissionList : Array<String> = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                val needpermission : Boolean = permissioncheck(permissionList, PERMISSIONS_GALLERY_CODE)
+                if (needpermission){
+                    //카메라, 저장소 이미지 권한 요청
+                    ActivityCompat.requestPermissions(this, permissionList, PERMISSIONS_GALLERY_CODE)
+                }else{
+                    callAlbum()
+                }
+            }else{
+                callAlbum()
+            }
         }
+    }
+
+    //앨범 intent부르기
+    fun callAlbum(){
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST_MODE)
+    }
+    //
+    fun callPreview(){
+        val intent_picture: Intent = Intent(this, SurfaceCamera::class.java)
+        startActivityForResult(intent_picture, CAMERA_REQUEST_MODE)
     }
 
     //파이어 베이스 동기화 싫다.
     fun sendPicture(){
         val progressDialog : ProgressDialog = ProgressDialog(this)
-        val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val uploadRef : StorageReference = mStorageRef.child("images/" + timeStamp + ".jpg")
+        var imagename : String = imageName.text.toString()
+        //아무것도 없거나 공백만 있는 경우
+        if(imagename == null || imagename.replace(" ","") == ""){
+            imagename = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        }
+        val uploadRef : StorageReference = mStorageRef.child("images/" + imagename + ".jpg")
         uploadRef.putFile(uri!!)
                 //사진 전송이 성공한 경우
                 .addOnSuccessListener({ taskSnapshot ->
@@ -124,9 +150,10 @@ class RegistrationPart : AppCompatActivity() {
                     //Realtime Database에 이름과 uri를 기록한다. (목록생성을 위함)
                     writeRealtimeDB(name, downloadUrl.toString())
 
-                    progressDialog.dismiss()
+                    imageName.text = null
                     uri = null
                     pickedImage.setImageBitmap(null)
+                    progressDialog.dismiss()
                     Toast.makeText(this, "사진 전송에 성공했습니다.", Toast.LENGTH_SHORT).show()
                 })
                 //사진 전송이 실패한 경우
@@ -156,8 +183,7 @@ class RegistrationPart : AppCompatActivity() {
             //카메라
             PERMISSIONS_CAMERA_CODE -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    val intent_picture: Intent = Intent(this@RegistrationPart, SurfaceCamera::class.java)
-                    startActivityForResult(intent_picture, CAMERA_REQUEST_MODE)
+                    callPreview()
                 } else {
                     Toast.makeText(this, "카메라와 저장소 권한이 있어야 실행 가능합니다.", Toast.LENGTH_SHORT).show()
                 }
@@ -168,6 +194,13 @@ class RegistrationPart : AppCompatActivity() {
                     prepareFirebase()
                 } else {
                     Toast.makeText(this, "인터넷 권한을 해주셔야 사진을 보낼 수 있습니다.", Toast.LENGTH_SHORT).show()
+                }
+            //저장소
+            PERMISSIONS_GALLERY_CODE ->
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    callAlbum()
+                } else {
+                    Toast.makeText(this, "앨범 접근 권한을 거부하셨습니다.", Toast.LENGTH_SHORT).show()
                 }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -189,7 +222,6 @@ class RegistrationPart : AppCompatActivity() {
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     try {
                         uri = data.data
-                        //var bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
                         val bytes : ByteArray =  getContentResolver().openInputStream(uri).readBytes()
                         val bitmap = bitmapController.smallerBitmap(bytes, 1400, 1400)
 

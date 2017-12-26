@@ -9,6 +9,7 @@ import java.util.*
 /**
  * Created by im on 2017-12-24.
  */
+//파이어 베이스 관련 함수
 class CameraFirebase(val context : Context) {
     private val mDBRef : DatabaseReference = FirebaseDatabase.getInstance().getReference("images")
 

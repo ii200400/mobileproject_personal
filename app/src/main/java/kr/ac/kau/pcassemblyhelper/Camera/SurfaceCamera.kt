@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.net.Uri
 import android.os.Environment
-import android.support.v4.graphics.BitmapCompat
 import android.util.Log
 import android.view.Surface
 import android.view.WindowManager
@@ -19,7 +18,6 @@ import kr.ac.kau.pcassemblyhelper.R
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
-//import kotlinx.android.synthetic.main.camera_api.*
 import kotlinx.android.synthetic.main.ui_camera_api.*
 
 /**
@@ -37,20 +35,24 @@ class SurfaceCamera : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.camera_api)
         setContentView(R.layout.ui_camera_api)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         setTitle("부품 등록")
 
+        //카메라 객체 가져오기(핸드폰 카메라)
         mCamera = getCameraInstance()
 
         if (mCamera != null && checkCameraHardware(this)) {
             ImageSurfaceView = SurfaceClass(this, mCamera!!)
+            //preview를 보여줄 view에 연결
             texture.addView(ImageSurfaceView)
-        }
 
-        btn_takepicture.setOnClickListener{
-            mCamera!!.takePicture(null, null, pictureCallback)
+            //사진찍으면 불리는 콜백함수
+            btn_takepicture.setOnClickListener{
+                mCamera!!.takePicture(null, null, pictureCallback)
+            }
+        }else{
+            Toast.makeText(this, "카메라의 사용이 불가합니다.", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -77,7 +79,7 @@ class SurfaceCamera : AppCompatActivity() {
             preview_intent.putExtra("uri", uri)
             startActivityForResult(preview_intent, PREVIEW_CODE)
         } else {
-            Toast.makeText(this, "Captured image is empty", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "이미지 정보 전달이 실패했습니다.", Toast.LENGTH_LONG).show()
         }
         mCamera!!.startPreview()
     }
@@ -91,7 +93,7 @@ class SurfaceCamera : AppCompatActivity() {
             // 카메라 사용 불가
         }
 
-        return c // returns null if camera is unavailable
+        return c //사용가능한 카메라 없으면 null!
     }
 
     private fun checkCameraHardware(context: Context): Boolean {
@@ -109,7 +111,7 @@ class SurfaceCamera : AppCompatActivity() {
         val file : File = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "camtest")
         if (!file.exists()) {
             if (!file.mkdirs()) {
-                Log.d("------", "failed to create directory")
+                Log.d("------", "파일 생성 실패")
                 return
             }
         }
@@ -134,7 +136,6 @@ class SurfaceCamera : AppCompatActivity() {
                         val answer_intent : Intent = Intent()
                         answer_intent.putExtra("uri", uri)
                         setResult(Activity.RESULT_OK, answer_intent)
-                        //bitmap!!.recycle()
 
                         finish()
                     }else{
