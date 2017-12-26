@@ -1,7 +1,9 @@
 package kr.ac.kau.pcassemblyhelper
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.*
@@ -12,9 +14,27 @@ class SelectPart:AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_select)
-        setTitle("부품 선택")
+        //setContentView(R.layout.activity_select)
+        setContentView(R.layout.test_mainactivity)
+        setTitle("PC 조립 도우미")
 
+        var help : ImageButton = findViewById<ImageButton>(R.id.help)
+
+        help.setOnClickListener { view ->
+
+            var alert = AlertDialog.Builder(this)
+            var str : String = "사용법 : 아래 재생 버튼을 누르면 AR이 실행됩니다. 메인보드를 비추세요."
+            //AlertDialog.Builder(this).setTitle("도움말").setMessage(str)
+            alert.setTitle("도움말")
+            alert.setMessage(str)
+            alert.setNeutralButton("닫기", DialogInterface.OnClickListener(){ dialog, which ->
+
+                // 여기에 닫기버튼 눌렀을때 할 행동 넣기
+            })
+            alert.show()
+        }
+
+        /*
         val spin1:Spinner = findViewById(R.id.spinner1)
         val spin2:Spinner = findViewById(R.id.spinner2)
         val spin3:Spinner = findViewById(R.id.spinner3)
@@ -42,5 +62,6 @@ class SelectPart:AppCompatActivity() {
             //val intent : Intent = Intent(this, ImageTargets::class.java)
             //startActivity(intent)
         }
+        */
     }
 }

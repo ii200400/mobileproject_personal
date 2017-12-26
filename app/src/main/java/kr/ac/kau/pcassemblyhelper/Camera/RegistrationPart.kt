@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.*
-import kotlinx.android.synthetic.main.activity_registration.*
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -24,6 +23,8 @@ import com.google.firebase.storage.StorageReference
 import kr.ac.kau.pcassemblyhelper.R
 import java.text.SimpleDateFormat
 import java.util.*
+//import kotlinx.android.synthetic.main.activity_registration.*
+import kotlinx.android.synthetic.main.ui_registration.*
 
 class RegistrationPart : AppCompatActivity() {
     private val PERMISSIONS_CAMERA_CODE = 100
@@ -42,7 +43,8 @@ class RegistrationPart : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration)
+        //setContentView(R.layout.activity_registration)
+        setContentView(R.layout.ui_registration)
         setTitle("부품 등록")
 
         //spinner에 값 넣기
