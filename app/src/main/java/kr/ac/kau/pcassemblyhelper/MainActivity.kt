@@ -11,12 +11,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+        setContentView(R.layout.test_main)
 
         val btn1 : Button = findViewById(R.id.button_1)
         val btn2 : Button = findViewById(R.id.button_2)
         val btn3 : Button = findViewById(R.id.button_3)
-        val btn4 : Button = findViewById(R.id.button_4)
 
         btn1.setOnClickListener{
             val intent1:Intent = Intent(this@MainActivity,SelectPart::class.java)
@@ -30,11 +30,13 @@ class MainActivity : AppCompatActivity() {
             val intent3:Intent = Intent(this@MainActivity,Assembly::class.java)
             startActivity(intent3)
         }
+        /*
         btn4.setOnClickListener{
             //val intent4:Intent = Intent(this@MainActivity,ActivityLauncher::class.java)
             val intent4:Intent = Intent(this@MainActivity, drawerSample::class.java)
             startActivity(intent4)
             finish()
         }
+        */
     }
 }

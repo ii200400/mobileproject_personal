@@ -15,11 +15,12 @@ import android.util.Log
 import android.view.Surface
 import android.view.WindowManager
 import android.widget.Toast
-import kotlinx.android.synthetic.main.camera_api.*
 import kr.ac.kau.pcassemblyhelper.R
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+//import kotlinx.android.synthetic.main.camera_api.*
+import kotlinx.android.synthetic.main.ui_camera_api.*
 
 /**
  * Created by im on 2017-09-19.
@@ -36,8 +37,10 @@ class SurfaceCamera : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.camera_api)
+        //setContentView(R.layout.camera_api)
+        setContentView(R.layout.ui_camera_api)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        setTitle("부품 등록")
 
         mCamera = getCameraInstance()
 

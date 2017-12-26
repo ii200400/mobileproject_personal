@@ -5,8 +5,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.camera_preview.*
 import kr.ac.kau.pcassemblyhelper.R
+//import kotlinx.android.synthetic.main.camera_preview.*
+import kotlinx.android.synthetic.main.ui_camera_preview.*
 
 /**
  * Created by im on 2017-10-31.
@@ -16,7 +17,9 @@ class PreviewImage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.camera_preview)
+        //setContentView(R.layout.camera_preview)
+        setContentView(R.layout.ui_camera_preview)
+        setTitle("부품 등록")
 
         val uri = intent.extras.get("uri") as Uri
         val bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri)
