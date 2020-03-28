@@ -8,9 +8,13 @@
 + 개발 기간 : 약 3개월 (2017.09~2017.12)
 + 사용 언어 : Kotlin
 
-## 사용 기술
+## 개발 환경
 
 + Android Studio 3.0(안드로이드 스튜디오)
++ Unity3D(유니티 - **당시** 뷰포리아 연동시 필수)
+
+## 사용 기술
+
 + Vuforia(뷰포리아) - AR 개발 소프트웨어
 + Firebase(Google Cloud Storage) - 사진 업로드 DB
 
